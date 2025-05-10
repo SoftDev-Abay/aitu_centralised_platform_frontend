@@ -15,18 +15,22 @@ import {
 } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
+import Navbar from "./navbar/navbar";
+import { NavbarProvider } from "./navbar/navbar-context";
 export default function DashboardLayout() {
   return (
-    <SidebarProvider>
+    <div className="relative bg-brand-gray-light">
       <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <SmartBreadcrumbs />
-        </header>
-        <Outlet />
-      </SidebarInset>
-    </SidebarProvider>
+      <div className="ml-[90px] xl:ml-[320px] min-h-screen">
+        <SidebarInset>
+          <NavbarProvider>
+            <Navbar />
+            <div className="bg-brand-gray-light h-full">
+              <Outlet />
+            </div>
+          </NavbarProvider>
+        </SidebarInset>
+      </div>
+    </div>
   );
 }
