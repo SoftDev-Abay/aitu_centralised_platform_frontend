@@ -3,11 +3,12 @@ import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import PostCard from "@/features/posts/components/PostCard";
-import { useSearchParams } from "react-router-dom";
+// import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const PostsListPage = () => {
-  const [searchParams] = useSearchParams();
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
+  // const [searchParams] = useSearchParams();
+  // const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   const count = 53; // Replace with dynamic value if available
   const limit = 6;
@@ -28,7 +29,13 @@ const PostsListPage = () => {
       <Section variant="wide" className="pt-[52px] pb-12 bg-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-13 justify-items-center mb-[50px]">
           {[...Array(6).keys()].map((_, index) => (
-            <PostCard key={index} />
+            <Link
+              to={`/dashboard/posts/${index + 1}`}
+              key={index}
+              className="w-full"
+            >
+              <PostCard key={index} />
+            </Link>
           ))}
         </div>
 

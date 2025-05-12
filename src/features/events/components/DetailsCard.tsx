@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Book, Instagram, Mail, Notebook, Timer, Twitter } from "lucide-react";
-import React from "react";
 import { cn } from "@/lib/utils"; // Assuming you have a `cn` utility for class merging
 
 const DetailsCard = ({

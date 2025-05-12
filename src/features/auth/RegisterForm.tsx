@@ -2,21 +2,13 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setCredentials } from "@/features/auth/authSlice";
 import { useRegisterMutation } from "@/features/auth/authApiSlice";
 import { toast } from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
 import { Checkbox } from "@/components/ui/checkbox";
+import { CardDescription } from "@/components/ui/card";
 
 const registerSchema = z
   .object({
@@ -36,13 +28,13 @@ export function RegisterForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
 
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: { username: "", password: "", confirmPassword: "" },

@@ -1,7 +1,6 @@
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart } from "lucide-react";
-import React from "react";
 
 const users = [
   {

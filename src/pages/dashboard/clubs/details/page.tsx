@@ -1,5 +1,4 @@
 import { useSetNavbarTitle } from "@/components/layout/dashboard/navbar/use-set-navbar-title";
-import React from "react";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { AvatarGroup } from "@/components/ui/avatar-group";
@@ -11,14 +10,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Car, Club, PlayIcon, TimerIcon } from "lucide-react";
+import { PlayIcon, TimerIcon } from "lucide-react";
 import ClubMemberCard from "@/features/clubs/components/ClubMemberCard";
 
 const users = [

@@ -1,4 +1,4 @@
-import { Users, LogOut, Link2, Key, Layers } from "lucide-react";
+import { Users, LogOut, Key, Layers } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "@/features/auth/authApiSlice";
 
@@ -9,11 +9,9 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { title: "Roles", url: "/dashboard/roles", icon: Users },
-  { title: "Objects", url: "/dashboard/objects", icon: Layers },
-  { title: "Permissions", url: "/dashboard/permissions", icon: Key },
-  { title: "Users", url: "/dashboard/users", icon: Users },
-  { title: "Departments", url: "/dashboard/departments", icon: Users },
+  { title: "Posts", url: "/dashboard/posts", icon: Users },
+  { title: "Events", url: "/dashboard/events", icon: Layers },
+  { title: "Clubs", url: "/dashboard/clubs", icon: Key },
 ];
 
 export function AppSidebar() {

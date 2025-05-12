@@ -3,29 +3,8 @@ import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-
-import CommentItem from "@/features/posts/components/CommentItem";
-import { Separator } from "@/components/ui/separator";
-import WriteComment from "@/features/posts/components/WriteComment";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import ProfileCard from "@/features/events/components/ProfileCard";
-import {
-  Book,
-  Facebook,
-  Instagram,
-  Mail,
-  Notebook,
-  Timer,
-  Twitter,
-} from "lucide-react";
 import DetailsCard from "@/features/events/components/DetailsCard";
 
 const users = [

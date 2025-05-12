@@ -1,8 +1,7 @@
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Locate } from "lucide-react";
-import React from "react";
 
 const EventCard = () => {
   return (
@@ -26,7 +25,9 @@ const EventCard = () => {
           <span className="text-sm">Astana City</span>
         </div>
       </div>
-      <div className="flex justify-center font-semibold text-lg p-4 border-t text-brand-primary">Learn more</div>
+      <div className="flex justify-center font-semibold text-lg p-4 border-t text-brand-primary">
+        Learn more
+      </div>
     </Card>
   );
 };

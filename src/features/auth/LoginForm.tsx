@@ -8,11 +8,7 @@ import { useLoginMutation } from "@/features/auth/authApiSlice";
 import { toast } from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import {
-  Card,
-  CardContent,
   CardDescription,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
@@ -35,7 +31,7 @@ export function LoginForm({
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: { email: "", password: "" },
@@ -62,7 +58,13 @@ export function LoginForm({
   };
 
   return (
-    <div className={cn("flex justify-center flex-wrap-reverse items-center gap-30 px-5 py-10", className)} {...props}>
+    <div
+      className={cn(
+        "flex justify-center flex-wrap-reverse items-center gap-30 px-5 py-10",
+        className
+      )}
+      {...props}
+    >
       <img
         src="/logo-black-blue-text.svg"
         className="w-[328px] h-[169px] "

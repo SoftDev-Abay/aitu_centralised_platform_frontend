@@ -1,8 +1,6 @@
 import { useSetNavbarTitle } from "@/components/layout/dashboard/navbar/use-set-navbar-title";
-import React from "react";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { AvatarGroup } from "@/components/ui/avatar-group";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -11,30 +9,22 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Car, Club, LoaderIcon, PlayIcon, TimerIcon } from "lucide-react";
-import ClubMemberCard from "@/features/clubs/components/ClubMemberCard";
+import { LoaderIcon } from "lucide-react";
 import CommentItem from "@/features/posts/components/CommentItem";
 import { Separator } from "@/components/ui/separator";
 import WriteComment from "@/features/posts/components/WriteComment";
 
-const users = [
-  {
-    name: "Alice",
-    image:
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-  },
-  {
-    name: "Bob",
-    image: "https://static-cse.canva.com/blob/1991552/1600w-B-cRyoh7b98.jpg",
-  },
-];
+// const users = [
+//   {
+//     name: "Alice",
+//     image:
+//       "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
+//   },
+//   {
+//     name: "Bob",
+//     image: "https://static-cse.canva.com/blob/1991552/1600w-B-cRyoh7b98.jpg",
+//   },
+// ];
 
 const ClubDetailsPage = () => {
   useSetNavbarTitle("Clubs");

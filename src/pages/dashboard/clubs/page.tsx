@@ -1,5 +1,4 @@
-import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Section from "@/components/ui/section";
 import { Input } from "@/components/ui/input";
 import {
@@ -75,7 +74,13 @@ const ClubsListPage = () => {
       <Section variant="wide" className="bg-white pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center pt-[60px] pb-[60px]">
           {[...Array(limit).keys()].map((_, index) => (
-            <ClubCard key={index + (currentPage - 1) * limit} />
+            <Link
+              to={`/dashboard/clubs/${index + 1}`}
+              key={index}
+              className="w-full"
+            >
+              <ClubCard key={index + (currentPage - 1) * limit} />
+            </Link>
           ))}
         </div>
 

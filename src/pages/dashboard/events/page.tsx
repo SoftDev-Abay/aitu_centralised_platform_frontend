@@ -1,5 +1,4 @@
-import React from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import Section from "@/components/ui/section";
 import { Input } from "@/components/ui/input";
 import {
@@ -9,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import ClubCard from "@/features/clubs/components/ClubCard";
 import PaginationControls from "@/components/ui/pagination-controls";
 import { useSetNavbarTitle } from "@/components/layout/dashboard/navbar/use-set-navbar-title";
 import EventCard from "@/features/events/components/EventCard";
@@ -65,7 +63,13 @@ const EventsDetailsPage = () => {
       <Section variant="wide" className="bg-white pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center pt-[60px] pb-[60px]">
           {[...Array(limit).keys()].map((_, index) => (
-            <EventCard key={index + (currentPage - 1) * limit} />
+            <Link
+              to={`/dashboard/events/${index + 1}`}
+              key={index}
+              className="w-full"
+            >
+              <EventCard key={index + (currentPage - 1) * limit} />
+            </Link>
           ))}
         </div>
 
