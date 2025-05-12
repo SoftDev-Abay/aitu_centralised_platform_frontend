@@ -18,7 +18,7 @@ const ClubsListPage = () => {
   const currentPage = parseInt(searchParams.get("page") || "1", 10);
 
   const count = 53; // Replace with dynamic value if available
-  const limit = 5;
+  const limit = 6;
 
   useSetNavbarTitle("Clubs");
 
