@@ -92,7 +92,7 @@ const EventsDetailsPage = () => {
           <DetailsCard className="absolute top-0 right-[-83px] max-w-[323px]" />
         </div>
       </Section>
-      <Section variant="narrow" className="pt-[48px] pb-[76px] bg-white">
+      <Section variant="narrow" className="pt-[48px] pb-[76px] bg-white h-full flex-grow">
         <h2 className="text-2xl mb-5 font-semibold">Description</h2>
         <div className="text-brand-gray-steel mb-10">
           <p className="mb-6">

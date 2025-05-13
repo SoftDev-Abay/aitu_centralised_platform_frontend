@@ -61,7 +61,7 @@ const ClubDetailsPage = () => {
           </Button>
         </div>
       </Section>
-      <Section variant="narrow" className="pb-[76px] bg-white">
+      <Section variant="narrow" className="pb-[76px] bg-white h-full flex-grow">
         <Carousel
           className="w-full mb-8 relative "
           style={{ transform: "translateY(-10px)" }}

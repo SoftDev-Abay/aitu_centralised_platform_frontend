@@ -59,7 +59,7 @@ const ClubDetailsPage = () => {
           </Button>
         </div>
       </Section>
-      <Section variant="narrow" className="pb-[76px] bg-white">
+      <Section variant="narrow" className="pb-[76px] bg-white h-full flex-grow">
         {/* <img src="/images/club.png" alt="" className="w-full" /> */}
 
         <Carousel

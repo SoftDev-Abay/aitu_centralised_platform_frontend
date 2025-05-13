@@ -60,7 +60,7 @@ const EventsDetailsPage = () => {
         </div>
       </Section>
 
-      <Section variant="wide" className="bg-white pb-12">
+      <Section variant="wide" className="bg-white pb-12 h-full flex-grow">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 justify-items-center pt-[60px] pb-[60px]">
           {[...Array(limit).keys()].map((_, index) => (
             <Link
