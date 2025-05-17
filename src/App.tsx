@@ -10,6 +10,7 @@ import PostDetailsPage from "./pages/dashboard/posts/details/page";
 import EventsDetailsPage from "./pages/dashboard/events/details/page";
 import EvensListPage from "./pages/dashboard/events/page";
 import DashboardPage from "./pages/dashboard/page";
+import CalendarPage from "./pages/dashboard/calendar/page";
 function App() {
   return (
     <Routes>
@@ -32,6 +33,9 @@ function App() {
         <Route path="events">
           <Route index element={<EvensListPage />} />
           <Route path=":id" element={<EventsDetailsPage />} />
+        </Route>
+        <Route path="calendar">
+          <Route index element={<CalendarPage />} />
         </Route>
       </Route>
 

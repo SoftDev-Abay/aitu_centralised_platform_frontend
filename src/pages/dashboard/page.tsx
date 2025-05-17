@@ -2,12 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Section from "@/components/ui/section";
 import { Separator } from "@/components/ui/separator";
-import {
-  Ellipsis,
-  MessageCircle,
-  StarIcon,
-  User,
-} from "lucide-react";
+import { Ellipsis, MessageCircle, StarIcon, User } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -17,6 +12,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { cn } from "@/lib/utils";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const mockRows = [
+  { date: "2024-06-01", event: "Music Club Registration", status: "Unread" },
+  { date: "2024-06-03", event: "New Event Rules Released", status: "Reviewed" },
+  { date: "2024-06-05", event: "Photography Club Signup", status: "Unread" },
+  { date: "2024-06-07", event: "Literature Contest Open", status: "Reviewed" },
+  { date: "2024-06-09", event: "Art Club Exhibition Update", status: "Unread" },
+  {
+    date: "2024-06-11",
+    event: "Volunteer Activity Launch",
+    status: "Reviewed",
+  },
+  { date: "2024-06-13", event: "Summer Camp Details", status: "Unread" },
+  {
+    date: "2024-06-15",
+    event: "Coding Challenge Briefing",
+    status: "Reviewed",
+  },
+];
 
 const DashboardPage = () => {
   return (
@@ -60,11 +91,11 @@ const DashboardPage = () => {
           <div className="">
             <div className="flex gap-4 mb-3">
               <p className="text-brand-gray-medium  text-xs">
-                Uploaded:{" "}
+                Uploaded:
                 <span className="text-brand-gray-steel">Jan 21, 2022</span>
               </p>
               <p className="text-brand-gray-medium  text-xs">
-                Last Updated:{" "}
+                Last Updated:
                 <span className="text-brand-gray-steel">Sep 21, 2022</span>
               </p>
             </div>
@@ -100,7 +131,8 @@ const DashboardPage = () => {
         </div>
       </div>
       <div className="grid gap-[29px] grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
-        <Card className="border-0 bg-white rounded-none col-span-2 py-0 gap-0">
+        {/* <Card className="border-0 bg-white rounded-none col-span-2 py-0 gap-0"> */}
+        <Card className="border-0 shadow-none bg-white rounded-none col-span-2 py-0 gap-0">
           <CardHeader className="flex justify-between items-center px-5 py-4">
             <p className="font-medium">Recent announcements</p>
             <Select>
@@ -130,10 +162,12 @@ const DashboardPage = () => {
               </div>
               <div>
                 <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on your lecture “What is ux” in “2021 ui/ux
-                  design with figma”
+                  <strong className="font-semibold">Kevin</strong> comments on
+                  your lecture “What is ux” in “2021 ui/ux design with figma”
                 </p>
-                <span className="text-xs text-brand-gray-medium">5 min ago</span>
+                <span className="text-xs text-brand-gray-medium">
+                  5 min ago
+                </span>
               </div>
             </div>
             <div className="flex gap-3 py-3">
@@ -142,10 +176,12 @@ const DashboardPage = () => {
               </div>
               <div>
                 <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on your lecture “What is ux” in “2021 ui/ux
-                  design with figma”
+                  <strong className="font-semibold">Kevin</strong> comments on
+                  your lecture “What is ux” in “2021 ui/ux design with figma”
                 </p>
-                <span className="text-xs text-brand-gray-medium">5 min ago</span>
+                <span className="text-xs text-brand-gray-medium">
+                  5 min ago
+                </span>
               </div>
             </div>
             <div className="flex gap-3 py-3">
@@ -154,10 +190,12 @@ const DashboardPage = () => {
               </div>
               <div>
                 <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on your lecture “What is ux” in “2021 ui/ux
-                  design with figma”
+                  <strong className="font-semibold">Kevin</strong> comments on
+                  your lecture “What is ux” in “2021 ui/ux design with figma”
                 </p>
-                <span className="text-xs text-brand-gray-medium">5 min ago</span>
+                <span className="text-xs text-brand-gray-medium">
+                  5 min ago
+                </span>
               </div>
             </div>
             <div className="flex gap-3 py-3">
@@ -166,15 +204,96 @@ const DashboardPage = () => {
               </div>
               <div>
                 <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on your lecture “What is ux” in “2021 ui/ux
-                  design with figma”
+                  <strong className="font-semibold">Kevin</strong> comments on
+                  your lecture “What is ux” in “2021 ui/ux design with figma”
                 </p>
-                <span className="text-xs text-brand-gray-medium">5 min ago</span>
+                <span className="text-xs text-brand-gray-medium">
+                  5 min ago
+                </span>
               </div>
             </div>
           </CardContent>
         </Card>
-        <div className="bg-white rounded-none w-full col-span-3"></div>
+        {/* <Card className=" border-0 bg-white rounded-none col-span-3 py-0 gap-0"> */}
+        <Card className="shadow-none border-0 bg-white rounded-none col-span-3 py-0 gap-0">
+          <CardHeader className="flex justify-between items-center px-5 py-5.5">
+            <p className="font-medium">Recent announcements</p>
+
+            {/* <div className="flex items-center gap-2 text-brand-gray-muted">
+              <span className="text-sm">Today</span>
+              <ChevronDown size={18} />
+            </div> */}
+          </CardHeader>
+          <CardContent className="px-0">
+            <Table>
+              <TableHeader className="bg-brand-gray-bluish">
+                <TableRow className="border-none bg-brand-gray-bluish">
+                  <TableHead className="px-5 py-[9px] text-brand-gray-muted font-medium">
+                    Date
+                  </TableHead>
+                  <TableHead className="px-5 py-[9px] text-brand-gray-muted font-medium">
+                    Event
+                  </TableHead>
+                  <TableHead className="px-5 py-[9px] text-brand-gray-muted font-medium">
+                    Status
+                  </TableHead>
+                  <TableHead className="px-5 py-[9px] text-brand-gray-muted font-medium "></TableHead>
+                </TableRow>
+              </TableHeader>
+
+              <TableBody>
+                {mockRows.map((row, idx) => (
+                  <TableRow
+                    key={idx}
+                    className="border-none hover:bg-transparent"
+                  >
+                    <TableCell className="px-5 py-[13px] text-brand-gray-steel">
+                      {row.date}
+                    </TableCell>
+
+                    <TableCell className="px-5 py-[13px] text-brand-gray-steel">
+                      {row.event}
+                    </TableCell>
+
+                    <TableCell className="px-5 py-[13px] text-brand-gray-steel">
+                      <span
+                        className={cn(
+                          "font-medium",
+                          row.status === "Unread"
+                            ? "text-brand-primary"
+                            : "text-brand-success"
+                        )}
+                      >
+                        {row.status}
+                      </span>
+                    </TableCell>
+
+                    <TableCell className="px-5 py-[13px] text-brand-gray-steel flex justify-center">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Ellipsis className="cursor-pointer" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56">
+                          <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuCheckboxItem>
+                            Status Bar
+                          </DropdownMenuCheckboxItem>
+                          <DropdownMenuCheckboxItem disabled>
+                            Activity Bar
+                          </DropdownMenuCheckboxItem>
+                          <DropdownMenuCheckboxItem>
+                            Panel
+                          </DropdownMenuCheckboxItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
       </div>
     </Section>
   );

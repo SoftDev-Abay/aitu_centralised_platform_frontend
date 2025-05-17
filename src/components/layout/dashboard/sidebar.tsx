@@ -1,4 +1,12 @@
-import { Users, LogOut, Key, Layers, LayoutDashboard } from "lucide-react";
+import {
+  Users,
+  LogOut,
+  Key,
+  Layers,
+  LayoutDashboard,
+  Calendar,
+  Calendar1,
+} from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "@/features/auth/authApiSlice";
 
@@ -13,6 +21,7 @@ const menuItems: MenuItem[] = [
   { title: "Posts", url: "/dashboard/posts", icon: Users },
   { title: "Events", url: "/dashboard/events", icon: Layers },
   { title: "Clubs", url: "/dashboard/clubs", icon: Key },
+  { title: "Calendar", url: "/dashboard/calendar", icon: Calendar1 },
 ];
 
 export function AppSidebar() {
