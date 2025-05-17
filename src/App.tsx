@@ -9,6 +9,7 @@ import PostsListPage from "./pages/dashboard/posts/page";
 import PostDetailsPage from "./pages/dashboard/posts/details/page";
 import EventsDetailsPage from "./pages/dashboard/events/details/page";
 import EvensListPage from "./pages/dashboard/events/page";
+import DashboardPage from "./pages/dashboard/page";
 function App() {
   return (
     <Routes>
@@ -18,6 +19,8 @@ function App() {
       </Route>
       {/* <Route element={<RequireAuth />}> */}
       <Route path="dashboard" element={<DashboardLayout />}>
+        <Route index element={<DashboardPage />} />
+
         <Route path="clubs">
           <Route index element={<ClubsListPage />} />
           <Route path=":id" element={<ClubDetailsPage />} />
