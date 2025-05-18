@@ -1,0 +1,80 @@
+/* Make FullCalendar fit your design system */
+
+.fc {
+  /* --fc-border-color: transparent; */
+  font-family: "Inter", sans-serif;
+  /* width: 848px; */
+}
+
+/* Toolbar styling */
+/* .fc-toolbar-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #1e293b; 
+} */
+
+/* .fc-button {
+  background-color: #e5e7eb !important;
+  border: none;
+  color: #1f2937 !important; 
+  font-weight: 500;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+} */
+
+/* .fc-button:hover {
+  background-color: #d1d5db !important; 
+} */
+
+/* .fc-daygrid-day-number {
+  font-weight: 500;
+} */
+
+/* Event styling */
+/* .fc-event {
+  border: none;
+  padding: 2px 6px;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+} */
+/* 
+.fc-event-brand {
+  background-color: #2563eb !important; 
+  
+  color: white !important;
+} */
+
+/* #2563eb Tailwind brand-primary (blue-600) */
+
+/* Remove cell borders */
+.fc-scrollgrid td {
+  height: 120px;
+}
+.fc-scrollgrid th {
+  /* border: none !important; */
+}
+/* src/styles/calendar.css */
+
+.fc-view{
+  height: 800px;
+  overflow-y: auto;
+}
+
+.fc .event-primary {
+  background-color: var(--brand-primary) !important;
+  color: var(--brand-light-blue) !important;
+  border: none !important;
+}
+
+.fc .event-secondary {
+  background-color: var(--brand-secondary) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.fc .event-danger {
+  background-color: var(--brand-danger) !important;
+  color: white !important;
+  border: none !important;
+}
