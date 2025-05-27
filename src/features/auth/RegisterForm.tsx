@@ -12,8 +12,10 @@ import { CardDescription } from "@/components/ui/card";
 
 const registerSchema = z
   .object({
-    username: z.string().min(4, "Username must be at least 4 characters"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
+    securityKey: z
+      .string()
+      .min(4, "Security key must be at least 4 characters"),
+    password: z.string().min(4, "Password must be at least 4 characters"),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
@@ -37,13 +39,15 @@ export function RegisterForm({
     // formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
-    defaultValues: { username: "", password: "", confirmPassword: "" },
+    defaultValues: { securityKey: "", password: "", confirmPassword: "" },
   });
 
   const onSubmit = async (data: RegisterFormValues) => {
-    const { username, password } = data;
+    const { securityKey, password } = data;
     try {
-      await register({ username, password });
+      await register({ securityKey, password }).unwrap();
+      // await register({ securityKey, password, role: "ADMIN" }).unwrap();
+
       navigate("/auth/sign-in");
       toast.success("Registration successful!");
     } catch (err: any) {
@@ -75,10 +79,10 @@ export function RegisterForm({
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <FormInput
-            name="username"
+            name="securityKey"
             control={control}
-            label="Username"
-            placeholder="Enter your username"
+            label="Security Key"
+            placeholder="Enter your security key"
             inputClassName="py-[16.5px] px-6"
             className="mb-5"
           />
@@ -88,6 +92,15 @@ export function RegisterForm({
             label="Password"
             type="password"
             placeholder="Enter your password"
+            inputClassName="py-[16.5px] px-6"
+            className="mb-5"
+          />
+          <FormInput
+            name="confirmPassword"
+            control={control}
+            label="Confirm Password"
+            type="password"
+            placeholder="Enter your password again"
             inputClassName="py-[16.5px] px-6"
             className="mb-5"
           />

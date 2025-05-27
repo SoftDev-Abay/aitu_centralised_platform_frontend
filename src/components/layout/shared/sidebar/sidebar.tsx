@@ -5,25 +5,40 @@ import {
   Layers,
   LayoutDashboard,
   Calendar1,
+  ShieldCheck,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "@/features/auth/authApiSlice";
+import { useGetUserAndClubsQuery } from "@/features/users/usersApiSlice";
+import { useEffect } from "react";
+import { setUser } from "@/features/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 type MenuItem = {
   title: string;
   url: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 };
 
-const menuItems: MenuItem[] = [
-  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Posts", url: "/dashboard/posts", icon: Users },
-  { title: "Events", url: "/dashboard/events", icon: Layers },
-  { title: "Clubs", url: "/dashboard/clubs", icon: Key },
-  { title: "Calendar", url: "/dashboard/calendar", icon: Calendar1 },
-];
+type AppSidebarProps = {
+  menuItems: MenuItem[];
+};
 
-export function AppSidebar() {
+export function AppSidebar({ menuItems }: AppSidebarProps) {
+  // const { data, isLoading, isError } = useGetUserAndClubsQuery();
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (!isLoading && data) {
+  //     dispatch(setUser({ user: data }));
+  //   }
+  // }, [isLoading]);
+
+  // const role = data?.role;
+  // const menuItems = role === "ADMIN" ? adminMenuItems : userMenuItems;
+
+  // console.log(data);
+
   return (
     <div
       className="
@@ -33,9 +48,8 @@ export function AppSidebar() {
    px-5 py-[26px]
    transition-all duration-300
    w-[90px] xl:w-[320px]
-  "
+ "
     >
-      {/* Header */}
       <div
         className="flex items-center gap-1 overflow-hidden mb-14
     justify-center xl:justify-start"
@@ -50,12 +64,12 @@ export function AppSidebar() {
           className="
      text-[12px] w-[60px] font-semibold text-white leading-4
      hidden xl:block
-    "
+     "
         >
           ASTANA IT UNIVERSITY
         </span>
       </div>
-      {/* Menu Items */}
+
       <nav className="flex-1">
         <ul className="space-y-1">
           {menuItems.map((item) => {
@@ -64,14 +78,15 @@ export function AppSidebar() {
               <li key={item.title} className="overflow-hidden">
                 <NavLink
                   to={item.url}
-                  end={item.url === "/dashboard"} // <--- strict match only for base dashboard
+                  end
+                  // end={item.url === "/dashboard"}
                   className={({ isActive }) => `
                   flex items-center 
                   py-3.5
-                  px-3.5 
+                  px-3.5
                   rounded-md
                   justify-center xl:justify-start
-                  px-3.5 xl:px-[24px]
+                  xl:px-[24px]
                   ${
                     isActive
                       ? "bg-brand-primary text-white"
@@ -88,7 +103,7 @@ export function AppSidebar() {
           })}
         </ul>
       </nav>
-      {/* Footer */}
+
       <div className="mt-auto">
         <LogoutButton />
       </div>
@@ -102,7 +117,7 @@ function LogoutButton() {
 
   const handleLogout = async () => {
     await sendLogout({});
-    navigate("/login");
+    navigate("/auth/sign-in");
   };
 
   return (

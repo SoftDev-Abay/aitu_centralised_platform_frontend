@@ -35,6 +35,7 @@ export function FormInput({
             type={type}
             placeholder={placeholder}
             className={cn(inputClassName, error ? "border-red-500" : "")} // Combine inputClassName with error styles
+            value={field.value ?? ""} // ✅ ensure controlled value
           />
           {error && <p className="text-red-500 text-xs">{error.message}</p>}
         </div>

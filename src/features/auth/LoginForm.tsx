@@ -7,15 +7,14 @@ import { setCredentials } from "@/features/auth/authSlice";
 import { useLoginMutation } from "@/features/auth/authApiSlice";
 import { toast } from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import {
-  CardDescription,
-} from "@/components/ui/card";
+import { CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useGetUserAndClubsQuery } from "../users/usersApiSlice";
 const loginSchema = z.object({
   email: z.string().min(4, "email must be at least 4 characters"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  password: z.string().min(4, "Password must be at least 6 characters"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -27,6 +26,7 @@ export function LoginForm({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
+  // const [getUserInfo, { isLoading: userInfo }] = useGetUserAndClubsQuery();
 
   const {
     control,
@@ -39,14 +39,14 @@ export function LoginForm({
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const { access_token } = await login({
+      const { token } = await login({
         email: data.email,
         password: data.password,
       }).unwrap();
 
-      dispatch(setCredentials({ token: access_token }));
+      dispatch(setCredentials({ token }));
 
-      navigate("/dashboard/tables");
+      navigate("/dashboard");
       toast.success("Login successful!");
     } catch (err: any) {
       if (err?.data?.message) {
@@ -80,7 +80,7 @@ export function LoginForm({
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="">
           <FormInput
-            name="Email"
+            name="email"
             control={control}
             label="Email"
             placeholder="Enter your Email"
@@ -110,9 +110,10 @@ export function LoginForm({
             </label>
           </div>
           <Button
-            type="submit"
+            // type="submit"
             className="w-full text-xl font-medium h-auto py-[18px]"
-            disabled={isLoading}
+            // disabled={isLoading}
+            onClick={handleSubmit(onSubmit)} // ✅ правильно
           >
             {isLoading ? "Logging in..." : "Login"}
           </Button>

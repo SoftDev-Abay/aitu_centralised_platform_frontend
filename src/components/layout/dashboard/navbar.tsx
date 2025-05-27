@@ -1,9 +1,9 @@
 import SearchBar from "@/components/ui/search-bar";
 import ProfileDropdown from "@/components/ui/profile-dropdown";
 import { Bell } from "lucide-react";
-import { useNavbarContext } from "./navbar-context";
+import { useNavbarContext } from "../shared/navbar/navbar-context";
 
-const Navbar = () => {
+const DashboardNavbar = () => {
   const { pageTitle } = useNavbarContext();
 
   return (
@@ -27,4 +27,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;

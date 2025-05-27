@@ -1,26 +1,66 @@
-import { Card, CardContent } from "@/components/ui/card";
+// import { Card, CardContent } from "@/components/ui/card";
 
-const ClubMemberCard = () => {
+// const ClubMemberCard = () => {
+//   return (
+//     <Card className="w-full rounded-none">
+//       <CardContent className="flex gap-6">
+//         <img
+//           src="/images/profile.jpg"
+//           alt=""
+//           className="w-[136px] h-[136px] rounded-full"
+//         />
+//         <div>
+//           <h2 className="text-[20px] font-semibold mb-1.5">Abay Abayev</h2>
+//           <p className="text-sm text-brand-gray-muted mb-4">President</p>
+//           <p className="text-sm text-brand-gray-steel mb-4">
+//             Department FK
+//           </p>
+//           <p className="text-sm text-brand-gray-muted  mb-4">
+//             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
+//             erat id ligula efficitur facilisis. Lorem ipsum dolor sit amet,
+//             consectetur adipiscing elit. Quisque at erat id ligula efficitur
+//             facilisis.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+//             Quisque at erat id ligula efficitur facilisis... <strong className="font-medium">READ MORE</strong>
+//           </p>
+//         </div>
+//       </CardContent>
+//     </Card>
+//   );
+// };
+
+// export default ClubMemberCard;
+
+
+import { Card, CardContent } from "@/components/ui/card";
+import { UserDto } from "../types";
+
+interface ClubMemberCardProps {
+  user: UserDto;
+}
+
+const ClubMemberCard = ({ user }: ClubMemberCardProps) => {
   return (
     <Card className="w-full rounded-none">
       <CardContent className="flex gap-6">
         <img
           src="/images/profile.jpg"
-          alt=""
+          alt={`${user.firstName} ${user.lastName}`}
           className="w-[136px] h-[136px] rounded-full"
         />
         <div>
-          <h2 className="text-[20px] font-semibold mb-1.5">Abay Abayev</h2>
-          <p className="text-sm text-brand-gray-muted mb-4">President</p>
-          <p className="text-sm text-brand-gray-steel mb-4">
-            Department FK
+          <h2 className="text-[20px] font-semibold mb-1.5">
+            {user.firstName} {user.lastName}
+          </h2>
+          <p className="text-sm text-brand-gray-muted mb-4">
+            {/* No role in API, fallback value */}
+            Member
           </p>
-          <p className="text-sm text-brand-gray-muted  mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque at
-            erat id ligula efficitur facilisis. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Quisque at erat id ligula efficitur
-            facilisis.Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Quisque at erat id ligula efficitur facilisis... <strong className="font-medium">READ MORE</strong>
+          <p className="text-sm text-brand-gray-steel mb-4">
+            Department {user.department}
+          </p>
+          <p className="text-sm text-brand-gray-muted mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit...{" "}
+            <strong className="font-medium">READ MORE</strong>
           </p>
         </div>
       </CardContent>
