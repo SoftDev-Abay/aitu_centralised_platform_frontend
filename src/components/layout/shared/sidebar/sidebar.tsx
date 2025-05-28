@@ -1,18 +1,9 @@
-import {
-  Users,
-  LogOut,
-  Key,
-  Layers,
-  LayoutDashboard,
-  Calendar1,
-  ShieldCheck,
-} from "lucide-react";
+import { LogOut } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useSendLogoutMutation } from "@/features/auth/authApiSlice";
-import { useGetUserAndClubsQuery } from "@/features/users/usersApiSlice";
-import { useEffect } from "react";
-import { setUser } from "@/features/auth/authSlice";
+// import { useSendLogoutMutation } from "@/features/auth/authApiSlice";
+import { logOut, setUser } from "@/features/auth/authSlice";
 import { useDispatch } from "react-redux";
+// import { apiSlice } from "@/app/api/apiSlice";
 
 type MenuItem = {
   title: string;
@@ -112,11 +103,13 @@ export function AppSidebar({ menuItems }: AppSidebarProps) {
 }
 
 function LogoutButton() {
-  const [sendLogout, { isLoading }] = useSendLogoutMutation();
+  // const [sendLogout, { isLoading }] = useSendLogoutMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await sendLogout({});
+  const handleLogout = () => {
+    dispatch(logOut());
+    // dispatch(apiSlice.util.resetApiState());
     navigate("/auth/sign-in");
   };
 
@@ -128,11 +121,13 @@ function LogoutButton() {
     text-brand-gray-medium hover:bg-brand-primary/20 hover:text-white
     transition-colors duration-200
     justify-center xl:justify-start
+    cursor-pointer
    "
     >
       <LogOut className="mr-0 xl:mr-3" />
       <span className="hidden xl:block">
-        {isLoading ? "Logging out..." : "Logout"}
+        {"Logout"}
+        {/* {isLoading ? "Logging out..." : "Logout"} */}
       </span>
     </button>
   );
