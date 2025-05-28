@@ -1,8 +1,8 @@
 import SearchBar from "@/components/ui/search-bar";
 import ProfileDropdown from "@/components/ui/profile-dropdown";
-import { Bell } from "lucide-react";
+import { Bell, SettingsIcon } from "lucide-react";
 import { useNavbarContext } from "../shared/navbar/navbar-context";
-
+import SettingsMenu from "@/components/shared/settings-menu";
 const DashboardNavbar = () => {
   const { pageTitle } = useNavbarContext();
 
@@ -21,6 +21,7 @@ const DashboardNavbar = () => {
           <Bell size={24} />
           <div className="absolute top-[13px] right-[15px] w-2 h-2 bg-brand-primary rounded-full border border-white"></div>
         </div>
+        <SettingsMenu />
         <ProfileDropdown />
       </div>
     </header>

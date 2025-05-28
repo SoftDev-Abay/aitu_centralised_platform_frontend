@@ -62,7 +62,7 @@ const CreateEventPage = () => {
   };
 
   return (
-    <Section className="pt-[80px] pb-[37px] bg-brand-gray-bluish h-full flex-grow">
+    <Section className="pt-[80px] pb-[37px] bg-brand-gray-bluish h-full flex-grow" variant="wide">
       <SmartBreadcrumbs />
       <Card className="px-0 mt-7 pt-0 rounded-none gap-0">
         <CardHeader className="px-10 py-0">

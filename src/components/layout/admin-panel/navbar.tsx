@@ -1,8 +1,8 @@
 import SearchBar from "@/components/ui/search-bar";
 import ProfileDropdown from "@/components/ui/profile-dropdown";
-import { Bell } from "lucide-react";
+import { Bell, SettingsIcon } from "lucide-react";
 import { useNavbarContext } from "../shared/navbar/navbar-context";
-
+import SettingsMenu from "@/components/shared/settings-menu";
 const AdminPanelNavbar = () => {
   const { pageTitle } = useNavbarContext();
 
@@ -13,6 +13,11 @@ const AdminPanelNavbar = () => {
           Hello, Abay!
         </span>
         <h3 className="text-xl font-semibold">{pageTitle}</h3>
+      </div>
+
+      <div className="flex gap-4 items-center">
+        <SettingsMenu />
+        <ProfileDropdown />
       </div>
     </header>
   );

@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 // import AdminPanelNavbar from "./navbar";
 import { AppSidebar } from "../shared/sidebar/sidebar";
 import { HomeIcon, KeyIcon, LayersIcon, UsersIcon } from "lucide-react";
+import AdminPanelNavbar from "./navbar";
+import { NavbarProvider } from "../shared/navbar/navbar-context";
 
 const adminMenuItems = [
   { title: "Clubs Create", url: "/admin-panel/clubs/create", icon: KeyIcon },
@@ -23,12 +25,12 @@ export default function AdminPanelLayout() {
       <AppSidebar menuItems={adminMenuItems} />
       <div className="ml-[90px] xl:ml-[320px]">
         <SidebarInset>
-          {/* <NavbarProvider> */}
-          {/* <AdminPanelNavbar /> */}
-          <div className="bg-brand-gray-light  min-h-screen flex flex-col">
-            <Outlet />
-          </div>
-          {/* </NavbarProvider> */}
+          <NavbarProvider>
+            <AdminPanelNavbar />
+            <div className="bg-brand-gray-light pt-[104px] min-h-screen flex flex-col">
+              <Outlet />
+            </div>
+          </NavbarProvider>
         </SidebarInset>
       </div>
     </div>

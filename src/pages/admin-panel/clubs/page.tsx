@@ -9,7 +9,7 @@ const AdminClubListPage = () => {
   const { data: clubs, isLoading, isError } = useGetClubsQuery();
 
   return (
-    <Section variant="wide" className="pt-10 pb-12 h-full flex-grow ">
+    <Section variant="wide" className="pt-10 pb-12 h-full flex-grow bg-brand-gray-bluish">
       <h1 className="text-3xl font-bold mb-6">ALl Clubs</h1>
 
       <div className="flex flex-col gap-3.5">

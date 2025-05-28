@@ -11,8 +11,6 @@ function ProfileDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-12 w-12">
-          {" "}
-          {/* 48px = 12rem in Tailwind */}
           <AvatarImage src="/images/profile.jpg" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
