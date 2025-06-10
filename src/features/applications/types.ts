@@ -23,10 +23,16 @@ export type ClubApplicationRequestDto = {
   answerContent: string;
 };
 
+export type PaginatedClubApplicationRequestsDto = {
+  count: number;
+  data: ClubApplicationRequestDto[];
+};
+
 export type ClubApplicationFormCreateDto = {
   clubId: string;
   deadline: string;
   templateContent: string;
+  isActive: boolean
 };
 
 export type ClubApplicationFormDto = {

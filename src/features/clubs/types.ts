@@ -1,4 +1,21 @@
+export enum ClubMemberRole {
+  MEMBER = "MEMBER",
+  VICE_PRESIDENT = "VICE_PRESIDENT",
+  PRESIDENT = "PRESIDENT",
+}
+
 export type ClubDto = {
+  id: string;
+  name: string;
+  description: string;
+  status: string;
+  admins: UserDto[];
+  memberIds: number[];
+  forms: ClubApplicationFormDto[];
+  images?: string[];
+  activeFormId: number;
+};
+export type CreateClubDto = {
   id: string;
   name: string;
   description: string;
@@ -6,7 +23,12 @@ export type ClubDto = {
   admins: UserDto[];
   members: UserDto[];
   forms: ClubApplicationFormDto[];
-  imageIds?: string[];
+  images?: string[];
+};
+
+export type PaginatedClubs = {
+  count: number;
+  data: ClubDto[];
 };
 
 export type ClubApplicationFormDto = {
@@ -25,17 +47,17 @@ export type UserDto = {
   email: string;
   department: string;
   securityKey: string;
-  role: "ADMIN" | "USER";
+  role: ClubMemberRole;
 };
 
 export type CreateOrUpdateClubInput = Omit<
-  ClubDto,
+  CreateClubDto,
   "id" | "admins" | "members" | "forms"
 >;
 
 export type ClubIdParam = { id: string };
-export type ClubAdminOrMemberParam = {
+export type ClubAdminOrMemberInput = {
   clubId: string;
-  adminId?: number;
-  memberId?: number;
+  userId: string;
+  role: ClubMemberRole;
 };

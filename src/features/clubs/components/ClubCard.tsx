@@ -26,8 +26,8 @@
 import { User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ClubDto } from "../types";
-import FetchedImg from "@/features/images/FetchedImg";
 import { Link } from "react-router-dom";
+import { getFileDownloadUrl } from "@/lib/helpers";
 
 interface ClubCardProps {
   club: ClubDto;
@@ -36,29 +36,20 @@ interface ClubCardProps {
 const ClubCard = ({ club }: ClubCardProps) => {
   return (
     <div className="w-full rounded-3xl">
-      {club?.imageIds && club.imageIds.length > 0 && club.imageIds[0] ? (
-        <FetchedImg
-          imgId={club.imageIds[0]}
-          className="w-full h-57 rounded-t-lg"
-        />
-      ) : (
+      {club.images ? (
         <img
-          src="/images/club.png"
+          src={getFileDownloadUrl(club.images[0])}
           alt="Default Club"
           className="w-full h-57 rounded-t-lg"
         />
-      )}
+      ) : null}
 
       <div className="flex flex-col gap-5 px-[31px] py-[35px] bg-brand-gray-bluish rounded-lg shadow-sm">
         <div className="flex justify-between items-center text-sm text-brand-gray-steel font-medium">
-          <span>
-            {new Date(
-              club.forms?.[0]?.createdAt || club.id
-            ).toLocaleDateString()}
-          </span>
+          <span>{club.status}</span>
           <div className="flex gap-1 items-center">
             <User size={20} className="text-brand-secondary" />
-            <span className="text-gray-500">{club.members?.length ?? 0}</span>
+            <span className="text-gray-500">{club.memberIds?.length ?? 0}</span>
           </div>
         </div>
 

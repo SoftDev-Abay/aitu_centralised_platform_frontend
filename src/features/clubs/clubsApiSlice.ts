@@ -2,23 +2,31 @@ import { apiSlice } from "@/app/api/apiSlice";
 import {
   ClubDto,
   CreateOrUpdateClubInput,
-  ClubAdminOrMemberParam,
   ClubIdParam,
   UserDto,
+  PaginatedClubs,
+  ClubAdminOrMemberInput,
 } from "./types";
 
 export const clubsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getClubs: builder.query<ClubDto[], void>({
-      query: () => ({
+    getClubs: builder.query<
+      PaginatedClubs,
+      { page?: number; pageSize?: number }
+    >({
+      query: ({ page = 0, pageSize = 10 }) => ({
         url: "/clubs",
         method: "GET",
+        params: { page, pageSize },
       }),
       providesTags: (result) =>
         result
           ? [
               { type: "Club", id: "LIST" },
-              ...result.map((club) => ({ type: "Club" as const, id: club.id })),
+              ...result.data.map((club) => ({
+                type: "Club" as const,
+                id: club.id,
+              })),
             ]
           : [{ type: "Club", id: "LIST" }],
     }),
@@ -51,57 +59,40 @@ export const clubsApiSlice = apiSlice.injectEndpoints({
       ],
     }),
 
-    getClubMembers: builder.query<UserDto[], { clubId: string }>({
-      query: ({ clubId }) => ({
+    getClubMembers: builder.query<
+      { data: UserDto[]; count: number },
+      { clubId: string; page?: number; pageSize?: number }
+    >({
+      query: ({ clubId, page = 0, pageSize = 10 }) => ({
         url: `/clubs/${clubId}/members`,
         method: "GET",
+        params: { page, pageSize },
+      }),
+      providesTags: (result, _error, { clubId }) =>
+        result
+          ? [
+              { type: "Club", id: clubId },
+              ...result.data.map((member) => ({
+                type: "ClubMember" as const,
+                id: member.id.toString(),
+              })),
+            ]
+          : [{ type: "Club", id: clubId }],
+      transformResponse: (response: { data: UserDto[]; count: number }) => ({
+        data: response.data,
+        count: response.count,
       }),
     }),
-
-    getClubAdmins: builder.query<UserDto[], { clubId: string }>({
-      query: ({ clubId }) => ({
-        url: `/clubs/${clubId}/admins`,
-        method: "GET",
-      }),
-    }),
-
-    addClubAdmin: builder.mutation<ClubDto, ClubAdminOrMemberParam>({
-      query: ({ clubId, adminId }) => ({
-        url: `/clubs/${clubId}/admins/${adminId}`,
+    // not on backend yet
+    assignClubMember: builder.mutation<ClubDto, ClubAdminOrMemberInput>({
+      query: ({ clubId, userId, role }) => ({
+        url: `/clubs/${clubId}/roles/${userId}`,
         method: "POST",
+        body: { role },
       }),
-      invalidatesTags: (_res, _err, { clubId }) => [
+      invalidatesTags: (_result, _error, { clubId }) => [
         { type: "Club", id: clubId },
-      ],
-    }),
-
-    removeClubAdmin: builder.mutation<ClubDto, ClubAdminOrMemberParam>({
-      query: ({ clubId, adminId }) => ({
-        url: `/clubs/${clubId}/admins/${adminId}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: (_res, _err, { clubId }) => [
-        { type: "Club", id: clubId },
-      ],
-    }),
-
-    addClubMember: builder.mutation<ClubDto, ClubAdminOrMemberParam>({
-      query: ({ clubId, memberId }) => ({
-        url: `/clubs/${clubId}/members/${memberId}`,
-        method: "POST",
-      }),
-      invalidatesTags: (_res, _err, { clubId }) => [
-        { type: "Club", id: clubId },
-      ],
-    }),
-
-    removeClubMember: builder.mutation<ClubDto, ClubAdminOrMemberParam>({
-      query: ({ clubId, memberId }) => ({
-        url: `/clubs/${clubId}/members/${memberId}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: (_res, _err, { clubId }) => [
-        { type: "Club", id: clubId },
+        { type: "ClubMember", id: "LIST" },
       ],
     }),
   }),
@@ -113,9 +104,5 @@ export const {
   useCreateClubMutation,
   useDeleteClubMutation,
   useGetClubMembersQuery,
-  useGetClubAdminsQuery,
-  useAddClubAdminMutation,
-  useRemoveClubAdminMutation,
-  useAddClubMemberMutation,
-  useRemoveClubMemberMutation,
+  useAssignClubMemberMutation,
 } = clubsApiSlice;
