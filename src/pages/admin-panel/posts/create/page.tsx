@@ -11,14 +11,30 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
 import { Textarea } from "@/components/ui/textarea";
-import { useUploadImageMutation } from "@/features/images/imagesApiSlice";
+import { useUploadFilesMutation } from "@/features/files/filesApiSlice";
 import { useCreatePostMutation } from "@/features/posts/postsApiSlice";
-import { FormImageUpload } from "@/components/form/FormImageUpload";
+import MultiImageUpload from "@/components/form/FormImageUpload";
+import { postCategoriesOptions } from "@/features/posts/constants";
+import SelectAdvaced from "@/components/ui/select-advanced";
+import { PostCategories } from "@/features/posts/types";
+import { FormTextarea } from "@/components/form/FormTextAreat";
+// import { FormImageUpload } from "@/components/form/FormImageUpload";
 
 const schema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
-  image: z.instanceof(File),
+  // image: z.instanceof(File),
+  images: z
+    .array(
+      z.object({
+        file: z.instanceof(File),
+        local: z.boolean().optional(),
+      })
+    )
+    .min(1, "At least one image is required"),
+  category: z.nativeEnum(PostCategories, {
+    required_error: "Category is required",
+  }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -29,28 +45,32 @@ const CreatePostPage = () => {
     handleSubmit,
     setValue,
     watch,
+    register,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
       title: "",
       description: "",
-      image: undefined as unknown as File,
+      // image: undefined as unknown as File,
     },
   });
 
-  const [uploadImage] = useUploadImageMutation();
+  const [uploadImages] = useUploadFilesMutation();
   const [createPost, { isLoading }] = useCreatePostMutation();
   const [preview, setPreview] = useState<string | null>(null);
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const imageId = await uploadImage(data.image).unwrap();
+      const imageData = await uploadImages(
+        data.images.map((img) => img.file)
+      ).unwrap();
+
+      const { images, ...rest } = data;
 
       await createPost({
-        title: data.title,
-        description: data.description,
-        imageId,
+        ...rest,
+        images: imageData.data.map((ent) => ent.fileName),
       }).unwrap();
 
       toast.success("Post created successfully");
@@ -80,7 +100,7 @@ const CreatePostPage = () => {
               inputClassName="py-3 px-5"
             />
 
-            <Controller
+            {/* <Controller
               name="description"
               control={control}
               render={({ field }) => (
@@ -94,12 +114,30 @@ const CreatePostPage = () => {
                   )}
                 </div>
               )}
+            /> */}
+            <FormTextarea
+              name="description"
+              control={control}
+              label="Description"
+              placeholder="Enter your description here..."
+              description="This will be displayed publicly."
+              required
             />
 
-            <FormImageUpload
-              name="image"
+            <SelectAdvaced
+              options={postCategoriesOptions}
+              register={register("category")}
+              name="category"
               control={control}
-              label="Upload Image"
+              error={errors.category && errors.category.message}
+              // multiple
+            />
+
+            <MultiImageUpload
+              name="images"
+              control={control}
+              error={errors.images}
+              // label="Upload Image"
             />
 
             <Button type="submit" disabled={isLoading}>

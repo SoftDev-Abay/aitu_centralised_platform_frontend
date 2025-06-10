@@ -1,23 +1,29 @@
-const CommentItem = () => {
+import { cn, formatTime } from "@/lib/utils";
+import { CommentDto } from "../types";
+
+const CommentItem = ({
+  comment,
+  className,
+}: {
+  comment: CommentDto;
+  className?: string;
+}) => {
   return (
-    <div className="flex gap-4">
+    <div className={cn("flex gap-4 mb-6", className)}>
       <img
         src="/images/profile.jpg"
         className="rounded-full w-10 h-10"
-        alt=""
+        alt="User Avatar"
       />
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <span className="text-sm font-semibold">Guy Hawkings</span>
+          <span className="text-sm font-semibold">User #{comment.userId}</span>
           <div className="rounded-full w-1 h-1 bg-brand-gray-dark" />
-          <span className="text-brand-gray-muted text-xs">1 week ago</span>
+          <span className="text-brand-gray-muted text-xs">
+            {formatTime(comment.createdAt, false)}
+          </span>
         </div>
-        <p className="text-sm text-brand-gray-steel">
-          I appreciate the precise short videos (10 mins or less each) because
-          overly long videos tend to make me lose focus. The instructor is very
-          knowledgeable in Web Design and it shows as he shares his knowledge.
-          These were my best 6 months of training. Thanks, Vako.
-        </p>
+        <p className="text-sm text-brand-gray-steel">{comment.content}</p>
       </div>
     </div>
   );
