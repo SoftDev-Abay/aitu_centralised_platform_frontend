@@ -51,6 +51,7 @@ export const eventsApiSlice = apiSlice.injectEndpoints({
         url: `/events/${id}/subscribe`,
         method: "POST",
       }),
+      invalidatesTags: (_res, _err, { id }) => [{ type: "Event", id }],
     }),
 
     unsubscribeFromEvent: builder.mutation<void, EventIdParam>({
@@ -58,6 +59,7 @@ export const eventsApiSlice = apiSlice.injectEndpoints({
         url: `/events/${id}/unsubscribe`,
         method: "POST",
       }),
+      invalidatesTags: (_res, _err, { id }) => [{ type: "Event", id }],
     }),
   }),
 });
