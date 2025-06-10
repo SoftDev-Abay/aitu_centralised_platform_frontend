@@ -57,7 +57,7 @@ const DynamicSurveyForm: React.FC<DynamicSurveyFormProps> = ({
   const renderQuestion = (question: Question) => {
     const commonCard = (children: React.ReactNode) => (
       <Card key={question.id} className="mb-4 px-4">
-        <label className="block font-bold mb-2">{question.text}</label>
+        <label className="text-xl block  mb-1">{question.text}</label>
         {children}
       </Card>
     );
@@ -70,6 +70,7 @@ const DynamicSurveyForm: React.FC<DynamicSurveyFormProps> = ({
             value={responses[question.id] || ""}
             onChange={(e) => handleResponseChange(question.id, e.target.value)}
             readOnly={readonly}
+            className="text-lg"
           />
         );
 
@@ -151,11 +152,9 @@ const DynamicSurveyForm: React.FC<DynamicSurveyFormProps> = ({
   return (
     <div className="py-4">
       <div className="mx-auto">
-        <Card className="mb-4 px-4">
-          <h1 className="text-heading2-bold font-bold mb-2">
-            {survey.title || "New title"}
-          </h1>
-          <p>{survey.description || "New description"}</p>
+        <Card className="mb-4 space-y-2 py-6 px-4 border-t-12 border-t-brand-primary">
+          <h1 className="text-3xl font-semibold">{survey.title}</h1>
+          <p className="">{survey.description}</p>
         </Card>
 
         <form onSubmit={handleSubmit}>

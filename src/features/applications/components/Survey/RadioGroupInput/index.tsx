@@ -21,11 +21,6 @@ const RadioGroupInput: React.FC<RadioGroupInputProps> = ({
 }) => {
   return (
     <div>
-      {title && (
-        <p className="text-sm font-medium text-gray-900 dark:text-gray-300 mb-2">
-          {title}
-        </p>
-      )}
       {options.map((option) => (
         <div key={option.value} className="flex items-center mb-4">
           <input
@@ -40,7 +35,7 @@ const RadioGroupInput: React.FC<RadioGroupInputProps> = ({
           />
           <label
             htmlFor={`${name}-${option.value}`}
-            className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className="ml-2 text-lg text-gray-900 dark:text-gray-300 "
           >
             {option.label}
           </label>

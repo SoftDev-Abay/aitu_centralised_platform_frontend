@@ -20,15 +20,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
 import { useCreateApplicationFormMutation } from "@/features/applications/applicationFormsApiSlice";
-import { format } from "date-fns";
+import { formatTime } from "@/lib/utils";
 
 type Props = {
   clubId: string;
 };
-
-export function formatTime(date: string) {
-  return format(new Date(date), "yyyy-MM-dd HH:mm:ss");
-}
 
 const SurveyConstructor: React.FC<Props> = ({ clubId }) => {
   const questions = useSurveyStore((state) => state.questions);
@@ -54,12 +50,12 @@ const SurveyConstructor: React.FC<Props> = ({ clubId }) => {
         description: surveyDescription,
         questions: questions,
       }),
+      isActive: true,
     };
 
     try {
       await createApplicationForm(payload).unwrap();
       toast.success("Survey submitted successfully!");
-      
     } catch (err: any) {
       console.error(err);
       toast.error("Error submitting survey");
@@ -67,28 +63,26 @@ const SurveyConstructor: React.FC<Props> = ({ clubId }) => {
   };
 
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       {/* Survey Title, Description & Deadline */}
-      <Card className="mb-4 space-y-2 py-6 px-4">
+      <img
+        src="/images/music_stage.webp"
+        className="object-cover h-[350px] rounded-xl w-full mb-5"
+      />
+      <Card className="mb-4 space-y-2 py-6 px-4 border-t-12 border-t-brand-primary">
         <Input
           placeholder="Survey title"
           value={surveyTitle}
           // underline
           onChange={(e) => setSurveyTitle(e.target.value)}
-          style={{ fontSize: "32px", paddingLeft: "4px" }}
+          // style={{ fontSize: "32px", paddingLeft: "4px" }}
+          className="text-4xl pr-4 py-5 h-16 border-t-0 border-l-0 border-r-0 rounded-none  shadow-none border-b-1"
         />
         <Input
           placeholder="Survey description"
           value={surveyDescription}
-          // underline
           onChange={(e) => setSurveyDescription(e.target.value)}
-          style={{
-            fontSize: "16px",
-            paddingTop: "10px",
-            paddingLeft: "4px",
-            paddingBottom: "6px",
-            marginBottom: "25px",
-          }}
+          className="text-base pl-3 pt-2 pb-1 pr-4 mb-6  border-t-0 border-l-0 border-r-0 rounded-none  shadow-none border-b-1"
         />
         <div className="flex  items-center gap-10">
           <label className="text-base-semibold block mb-1 font-semibold ml-1">

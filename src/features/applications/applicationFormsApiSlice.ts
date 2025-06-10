@@ -13,7 +13,7 @@ export const applicationFormsApiSlice = apiSlice.injectEndpoints({
       ClubApplicationFormCreateDto
     >({
       query: (body) => ({
-        url: "/applications/form",
+        url: "/clubs/applications/form",
         method: "POST",
         body,
       }),
@@ -24,21 +24,21 @@ export const applicationFormsApiSlice = apiSlice.injectEndpoints({
       ApplicationIdParam
     >({
       query: ({ id }) => ({
-        url: `/applications/form/${id}`,
+        url: `/clubs/applications/form/${id}`,
         method: "GET",
       }),
     }),
 
     getFormsByVisitor: builder.query<ClubApplicationFormDto[], void>({
       query: () => ({
-        url: "/applications/form/visitor",
+        url: "/clubs/applications/form/visitor",
         method: "GET",
       }),
     }),
 
     getFormsByClub: builder.query<ClubApplicationFormDto[], ClubIdParam>({
       query: ({ clubId }) => ({
-        url: `/applications/form/club/${clubId}`,
+        url: `/clubs/applications/form/club/${clubId}`,
         method: "GET",
       }),
     }),

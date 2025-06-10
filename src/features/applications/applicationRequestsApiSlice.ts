@@ -5,6 +5,7 @@ import {
   ClubApplicationRequestResponseDto,
   ApplicationsByFormParams,
   ApplicationIdParam,
+  PaginatedClubApplicationRequestsDto,
 } from "./types";
 
 export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
@@ -14,7 +15,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
       ClubApplicationRequestCreateDto
     >({
       query: (body) => ({
-        url: "/applications/request",
+        url: "/clubs/applications/request",
         method: "POST",
         body,
       }),
@@ -25,16 +26,30 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
       ClubApplicationRequestResponseDto
     >({
       query: (body) => ({
-        url: "/applications/request/response",
+        url: "/clubs/applications/request/response",
         method: "POST",
         body,
       }),
     }),
 
-    getApplicationsByVisitor: builder.query<ClubApplicationRequestDto[], void>({
-      query: () => ({
-        url: "/applications/request/visitor",
+    getApplicationsByVisitor: builder.query<
+      PaginatedClubApplicationRequestsDto,
+      { page?: number; pageSize?: number }
+    >({
+      query: ({ page = 0, pageSize = 5 }) => ({
+        url: "/clubs/applications/request/visitor",
         method: "GET",
+        params: { page, pageSize },
+      }),
+    }),
+    getApplicationsByClub: builder.query<
+      PaginatedClubApplicationRequestsDto,
+      { page?: number; pageSize?: number; clubId: string }
+    >({
+      query: ({ page = 0, pageSize = 5, clubId }) => ({
+        url: `/clubs/applications/request/club/${clubId}`,
+        method: "GET",
+        params: { page, pageSize },
       }),
     }),
 
@@ -43,7 +58,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
       ApplicationsByFormParams
     >({
       query: ({ formId }) => ({
-        url: `/applications/requests/${formId}`,
+        url: `/clubs/applications/request/form/${formId}`,
         method: "GET",
       }),
     }),
@@ -53,7 +68,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
       ApplicationIdParam
     >({
       query: ({ id }) => ({
-        url: `/applications/request/${id}`,
+        url: `/clubs/applications/request/${id}`,
         method: "GET",
       }),
     }),
@@ -66,4 +81,5 @@ export const {
   useGetApplicationsByVisitorQuery,
   useGetApplicationsByFormQuery,
   useGetApplicationByIdQuery,
+  useGetApplicationsByClubQuery
 } = applicationRequestsApiSlice;
