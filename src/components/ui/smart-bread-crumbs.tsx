@@ -17,9 +17,7 @@ export default function SmartBreadcrumbs() {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink>
-            <Link to="/">home</Link>
-          </BreadcrumbLink>
+          <BreadcrumbLink href="/">home</BreadcrumbLink>
         </BreadcrumbItem>
 
         {pathnames.map((segment, index) => {
@@ -33,9 +31,7 @@ export default function SmartBreadcrumbs() {
                 {isLast ? (
                   <BreadcrumbPage>{segment}</BreadcrumbPage>
                 ) : (
-                  <BreadcrumbLink>
-                    <Link to={routeTo}>{segment}</Link>
-                  </BreadcrumbLink>
+                  <BreadcrumbLink href={routeTo}>{segment}</BreadcrumbLink>
                 )}
               </BreadcrumbItem>
             </React.Fragment>

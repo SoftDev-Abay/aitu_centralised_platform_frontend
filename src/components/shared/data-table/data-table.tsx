@@ -29,19 +29,11 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   /** if you want server-side paging, pass these three */
-  currentPage?: number; // 1-based
-  totalPages?: number;
-  onPageChange?: (newPage: number) => void;
-  visiblePages?: number; // how many numbered buttons to show
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  currentPage,
-  totalPages,
-  onPageChange,
-  visiblePages,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -70,18 +62,16 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const useExternal = onPageChange && currentPage != null && totalPages != null;
-
   return (
     <div className="w-full">
-      <div className="rounded-2xl bg-white py-2">
+      <div className="border bg-white">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
-              <TableRow key={hg.id}>
+              <TableRow key={hg.id} className="bg-gray-100">
                 {hg.headers.map((header) => (
                   <TableHead
-                    className=""
+                    className="py-6 px-6"
                     key={header.id}
                     colSpan={header.colSpan}
                   >
@@ -104,7 +94,7 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="py-6">
+                    <TableCell key={cell.id} className="py-6 px-6">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -125,17 +115,6 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
-
-      <div className="py-4">
-        {useExternal ? (
-          <DataPagination
-            currentPage={currentPage!}
-            totalPages={totalPages!}
-            visiblePages={visiblePages}
-            onPageChange={onPageChange!}
-          />
-        ) : null}
       </div>
     </div>
   );

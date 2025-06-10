@@ -16,6 +16,7 @@ const Section: React.FC<SectionProps> = ({
   const variantStyles = {
     default: "max-w-[1008px]", // Max width for default variant
     narrow: "max-w-[874px]", // Max width for narrow variant
+    medium: "max-w-[874px]", // Max width for narrow variant
     wide: "max-w-[1245px]", // Max width for wide variant
     large: "max-w-[1500px]", // Max width for wide variant
   };

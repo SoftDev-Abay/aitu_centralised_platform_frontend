@@ -1,77 +1,142 @@
-import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react";
 
-interface PaginationControlsProps {
-  totalItems: number;
-  itemsPerPage: number;
-  visiblePages?: number;
+export interface PaginationProps {
+  currentPage: number; // 1-based
+  onPageChange: (page: number) => void;
+  count: number; // total number of items
+  pageSize?: number; // number of items per page
+  visiblePages?: number; // how many page-buttons to show (default: 4)
 }
 
 export default function PaginationControls({
-  totalItems,
-  itemsPerPage,
-  visiblePages = 5,
-}: PaginationControlsProps) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const currentPage = parseInt(searchParams.get("page") || "1", 10);
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  currentPage,
+  count,
+  pageSize = 10,
+  onPageChange,
+  visiblePages = 4,
+}: PaginationProps) {
+  const totalPages = Math.ceil(count / pageSize);
 
-  const calculatePageRange = (): [number, number] => {
-    const startPage =
-      currentPage % visiblePages === 0
-        ? currentPage - visiblePages + 1
-        : currentPage - (currentPage % visiblePages) + 1;
-    const endPage = Math.min(startPage + visiblePages - 1, totalPages);
-    return [startPage, endPage];
+  if (totalPages < 1) {
+    return null;
+  }
+
+  const getPageRange = () => {
+    let startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + visiblePages - 1);
+
+    // Adjust if we're at the end
+    if (endPage - startPage + 1 < visiblePages) {
+      startPage = Math.max(1, endPage - visiblePages + 1);
+    }
+
+    return { startPage, endPage };
   };
 
-  const [startPage, endPage] = calculatePageRange();
+  const { startPage, endPage } = getPageRange();
 
-  const goToPage = (page: number) => {
-    setSearchParams({ page: page.toString() });
+  const renderPageButtons = () => {
+    const buttons = [];
+
+    // First page button
+    if (startPage > 1) {
+      buttons.push(
+        <Button
+          key={1}
+          variant="ghost"
+          size="icon"
+          className="rounded-full w-10 h-10"
+          onClick={() => onPageChange(1)}
+        >
+          1
+        </Button>
+      );
+      if (startPage > 2) {
+        buttons.push(
+          <Button
+            key="ellipsis-start"
+            variant="ghost"
+            size="icon"
+            className="rounded-full w-10 h-10"
+            disabled
+          >
+            <MoreHorizontal className="w-4 h-4" />
+          </Button>
+        );
+      }
+    }
+
+    // Middle pages
+    for (let page = startPage; page <= endPage; page++) {
+      buttons.push(
+        <Button
+          key={page}
+          variant={page === currentPage ? "default" : "ghost"}
+          size="icon"
+          className={`rounded-full w-10 h-10 ${
+            page === currentPage ? "pointer-events-none" : ""
+          }`}
+          onClick={() => onPageChange(page)}
+        >
+          {page}
+        </Button>
+      );
+    }
+
+    // Last page button
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        buttons.push(
+          <Button
+            key="ellipsis-end"
+            variant="ghost"
+            size="icon"
+            className="rounded-full w-10 h-10"
+            disabled
+          >
+            <MoreHorizontal className="w-4 h-4" />
+          </Button>
+        );
+      }
+      buttons.push(
+        <Button
+          key={totalPages}
+          variant="ghost"
+          size="icon"
+          className="rounded-full w-10 h-10"
+          onClick={() => onPageChange(totalPages)}
+        >
+          {totalPages}
+        </Button>
+      );
+    }
+
+    return buttons;
   };
 
   return (
-    <div className="flex justify-center items-center gap-2 font-medium">
+    <div className="flex justify-center items-center gap-1 font-medium">
       <Button
         variant="ghost"
         size="icon"
         className="rounded-full w-10 h-10"
-        onClick={() => goToPage(currentPage - 1)}
+        onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <ArrowLeft className="w-6 h-6" />
+        <ChevronLeft className="w-5 h-5" />
       </Button>
 
-      {Array.from({ length: endPage - startPage + 1 }, (_, i) => {
-        const page = startPage + i;
-        const isActive = page === currentPage;
-        return (
-          <Button
-            key={page}
-            variant="ghost"
-            size="icon"
-            className={`rounded-full w-10 h-10 ${
-              isActive
-                ? "border border-brand-primary text-brand-primary hover:bg-transparent"
-                : ""
-            }`}
-            onClick={() => goToPage(page)}
-          >
-            {page}
-          </Button>
-        );
-      })}
+      {renderPageButtons()}
 
       <Button
         variant="ghost"
         size="icon"
         className="rounded-full w-10 h-10"
-        onClick={() => goToPage(currentPage + 1)}
+        onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <ArrowRight className="w-6 h-6" />
+        <ChevronRight className="w-5 h-5" />
       </Button>
     </div>
   );
