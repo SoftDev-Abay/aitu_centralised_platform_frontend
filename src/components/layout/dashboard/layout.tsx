@@ -3,13 +3,40 @@ import { Outlet } from "react-router-dom";
 import DashboardNavbar from "./navbar";
 import { NavbarProvider } from "../shared/navbar/navbar-context";
 import { AppSidebar } from "../shared/sidebar/sidebar";
-import { Calendar1, LayoutDashboard, Key, Users, Layers } from "lucide-react";
+import {
+  Calendar1,
+  LayoutDashboard,
+  Key,
+  Users,
+  Layers,
+  DockIcon,
+  UsersIcon,
+} from "lucide-react";
 
 const userMenuItems = [
   { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
   { title: "Posts", url: "/dashboard/posts", icon: Users },
   { title: "Events", url: "/dashboard/events", icon: Layers },
-  { title: "Clubs", url: "/dashboard/clubs", icon: Key },
+  {
+    title: "Clubs",
+    url: "/dashboard/clubs",
+    icon: Key,
+    // subItems: [
+    //   {
+    //     title: "Music",
+    //     url: "/dashboard/events/create",
+    //     icon: UsersIcon,
+    //     // subItems: [],
+    //   },
+    //   {
+    //     title: "Chess",
+    //     url: "/dashboard/events/create",
+    //     icon: UsersIcon,
+    //     // subItems: [],
+    //   },
+    // ],
+  },
+  { title: "Applications", url: "/dashboard/applications", icon: DockIcon },
   { title: "Calendar", url: "/dashboard/calendar", icon: Calendar1 },
 ];
 

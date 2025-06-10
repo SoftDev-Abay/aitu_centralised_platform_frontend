@@ -1,22 +1,41 @@
 import { SidebarInset } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
-// import { NavbarProvider } from "../shared/navbar/navbar-context";
-// import AdminPanelNavbar from "./navbar";
 import { AppSidebar } from "../shared/sidebar/sidebar";
 import { HomeIcon, KeyIcon, LayersIcon, UsersIcon } from "lucide-react";
 import AdminPanelNavbar from "./navbar";
 import { NavbarProvider } from "../shared/navbar/navbar-context";
 
 const adminMenuItems = [
-  { title: "Clubs Create", url: "/admin-panel/clubs/create", icon: KeyIcon },
-  { title: "Posts Create", url: "/admin-panel/posts/create", icon: UsersIcon },
+  { title: "Home", url: "/admin-panel", icon: HomeIcon },
+
+  // { title: "Clubs Create", url: "/admin-panel/clubs/create", icon: KeyIcon },
+  { title: "Posts", url: "/admin-panel/posts", icon: UsersIcon },
+  // { title: "Posts Create", url: "/admin-panel/posts/create", icon: UsersIcon },
   {
-    title: "Events Create",
-    url: "/admin-panel/events/create",
+    title: "Events",
+    url: "/admin-panel/events",
     icon: UsersIcon,
   },
+  // {
+  //   title: "Events",
+  //   icon: UsersIcon,
+  //   subItems: [
+  //     {
+  //       title: "All",
+  //       url: "/admin-panel/events/create",
+  //       icon: UsersIcon,
+  //       // subItems: [],
+  //     },
+  //     {
+  //       title: "Create",
+  //       url: "/admin-panel/events/create",
+  //       icon: UsersIcon,
+  //       // subItems: [],
+  //     },
+  //   ],
+  // },
+
   { title: "Clubs", url: "/admin-panel/clubs", icon: LayersIcon },
-  { title: "Home", url: "/admin-panel", icon: HomeIcon },
 ];
 
 export default function AdminPanelLayout() {
