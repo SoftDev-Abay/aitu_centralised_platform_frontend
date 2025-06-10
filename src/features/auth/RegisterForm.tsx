@@ -45,8 +45,8 @@ export function RegisterForm({
   const onSubmit = async (data: RegisterFormValues) => {
     const { securityKey, password } = data;
     try {
-      await register({ securityKey, password }).unwrap();
-      // await register({ securityKey, password, role: "ADMIN" }).unwrap();
+      // await register({ securityKey, password }).unwrap();
+      await register({ securityKey, password, role: "ADMIN" }).unwrap();
 
       navigate("/auth/sign-in");
       toast.success("Registration successful!");

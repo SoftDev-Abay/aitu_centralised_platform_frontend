@@ -39,12 +39,14 @@ export function LoginForm({
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const { token } = await login({
+      const { accessToken } = await login({
         email: data.email,
         password: data.password,
       }).unwrap();
 
-      dispatch(setCredentials({ token }));
+      dispatch(setCredentials({ token: accessToken }));
+
+      console.log("token from login form", accessToken);
 
       navigate("/dashboard");
       toast.success("Login successful!");
