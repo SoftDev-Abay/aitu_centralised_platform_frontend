@@ -39,7 +39,7 @@ import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Locate } from "lucide-react";
 import { EventDto } from "@/features/events/types";
-import FetchedImg from "@/features/images/FetchedImg";
+import { getFileDownloadUrl } from "@/lib/helpers";
 
 type Props = {
   event: EventDto;
@@ -49,10 +49,12 @@ const EventCard = ({ event }: Props) => {
   return (
     <Card className="rounded-none p-0 gap-0">
       {event.imageIds.length > 0 ? (
-        <FetchedImg imgId={event.imageIds[0]} className="h-[234px]" />
-      ) : (
-        <img src="/images/club.png" className="h-[234px]" alt={event.name} />
-      )}
+        <img
+          src={getFileDownloadUrl(event.imageIds[0])}
+          className="h-[234px]"
+          alt={event.name}
+        />
+      ) : null}
       <div className="px-4.5 py-4">
         <Badge className="rounded-none bg-brand-gray-bluish text-brand-primary mb-2">
           EVENT

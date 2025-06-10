@@ -59,7 +59,7 @@ const mockRows = [
   },
 ];
 
-const DashboardPage = () => {
+const AdminDashboardPage = () => {
   return (
     <Section
       variant="wide"
@@ -303,4 +303,4 @@ const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;
+export default AdminDashboardPage;

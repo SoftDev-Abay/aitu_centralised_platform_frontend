@@ -18,11 +18,24 @@ import CreateClubPage from "./pages/admin-panel/clubs/create/page";
 import SurveyCreatePage from "./pages/admin-panel/survey/create/page";
 import ClubAdminDashboardPage from "./pages/admin-panel/clubs/view/page";
 import AdminClubListPage from "./pages/admin-panel/clubs/page";
-import SubmitSurveyPage from "./pages/admin-panel/survey/submit/page";
+import PreviewSurveyPage from "./pages/admin-panel/survey/preview/page";
 import ViewSurveyResponcePage from "./pages/admin-panel/survey/responce/page";
+import MyClubsListPage from "./pages/dashboard/clubs/my/page";
+import AdminEventsListPage from "./pages/admin-panel/events/page";
+import AdminPostsListPage from "./pages/admin-panel/posts/page";
+import MyApplicationsListPage from "./pages/dashboard/applications/page";
+import SubmitSurveyPage from "./pages/dashboard/applications/submit/page";
+import ClubEventsListPage from "./pages/admin-panel/clubs/view/events/page";
+import ClubMembersListPage from "./pages/admin-panel/clubs/view/members/page";
+import ClubApplicationsListPage from "./pages/admin-panel/clubs/view/applications/page";
+import AdminDashboardPage from "./pages/admin-panel/page";
 function App() {
   return (
     <Routes>
+      <Route element={<DashboardLayout />}>
+        <Route path="my" element={<MyClubsListPage />} />
+      </Route>
+
       <Route path="auth">
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
@@ -33,6 +46,7 @@ function App() {
 
         <Route path="clubs">
           <Route index element={<ClubsListPage />} />
+          <Route path="my" element={<MyClubsListPage />} />
           <Route path=":id" element={<ClubDetailsPage />} />
         </Route>
         <Route path="posts">
@@ -46,28 +60,37 @@ function App() {
         <Route path="calendar">
           <Route index element={<CalendarPage />} />
         </Route>
-        <Route path="survey">
+        <Route path="applications">
+          <Route index element={<MyApplicationsListPage />} />
           <Route path="submit/:id" element={<SubmitSurveyPage />} />
         </Route>
       </Route>
       <Route path="admin-panel" element={<AdminPanelLayout />}>
+        <Route index element={<AdminDashboardPage />} />
+
         <Route path="survey">
           <Route path="create" element={<SurveyCreatePage />} />
           <Route path="responce/:id" element={<ViewSurveyResponcePage />} />
-          <Route path="submit/:id" element={<SubmitSurveyPage />} />
+          <Route path="preview/:id" element={<PreviewSurveyPage />} />
         </Route>
         <Route path="posts">
           <Route path="create" element={<CreatePost />} />
+          <Route index element={<AdminPostsListPage />} />
         </Route>
         <Route path="events">
+          <Route index element={<AdminEventsListPage />} />
           <Route path="create" element={<CreateEventPage />} />
         </Route>
         <Route path="clubs">
           <Route path="create" element={<CreateClubPage />} />
-          <Route path="view/:id" element={<ClubAdminDashboardPage />} />
+          <Route path="view/:id">
+            <Route index element={<ClubAdminDashboardPage />} />
+            <Route path="events" element={<ClubEventsListPage />} />
+            <Route path="members" element={<ClubMembersListPage />} />
+            <Route path="applications" element={<ClubApplicationsListPage />} />
+          </Route>
           <Route index element={<AdminClubListPage />} />
         </Route>
-        <Route index element={<DashboardPage />} />
       </Route>
 
       {/* <Route path="dashboard" element={<DashboardLayout />}>
