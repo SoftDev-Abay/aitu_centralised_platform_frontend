@@ -86,7 +86,7 @@ export function LoginForm({
             control={control}
             label="Email"
             placeholder="Enter your Email"
-            inputClassName="py-[16.5px] px-6"
+            inputClassName="py-[16.5px] px-6 rounded-md"
             className="mb-5  "
           />
           <FormInput
@@ -95,7 +95,7 @@ export function LoginForm({
             label="Password"
             placeholder="Enter your password"
             type="password"
-            inputClassName="py-[16.5px] px-6 "
+            inputClassName="py-[16.5px] px-6 rounded-md"
             className="mb-5"
           />
 

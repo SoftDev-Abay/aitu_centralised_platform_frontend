@@ -92,7 +92,7 @@ export function RegisterForm({
             label="Password"
             type="password"
             placeholder="Enter your password"
-            inputClassName="py-[16.5px] px-6"
+            inputClassName="py-[16.5px] px-6 rounded-md"
             className="mb-5"
           />
           <FormInput
@@ -101,7 +101,7 @@ export function RegisterForm({
             label="Confirm Password"
             type="password"
             placeholder="Enter your password again"
-            inputClassName="py-[16.5px] px-6"
+            inputClassName="py-[16.5px] px-6 rounded-md"
             className="mb-5"
           />
           <div className="flex items-center mb-5">
