@@ -47,13 +47,13 @@ const ClubsListPage = () => {
 
           <div className="flex gap-4">
             <div className="flex flex-col gap-4">
-              <p>Search</p>
-              <Input placeholder="Search" />
+              <p className="text-brand-gray-steel text-sm">Search:</p>
+              <Input placeholder="Search" className="bg-white border-0" />
             </div>
             <div className="flex flex-col gap-4">
-              <p>Sort By</p>
+              <p className="text-brand-gray-steel text-sm">Sort By:</p>
               <Select>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-white border-0">
                   <SelectValue placeholder="Latest" />
                 </SelectTrigger>
                 <SelectContent>
@@ -63,9 +63,9 @@ const ClubsListPage = () => {
               </Select>
             </div>
             <div className="flex flex-col gap-4">
-              <p>Category</p>
+              <p className="text-brand-gray-steel text-sm">Category:</p>
               <Select>
-                <SelectTrigger className="w-[180px]">
+                <SelectTrigger className="w-[180px] bg-white border-0">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
