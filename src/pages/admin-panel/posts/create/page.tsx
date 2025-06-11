@@ -18,6 +18,7 @@ import { postCategoriesOptions } from "@/features/posts/constants";
 import SelectAdvaced from "@/components/ui/select-advanced";
 import { PostCategories } from "@/features/posts/types";
 import { FormTextarea } from "@/components/form/FormTextAreat";
+import TextEditor from "@/components/shared/text-editor/text-editor";
 // import { FormImageUpload } from "@/components/form/FormImageUpload";
 
 const schema = z.object({
@@ -51,7 +52,26 @@ const CreatePostPage = () => {
     resolver: zodResolver(schema),
     defaultValues: {
       title: "",
-      description: "",
+      description: `<h2>🚀 Welcome to your new post</h2>
+    <p>Start by telling your story or sharing your idea. Here's a helpful structure:</p>
+    
+    <h3>🧠 Introduction</h3>
+    <p>Briefly introduce the topic you’ll be discussing. Hook your readers.</p>
+
+    <h3>📌 Key Points</h3>
+    <ul>
+      <li>Point 1: Explain your first main idea</li>
+      <li>Point 2: Support it with an example or evidence</li>
+      <li>Point 3: Add something visual or engaging</li>
+    </ul>
+
+    <h3>🎯 Conclusion</h3>
+    <p>Summarize your message and encourage the reader to take action or reflect.</p>
+
+    <blockquote>“You can inspire, inform, or ignite — the choice is yours.”</blockquote>
+
+    <p><em>Feel free to remove this template and write your own content!</em></p>
+  `,
       // image: undefined as unknown as File,
     },
   });
@@ -99,7 +119,6 @@ const CreatePostPage = () => {
               placeholder="Enter post title"
               inputClassName="py-3 px-5"
             />
-
             {/* <Controller
               name="description"
               control={control}
@@ -115,15 +134,20 @@ const CreatePostPage = () => {
                 </div>
               )}
             /> */}
-            <FormTextarea
+            {/* <FormTextarea
               name="description"
               control={control}
               label="Description"
               placeholder="Enter your description here..."
               description="This will be displayed publicly."
               required
+            /> */}
+            <TextEditor
+              name="description"
+              control={control}
+              error={errors.description && errors.description.message}
+              defaultValue=""
             />
-
             <SelectAdvaced
               options={postCategoriesOptions}
               register={register("category")}
@@ -132,14 +156,12 @@ const CreatePostPage = () => {
               error={errors.category && errors.category.message}
               // multiple
             />
-
             <MultiImageUpload
               name="images"
               control={control}
               error={errors.images}
               // label="Upload Image"
             />
-
             <Button type="submit" disabled={isLoading}>
               {isLoading ? "Creating..." : "Create Post"}
             </Button>

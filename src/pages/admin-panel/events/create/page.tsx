@@ -25,6 +25,37 @@ import { formatTime } from "@/lib/utils";
 import SelectAdvaced from "@/components/ui/select-advanced";
 import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
 import { Label } from "@/components/ui/label";
+import TextEditor from "@/components/shared/text-editor/text-editor";
+
+const defaultEventDescription = `
+  <h2>🎉 Event Overview</h2>
+  <p>Welcome to our event! Here's a quick overview of what it's all about.</p>
+
+  <h3>📍 Location</h3>
+  <p>Provide details on how to join (venue address or online platform link).</p>
+
+  <h3>📅 Agenda</h3>
+  <ul>
+    <li><strong>Registration:</strong> Include register cabinet</li>
+    <li><strong>Start:</strong> Include start time and timezone</li>
+    <li><strong>End:</strong> Include end time and timezone</li>
+  </ul>
+
+  <h3>👤 Who Should Attend?</h3>
+  <p>Describe your target audience. Is this event for students, professionals, everyone?</p>
+
+  <h3>❗ Important Notes</h3>
+  <ul>
+    <li>RSVP before a certain date</li>
+    <li>Bring ID / prepare presentation / install Zoom, etc.</li>
+  </ul>
+
+  <blockquote>
+    “The best way to predict the future is to create it.” — Abraham Lincoln
+  </blockquote>
+
+  <p><em>Feel free to edit or remove this content and describe your event in your own words.</em></p>
+`;
 
 const eventSchema = z.object({
   name: z.string().min(1, "Required"),
@@ -65,6 +96,7 @@ const CreateEventPage = () => {
     resolver: zodResolver(eventSchema),
     defaultValues: {
       format: "ONLINE",
+      description: defaultEventDescription,
     },
   });
 
@@ -114,11 +146,11 @@ const CreateEventPage = () => {
               label="Name"
               placeholder="Name"
             />
-            <FormInput
+            <TextEditor
               name="description"
               control={control}
-              label="Description"
-              placeholder="Optional"
+              error={errors.description && errors.description.message}
+              defaultValue=""
             />
 
             <div className="flex gap-5">

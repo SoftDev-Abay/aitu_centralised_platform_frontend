@@ -40,18 +40,18 @@
 
   /* new colors from figma */
 
-  --brand-primary: oklch(0.68 0.119 228.97);        /* #34A7D4 */
-  --brand-secondary: oklch(0.24 0.0123 264.31);   /* #1D2026 */
-  --brand-light-blue: oklch(0.93 0.0272 223.23);    /* #D6EDF6 */
-  --brand-gray-light: oklch(0.94 0.0081 278.63);    /* #E9EAF0 */
+  --brand-primary: oklch(0.68 0.119 228.97); /* #34A7D4 */
+  --brand-secondary: oklch(0.24 0.0123 264.31); /* #1D2026 */
+  --brand-light-blue: oklch(0.93 0.0272 223.23); /* #D6EDF6 */
+  --brand-gray-light: oklch(0.94 0.0081 278.63); /* #E9EAF0 */
   --brand-gray-medium: oklch(0.67 0.0241 263.14); /* #8C94A3 */
-  --brand-gray-muted: oklch(0.45 0.01 260);         /* #6E7485 */
+  --brand-gray-muted: oklch(0.45 0.01 260); /* #6E7485 */
 
-  --brand-gray-bluish: oklch(0.98 0.0045 258.32);   /* #F5F7FA */
-  --brand-gray-dark: oklch(0.51 0.0031 286.29);     /* #656567 */
-  --brand-success: oklch(0.7 0.2144 143.92);       /* #23BD33 */
-  --brand-danger: oklch(0.65 0.2348 26.76);         /* #FF3636 */
-  --brand-gray-steel: oklch(0.45 0.0293 267.57);        /* #4E5566 */
+  --brand-gray-bluish: oklch(0.98 0.0045 258.32); /* #F5F7FA */
+  --brand-gray-dark: oklch(0.51 0.0031 286.29); /* #656567 */
+  --brand-success: oklch(0.7 0.2144 143.92); /* #23BD33 */
+  --brand-danger: oklch(0.65 0.2348 26.76); /* #FF3636 */
+  --brand-gray-steel: oklch(0.45 0.0293 267.57); /* #4E5566 */
 }
 
 .dark {
@@ -145,5 +145,72 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+@layer components {
+  .content h1 {
+    @apply text-4xl font-bold mb-4 leading-tight;
+  }
+  .content h2 {
+    @apply text-3xl font-bold mb-4 leading-snug;
+  }
+  .content h3 {
+    @apply text-2xl font-semibold mb-3 leading-snug;
+  }
+  .content h4 {
+    @apply text-xl font-semibold mb-2 leading-snug;
+  }
+
+  .content p {
+    @apply text-base mb-5 leading-relaxed text-foreground;
+  }
+
+  .content ul,
+  .content ol {
+    @apply pl-5 ml-4 mb-5;
+  }
+
+  .content ul {
+    @apply list-disc;
+  }
+
+  .content ol {
+    @apply list-decimal;
+  }
+
+  .content li {
+    @apply text-base mb-2 leading-relaxed;
+  }
+
+  .content a {
+    @apply text-blue-600 underline hover:text-blue-800;
+  }
+
+  .content blockquote {
+    @apply border-l-4 border-gray-200 pl-4 italic text-muted-foreground mb-5;
+  }
+
+  .content strong {
+    @apply font-semibold;
+  }
+
+  .content em {
+    @apply italic;
+  }
+
+  .content img {
+    @apply my-4 rounded-md max-w-full;
+  }
+
+  .content hr {
+    @apply my-8 border-t border-border;
+  }
+
+  .content code {
+    @apply px-1 py-0.5 bg-muted text-sm font-mono rounded;
+  }
+
+  .content pre {
+    @apply p-4 overflow-x-auto bg-muted text-sm font-mono rounded my-4;
   }
 }

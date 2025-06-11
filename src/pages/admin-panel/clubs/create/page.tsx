@@ -15,6 +15,34 @@ import { Label } from "@/components/ui/label";
 import SelectAdvaced from "@/components/ui/select-advanced";
 import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
 import { useUploadFilesMutation } from "@/features/files/filesApiSlice";
+import TextEditor from "@/components/shared/text-editor/text-editor";
+
+const defaultClubDescription = `
+  <h2>🏛️ About the Club</h2>
+  <p>Welcome to our club! Here's a short overview of what we stand for.</p>
+
+  <h3>🎯 Mission</h3>
+  <p>Describe your club’s mission and why it exists. What is your purpose?</p>
+
+  <h3>📌 Activities</h3>
+  <ul>
+    <li>Weekly meetups and discussions</li>
+    <li>Workshops, guest lectures, or competitions</li>
+    <li>Collaborative projects and community engagement</li>
+  </ul>
+
+  <h3>👥 Who Can Join?</h3>
+  <p>Let others know who this club is for — open to all, or specific departments, interests, etc.</p>
+
+  <h3>💬 Communication</h3>
+  <p>Mention how members stay in touch — Telegram, Discord, WhatsApp, etc.</p>
+
+  <blockquote>
+    “Clubs don’t make people better. People make clubs better.” – Unknown
+  </blockquote>
+
+  <p><em>Feel free to personalize or remove this template content!</em></p>
+`;
 
 const clubSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -50,7 +78,7 @@ const CreateClubPage = () => {
     resolver: zodResolver(clubSchema),
     defaultValues: {
       name: "",
-      description: "",
+      description: defaultClubDescription,
     },
   });
 
@@ -99,7 +127,7 @@ const CreateClubPage = () => {
         <CardContent className="px-10 py-8">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="space-y-6 mt-6 max-w-xl"
+            className="space-y-6 mt-6 "
           >
             <FormInput
               name="name"
@@ -107,11 +135,11 @@ const CreateClubPage = () => {
               label="Name"
               placeholder="Enter club name"
             />
-            <FormInput
+            <TextEditor
               name="description"
               control={control}
-              label="Description"
-              placeholder="Enter club description"
+              error={errors.description && errors.description.message}
+              defaultValue=""
             />
             <div className="flex flex-col space-y-2">
               <Label>Admins</Label>
