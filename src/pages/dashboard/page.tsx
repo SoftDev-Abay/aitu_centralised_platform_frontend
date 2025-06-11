@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 import QuickLinkCard from "@/components/shared/QuickLinkCard";
+import NotificationsCard from "@/features/notifications/components/NotificationsCard";
 
 const mockRows = [
   { date: "2024-06-01", event: "Music Club Registration", status: "Unread" },
@@ -136,88 +137,7 @@ const DashboardPage = () => {
       </div>
       <div className="grid gap-y-[29px] lg:gap-x-[29px] grid-cols-1 md:grid-cols-2 lg:grid-cols-5">
         {/* <Card className="border-0 bg-white rounded-none col-span-2 py-0 gap-0"> */}
-        <Card className="border-0 shadow-none bg-white rounded-none col-span-2 py-0 gap-0">
-          <CardHeader className="flex justify-between items-center px-5 py-4">
-            <p className="font-medium">Recent announcements</p>
-            <Select>
-              <SelectTrigger className="border-0 shadow-none text-sm text-brand-gray-muted">
-                <SelectValue placeholder="Select time" />
-              </SelectTrigger>
-              <SelectContent defaultValue={"today"}>
-                <SelectGroup>
-                  <SelectLabel>Time</SelectLabel>
-                  <SelectItem value="today">Today</SelectItem>
-                  <SelectItem value="week">Week</SelectItem>
-                  <SelectItem value="month">Month</SelectItem>
-                  <SelectItem value="year">Year</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-            {/* <div className="flex items-center gap-2 text-brand-gray-muted">
-              <span className="text-sm">Today</span>
-              <ChevronDown size={18} />
-            </div> */}
-          </CardHeader>
-          <Separator />
-          <CardContent className="px-5 flex flex-col gap-4">
-            <div className="flex gap-3 py-3">
-              <div className="h-8 w-8 rounded-full shrink-0 bg-brand-primary flex justify-center items-center">
-                <MessageCircle size={16} className="text-white" />
-              </div>
-              <div>
-                <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on
-                  your lecture “What is ux” in “2021 ui/ux design with figma”
-                </p>
-                <span className="text-xs text-brand-gray-medium">
-                  5 min ago
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-3 py-3">
-              <div className="h-8 w-8 rounded-full shrink-0 bg-brand-primary flex justify-center items-center">
-                <MessageCircle size={16} className="text-white" />
-              </div>
-              <div>
-                <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on
-                  your lecture “What is ux” in “2021 ui/ux design with figma”
-                </p>
-                <span className="text-xs text-brand-gray-medium">
-                  5 min ago
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-3 py-3">
-              <div className="h-8 w-8 rounded-full shrink-0 bg-brand-primary flex justify-center items-center">
-                <MessageCircle size={16} className="text-white" />
-              </div>
-              <div>
-                <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on
-                  your lecture “What is ux” in “2021 ui/ux design with figma”
-                </p>
-                <span className="text-xs text-brand-gray-medium">
-                  5 min ago
-                </span>
-              </div>
-            </div>
-            <div className="flex gap-3 py-3">
-              <div className="h-8 w-8 rounded-full shrink-0 bg-brand-primary flex justify-center items-center">
-                <MessageCircle size={16} className="text-white" />
-              </div>
-              <div>
-                <p className="mb-1.5 leading-5">
-                  <strong className="font-semibold">Kevin</strong> comments on
-                  your lecture “What is ux” in “2021 ui/ux design with figma”
-                </p>
-                <span className="text-xs text-brand-gray-medium">
-                  5 min ago
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <NotificationsCard />
         {/* <Card className=" border-0 bg-white rounded-none col-span-3 py-0 gap-0"> */}
         <Card className="shadow-none border-0 bg-white rounded-none col-span-3 py-0 gap-0">
           <CardHeader className="flex justify-between items-center px-5 py-5.5">

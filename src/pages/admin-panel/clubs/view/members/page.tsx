@@ -19,6 +19,7 @@ import AddMemberModal from "@/features/clubs/components/modals/AddMemberModal";
 import EditMemberRoleModal from "@/features/clubs/components/modals/EditMemberRoleModal";
 import { UserDto } from "@/features/users/types";
 import { DataPagination } from "@/components/shared/data-pagination";
+import { ClubMemberDto } from "@/features/clubs/types";
 
 const ClubMembersListPage = () => {
   useSetNavbarTitle("Club Members");
@@ -29,7 +30,9 @@ const ClubMembersListPage = () => {
   const { id: clubId } = useParams();
 
   const [editMemberOpen, setEditMemberOpen] = useState(false);
-  const [selectedMember, setSelectedMember] = useState<UserDto | null>(null);
+  const [selectedMember, setSelectedMember] = useState<ClubMemberDto | null>(
+    null
+  );
 
   const { data, isLoading, isError } = useGetClubMembersQuery({
     page: page - 1,
@@ -63,17 +66,20 @@ const ClubMembersListPage = () => {
           onOpenChange={setAddMemberOpen}
           clubId={clubId ?? ""}
         />
-        {/* <EditMemberRoleModal
-          open={editMemberOpen}
-          onOpenChange={setEditMemberOpen}
-          clubId={clubId ?? ""}
-          member={selectedMember!}
-        /> */}
+        {selectedMember && (
+          <EditMemberRoleModal
+            open={editMemberOpen}
+            onOpenChange={setEditMemberOpen}
+            clubId={clubId ?? ""}
+            member={selectedMember}
+          />
+        )}
         <DataTable
           columns={[
             { accessorKey: "id", header: "ID" },
             { accessorKey: "firstName", header: "First Name" },
             { accessorKey: "lastName", header: "Last Name" },
+            { accessorKey: "role", header: "Role" },
             { accessorKey: "email", header: "Email" },
             { accessorKey: "department", header: "Department" },
             {
@@ -94,7 +100,14 @@ const ClubMembersListPage = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-32">
                       <DropdownMenuItem>Preview</DropdownMenuItem>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setSelectedMember(row.original);
+                          setEditMemberOpen(true);
+                        }}
+                      >
+                        Edit Role
+                      </DropdownMenuItem>
                       {/* <DropdownMenuItem
                         onClick={() => {
                           setSelectedMember(row.original);

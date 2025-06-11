@@ -11,6 +11,7 @@ import {
   Layers,
   DockIcon,
   UsersIcon,
+  UserIcon,
 } from "lucide-react";
 
 const userMenuItems = [
@@ -38,6 +39,7 @@ const userMenuItems = [
   },
   { title: "Applications", url: "/dashboard/applications", icon: DockIcon },
   { title: "Calendar", url: "/dashboard/calendar", icon: Calendar1 },
+  { title: "Profile", url: "/dashboard/profile", icon: UserIcon },
 ];
 
 export default function DashboardLayout() {

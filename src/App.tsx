@@ -29,6 +29,7 @@ import ClubEventsListPage from "./pages/admin-panel/clubs/view/events/page";
 import ClubMembersListPage from "./pages/admin-panel/clubs/view/members/page";
 import ClubApplicationsListPage from "./pages/admin-panel/clubs/view/applications/page";
 import AdminDashboardPage from "./pages/admin-panel/page";
+import ProfilePage from "./pages/dashboard/profile/page";
 function App() {
   return (
     <Routes>
@@ -64,6 +65,7 @@ function App() {
           <Route index element={<MyApplicationsListPage />} />
           <Route path="submit/:id" element={<SubmitSurveyPage />} />
         </Route>
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
       <Route path="admin-panel" element={<AdminPanelLayout />}>
         <Route index element={<AdminDashboardPage />} />
@@ -77,6 +79,8 @@ function App() {
           <Route path="create" element={<CreatePost />} />
           <Route index element={<AdminPostsListPage />} />
         </Route>
+        <Route path="profile" element={<ProfilePage />} />
+        {/* <Route path="profile/:id" element /> */}
         <Route path="events">
           <Route index element={<AdminEventsListPage />} />
           <Route path="create" element={<CreateEventPage />} />

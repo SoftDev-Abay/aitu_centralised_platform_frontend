@@ -47,7 +47,7 @@
   --brand-gray-medium: oklch(0.67 0.0241 263.14); /* #8C94A3 */
   --brand-gray-muted: oklch(0.45 0.01 260); /* #6E7485 */
 
-  --brand-gray-bluish: oklch(0.98 0.0045 258.32); /* #F5F7FA */
+  --brand-gray-bluish: oklch(0.9755 0.0045 258.32); /* #F5F7FA */
   --brand-gray-dark: oklch(0.51 0.0031 286.29); /* #656567 */
   --brand-success: oklch(0.7 0.2144 143.92); /* #23BD33 */
   --brand-danger: oklch(0.65 0.2348 26.76); /* #FF3636 */

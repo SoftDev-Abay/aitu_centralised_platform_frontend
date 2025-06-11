@@ -1,21 +1,32 @@
 import { SidebarInset } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
 import { AppSidebar } from "../shared/sidebar/sidebar";
-import { HomeIcon, KeyIcon, LayersIcon, UsersIcon } from "lucide-react";
+import {
+  HomeIcon,
+  KeyIcon,
+  LayersIcon,
+  UserIcon,
+  UsersIcon,
+} from "lucide-react";
 import AdminPanelNavbar from "./navbar";
 import { NavbarProvider } from "../shared/navbar/navbar-context";
 
 const adminMenuItems = [
   { title: "Home", url: "/admin-panel", icon: HomeIcon },
 
-  // { title: "Clubs Create", url: "/admin-panel/clubs/create", icon: KeyIcon },
   { title: "Posts", url: "/admin-panel/posts", icon: UsersIcon },
-  // { title: "Posts Create", url: "/admin-panel/posts/create", icon: UsersIcon },
+
   {
     title: "Events",
     url: "/admin-panel/events",
     icon: UsersIcon,
   },
+
+  { title: "Clubs", url: "/admin-panel/clubs", icon: LayersIcon },
+  { title: "Profile", url: "/admin-panel/profile", icon: UserIcon },
+
+  // { title: "Clubs Create", url: "/admin-panel/clubs/create", icon: KeyIcon },
+  // { title: "Posts Create", url: "/admin-panel/posts/create", icon: UsersIcon },
   // {
   //   title: "Events",
   //   icon: UsersIcon,
@@ -34,8 +45,6 @@ const adminMenuItems = [
   //     },
   //   ],
   // },
-
-  { title: "Clubs", url: "/admin-panel/clubs", icon: LayersIcon },
 ];
 
 export default function AdminPanelLayout() {

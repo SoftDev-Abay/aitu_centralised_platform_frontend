@@ -17,14 +17,14 @@ import {
 } from "@/components/ui/select";
 import { useAssignClubMemberMutation } from "../../clubsApiSlice";
 import { clubMemberRolesOptions } from "../../constants";
-import { ClubMemberRole, UserDto } from "../../types";
+import { ClubMemberDto, ClubMemberRole, UserDto } from "../../types";
 import { Label } from "@/components/ui/label";
 
 interface EditMemberRoleModalProps {
   open: boolean;
   onOpenChange: (val: boolean) => void;
   clubId: string;
-  member: UserDto;
+  member: ClubMemberDto;
 }
 
 const EditMemberRoleModal = ({
@@ -33,7 +33,12 @@ const EditMemberRoleModal = ({
   clubId,
   member,
 }: EditMemberRoleModalProps) => {
-  const [role, setRole] = useState<ClubMemberRole>(member.role);
+  const [role, setRole] = useState<ClubMemberRole>(
+    member?.role || ClubMemberRole.MEMBER
+  );
+
+  if (!member) return null; // Early return if no member
+  
   const [assignRole, { isLoading }] = useAssignClubMemberMutation();
 
   const handleRoleChange = (value: string) => {

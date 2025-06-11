@@ -6,6 +6,7 @@ import {
   UserDto,
   PaginatedClubs,
   ClubAdminOrMemberInput,
+  ClubMemberDto,
 } from "./types";
 
 export const clubsApiSlice = apiSlice.injectEndpoints({
@@ -60,7 +61,7 @@ export const clubsApiSlice = apiSlice.injectEndpoints({
     }),
 
     getClubMembers: builder.query<
-      { data: UserDto[]; count: number },
+      { data: ClubMemberDto[]; count: number },
       { clubId: string; page?: number; pageSize?: number }
     >({
       query: ({ clubId, page = 0, pageSize = 10 }) => ({
@@ -78,7 +79,10 @@ export const clubsApiSlice = apiSlice.injectEndpoints({
               })),
             ]
           : [{ type: "Club", id: clubId }],
-      transformResponse: (response: { data: UserDto[]; count: number }) => ({
+      transformResponse: (response: {
+        data: ClubMemberDto[];
+        count: number;
+      }) => ({
         data: response.data,
         count: response.count,
       }),

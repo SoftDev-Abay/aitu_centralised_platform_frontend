@@ -75,5 +75,5 @@ const baseQueryWithAuthHandling = async (
 export const apiSlice = createApi({
   baseQuery: baseQueryWithAuthHandling,
   endpoints: () => ({}),
-  tagTypes: ["Club", "Event", "Post", "Comment", "ClubMember"],
+  tagTypes: ["Club", "Event", "Post", "Comment", "ClubMember", "Notification"],
 });

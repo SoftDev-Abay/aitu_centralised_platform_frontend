@@ -29,6 +29,7 @@ const EventsDetailsPage = () => {
 
   if (!id) return null;
   if (isLoading || !event) return <div className="p-10">Loading...</div>;
+  // if (isLoading || !event) return <div className="p-10">Loading...</div>;
 
   const users = [...event.admins, ...event.participants].map((user) => ({
     name: `${user.firstName} ${user.lastName}`,
