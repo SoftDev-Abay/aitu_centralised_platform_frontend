@@ -27,7 +27,7 @@ const ClubDetailsPage = () => {
   const { id } = useParams();
   useSetNavbarTitle("Clubs");
 
-  const { data: club, isLoading } = useGetClubByIdQuery({ id: id! });
+  const { data: club } = useGetClubByIdQuery({ id: id! });
 
   return (
     <>

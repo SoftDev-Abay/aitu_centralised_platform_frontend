@@ -38,21 +38,21 @@ const DynamicSurveyForm: React.FC<DynamicSurveyFormProps> = ({
     setResponses((prev) => ({ ...prev, [questionId]: value }));
   };
 
-  const handleCheckboxChange = (
-    questionId: string,
-    option: string,
-    checked: boolean
-  ) => {
-    const current = responses[questionId] || [];
-    if (checked) {
-      setResponses((prev) => ({ ...prev, [questionId]: [...current, option] }));
-    } else {
-      setResponses((prev) => ({
-        ...prev,
-        [questionId]: current.filter((v: string) => v !== option),
-      }));
-    }
-  };
+  // const handleCheckboxChange = (
+  //   questionId: string,
+  //   option: string,
+  //   checked: boolean
+  // ) => {
+  //   const current = responses[questionId] || [];
+  //   if (checked) {
+  //     setResponses((prev) => ({ ...prev, [questionId]: [...current, option] }));
+  //   } else {
+  //     setResponses((prev) => ({
+  //       ...prev,
+  //       [questionId]: current.filter((v: string) => v !== option),
+  //     }));
+  //   }
+  // };
 
   const renderQuestion = (question: Question) => {
     const commonCard = (children: React.ReactNode) => (

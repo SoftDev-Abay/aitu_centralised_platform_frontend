@@ -3,7 +3,7 @@ import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { useGetApplicationsByVisitorQuery } from "@/features/applications/applicationRequestsApiSlice";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,7 @@ const MyApplicationsListPage = () => {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError } = useGetApplicationsByVisitorQuery({
+  const { data, isError } = useGetApplicationsByVisitorQuery({
     page: page - 1,
     pageSize,
   });

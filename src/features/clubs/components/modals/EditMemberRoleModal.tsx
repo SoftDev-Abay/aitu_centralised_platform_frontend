@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/select";
 import { useAssignClubMemberMutation } from "../../clubsApiSlice";
 import { clubMemberRolesOptions } from "../../constants";
-import { ClubMemberDto, ClubMemberRole, UserDto } from "../../types";
+import { ClubMemberDto, ClubMemberRole } from "../../types";
 import { Label } from "@/components/ui/label";
 
 interface EditMemberRoleModalProps {

@@ -1,7 +1,7 @@
 import Section from "@/components/ui/section";
 import SurveyConstructor from "@/features/applications/components/Survey/SurveyConstructor";
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SurveyCreatePage = () => {
   const searchParams = new URLSearchParams(window.location.search);

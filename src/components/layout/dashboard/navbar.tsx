@@ -1,6 +1,6 @@
 import SearchBar from "@/components/ui/search-bar";
 import ProfileDropdown from "@/components/ui/profile-dropdown";
-import { Bell, SettingsIcon } from "lucide-react";
+import { Bell } from "lucide-react";
 import { useNavbarContext } from "../shared/navbar/navbar-context";
 import SettingsMenu from "@/components/shared/settings-menu";
 const DashboardNavbar = () => {

@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { LogOut, ChevronDown, ChevronUp } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { logOut } from "@/features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { NavLink } from "react-router-dom";
 import LogoutButton from "@/components/shared/logout-button";
 
 export type MenuItem = {

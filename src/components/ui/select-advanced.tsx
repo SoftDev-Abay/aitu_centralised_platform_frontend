@@ -1,27 +1,13 @@
 import React from "react";
 import { ChangeHandler } from "react-hook-form";
-import Select, { components } from "react-select";
+import Select from "react-select";
 import { Controller } from "react-hook-form";
-import { ChevronDown, X } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 // Tailwind-based error text renderer
 const InputErrorText = ({ error }: { error: string }) => (
   <p className="text-sm text-red-500 mt-1">{error}</p>
 );
-
-const CustomMultiValueRemove = (props: any) => {
-  const { innerProps, innerRef } = props;
-  return (
-    <div {...innerProps} ref={innerRef}>
-      <span
-        onClick={props.onClick}
-        className="hover:bg-gray-200 rounded-full p-1 cursor-pointer"
-      >
-        <X size={16} />
-      </span>
-    </div>
-  );
-};
 
 type Props = {
   register: {
@@ -100,7 +86,7 @@ const SelectAdvaced: React.FC<Props> = ({
         <Controller
           name={name || register?.name} // TODO: here using both register and controller is kinda should not be so just make name required
           control={control}
-          render={({ field: { value, onChange, onBlur, ref } }) => (
+          render={({ field: { value, onChange, onBlur: _, ref } }) => (
             <Select
               ref={ref}
               isLoading={isLoading}

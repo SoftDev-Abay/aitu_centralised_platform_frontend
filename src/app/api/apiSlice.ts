@@ -4,7 +4,7 @@ import {
   FetchArgs,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../../app/store";
-import { logOut, setCredentials } from "@/features/auth/authSlice";
+import { logOut } from "@/features/auth/authSlice";
 
 const redirectToLogin = () => {
   window.location.href = "/auth/sign-in";

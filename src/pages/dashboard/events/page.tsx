@@ -1,4 +1,5 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link} from "react-router-dom";
+// import { Link, useSearchParams } from "react-router-dom";
 import Section from "@/components/ui/section";
 import { Input } from "@/components/ui/input";
 import {
@@ -8,16 +9,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PaginationControls from "@/components/ui/pagination-controls";
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import EventCard from "@/features/events/components/EventCard";
 import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 import { Suspense } from "react";
 
 const EventsListPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const page = parseInt(searchParams.get("page") || "1", 10);
+  // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
   useSetNavbarTitle("Events");
 

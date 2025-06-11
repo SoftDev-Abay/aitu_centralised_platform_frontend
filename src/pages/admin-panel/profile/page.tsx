@@ -1,7 +1,5 @@
 import { FormInput } from "@/components/form/FormInput";
 import Section from "@/components/ui/section";
-import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -21,7 +19,7 @@ type PasswordFormValues = z.infer<typeof passowordSchema>;
 const ProfilePage = () => {
   const {
     control,
-    handleSubmit,
+    // handleSubmit,
     // formState: { errors },
   } = useForm<PasswordFormValues>({
     resolver: zodResolver(passowordSchema),

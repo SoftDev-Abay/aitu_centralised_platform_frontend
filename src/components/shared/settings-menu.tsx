@@ -1,6 +1,5 @@
 // src/components/ui/settings-menu.tsx
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,

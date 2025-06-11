@@ -1,82 +1,5 @@
-// import React from "react";
-// import {
-//   Select,
-//   SelectTrigger,
-//   SelectContent,
-//   SelectItem,
-//   SelectValue,
-// } from "@/components/ui/select";
-// import { ArrowDown } from "lucide-react";
-
-// export type Option = {
-//   value: string;
-//   label: string;
-// };
-
-// interface SimpleSelectProps {
-//   options: Option[];
-//   placeholder?: string;
-//   disabled?: boolean;
-//   value: string;
-//   onChange: (value: string) => void;
-//   icon?: React.ReactElement;
-//   backgroundColor?: string;
-//   border?: string;
-//   innerHeight?: string;
-//   width?: string;
-// }
-
-// const SimpleSelect: React.FC<SimpleSelectProps> = ({
-//   options,
-//   placeholder = "Выберите...",
-//   disabled = false,
-//   value,
-//   onChange,
-//   icon,
-//   backgroundColor = "bg-white",
-//   border = "border border-[#26333D]",
-//   innerHeight = "h-10",
-//   width = "w-full",
-// }) => {
-//   return (
-//     <div className={`relative ${width}`}>
-//       {icon && (
-//         <div className="absolute left-3 top-1/2 -translate-y-1/2 z-10">
-//           {icon}
-//         </div>
-//       )}
-//       <Select value={value} onValueChange={onChange} disabled={disabled}>
-//         <SelectTrigger
-//           className={`${backgroundColor} ${border} ${innerHeight} pl-${
-//             icon ? "10" : "3"
-//           } pr-10 rounded-md text-sm`}
-//         >
-//           <SelectValue placeholder={placeholder} />
-//           <span className="absolute right-2 top-1/2 -translate-y-1/2">
-//             <ArrowDown width={20} height={20} />
-//           </span>
-//         </SelectTrigger>
-//         <SelectContent>
-//           {options.map((option) => (
-//             <SelectItem key={option.value} value={option.value}>
-//               {option.label}
-//             </SelectItem>
-//           ))}
-//         </SelectContent>
-//       </Select>
-//     </div>
-//   );
-// };
-
-// export default SimpleSelect;
-
 import React from "react";
-import Select, {
-  CSSObjectWithLabel,
-  GroupBase,
-  StylesConfig,
-} from "react-select";
-import { ArrowDownIcon } from "lucide-react";
+import Select, { CSSObjectWithLabel, StylesConfig } from "react-select";
 
 export type Option = {
   value: any;
@@ -142,12 +65,6 @@ const SimpleSelect: React.FC<SimpleSelectProps> = ({
       paddingRight: "10px",
     }),
   };
-
-  const DropdownIndicator = () => (
-    <div style={{ padding: "8px", display: "flex", alignItems: "center" }}>
-      <ArrowDownIcon width={20} height={20} />
-    </div>
-  );
 
   return (
     <div

@@ -1,13 +1,10 @@
-import React, { useState } from "react";
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import { DataTable } from "@/components/shared/data-table/data-table";
 import { Button } from "@/components/ui/button";
 // import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { useGetPostsQuery } from "@/features/posts/postsApiSlice";
-import { Link, useSearchParams } from "react-router-dom";
-import PaginationControls from "@/components/ui/pagination-controls";
+import { Link } from "react-router-dom";
 import { formatTime } from "@/lib/utils";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import {
@@ -17,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontalIcon, MoreVerticalIcon } from "lucide-react";
+import { MoreHorizontalIcon } from "lucide-react";
 import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 
 const ClubEventsListPage = () => {
@@ -27,7 +24,7 @@ const ClubEventsListPage = () => {
   // const page = parseInt(searchParams.get("page") || "1", 10);
   // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError, refetch } = useGetAllEventsQuery();
+  const { data, isLoading, isError } = useGetAllEventsQuery();
   // const { data, isLoading, isError, refetch } = useGetAllEventsQuery({
   //   page: page - 1,
   //   pageSize,

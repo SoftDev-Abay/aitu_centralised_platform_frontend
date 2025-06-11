@@ -11,7 +11,6 @@ import { CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useGetUserAndClubsQuery } from "../users/usersApiSlice";
 const loginSchema = z.object({
   email: z.string().min(4, "email must be at least 4 characters"),
   password: z.string().min(4, "Password must be at least 6 characters"),

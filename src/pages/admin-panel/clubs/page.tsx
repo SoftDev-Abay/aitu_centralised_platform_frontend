@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import { DataTable } from "@/components/shared/data-table/data-table";
 import { Button } from "@/components/ui/button";
@@ -25,7 +24,12 @@ const AdminClubListPage = () => {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError, refetch } = useGetClubsQuery({
+  const {
+    data,
+    isLoading: _,
+    isError,
+    refetch: __,
+  } = useGetClubsQuery({
     page: page - 1,
     pageSize,
   });

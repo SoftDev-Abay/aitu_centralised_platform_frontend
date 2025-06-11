@@ -2,11 +2,8 @@ import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-nav
 import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import {
-  useGetApplicationsByClubQuery,
-  useGetApplicationsByVisitorQuery,
-} from "@/features/applications/applicationRequestsApiSlice";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useGetApplicationsByClubQuery } from "@/features/applications/applicationRequestsApiSlice";
+import { useParams, useSearchParams } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +24,7 @@ const ClubApplicationsListPage = () => {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError } = useGetApplicationsByClubQuery({
+  const { data, isError } = useGetApplicationsByClubQuery({
     page: page - 1,
     pageSize,
     clubId: clubId!,

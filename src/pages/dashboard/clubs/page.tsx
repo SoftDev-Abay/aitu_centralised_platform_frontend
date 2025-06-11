@@ -16,7 +16,8 @@ import { Suspense } from "react";
 const ClubsListPage = () => {
   useSetNavbarTitle("Clubs");
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 

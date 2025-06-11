@@ -1,19 +1,15 @@
 import { apiSlice } from "@/app/api/apiSlice";
-import {
-  NotificationDto,
-  PageNotificationDto,
-  NotificationIdParam,
-} from "./types";
+import { NotificationIdParam, PaginatedNotifications } from "./types";
 
 export const notificationsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // Get paginated notifications (optionally filter by read)
     getNotifications: builder.query<
-      PageNotificationDto,
+      PaginatedNotifications,
       { page?: number; size?: number; unreadOnly?: boolean }
     >({
       query: ({ page = 0, size = 20, unreadOnly = false }) => ({
-        url: "/notifications/all",
+        url: "/notifications",
         method: "GET",
         params: {
           arg0: page,
@@ -22,10 +18,10 @@ export const notificationsApiSlice = apiSlice.injectEndpoints({
         },
       }),
       providesTags: (result) =>
-        result?.content
+        result?.data
           ? [
               { type: "Notification", id: "LIST" },
-              ...result.content.map((n) => ({
+              ...result.data.map((n) => ({
                 type: "Notification" as const,
                 id: n.id,
               })),

@@ -3,7 +3,6 @@ import {
   ClubDto,
   CreateOrUpdateClubInput,
   ClubIdParam,
-  UserDto,
   PaginatedClubs,
   ClubAdminOrMemberInput,
   ClubMemberDto,

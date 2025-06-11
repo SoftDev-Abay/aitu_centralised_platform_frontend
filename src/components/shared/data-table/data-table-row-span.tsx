@@ -11,7 +11,6 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import { cva, type VariantProps } from "class-variance-authority";
 
 // const tableCellVariants = cva(``, {
 //   variants: {
@@ -39,16 +38,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { DataTablePagination } from "./data-table-pagination";
-import { DataPagination } from "../data-pagination";
 import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  currentPage?: number; // 1-based
-  totalPages?: number;
-  onPageChange?: (newPage: number) => void;
   visiblePages?: number;
   tabelHeadClassName?: string;
   tabelCellClassName?: string;
@@ -57,10 +51,6 @@ interface DataTableProps<TData, TValue> {
 export function DataTableRowSpan<TData extends Record<string, any>, TValue>({
   columns,
   data,
-  currentPage,
-  totalPages,
-  onPageChange,
-  visiblePages,
   tabelHeadClassName,
   tabelCellClassName,
 }: DataTableProps<TData, TValue>) {
@@ -90,8 +80,6 @@ export function DataTableRowSpan<TData extends Record<string, any>, TValue>({
       rowSelection,
     },
   });
-
-  const useExternal = onPageChange && currentPage != null && totalPages != null;
 
   return (
     <div className="w-full">
@@ -164,19 +152,6 @@ export function DataTableRowSpan<TData extends Record<string, any>, TValue>({
           )}
         </TableBody>
       </Table>
-
-      <div className="py-4">
-        {useExternal ? (
-          <DataPagination
-            currentPage={currentPage!}
-            totalPages={totalPages!}
-            visiblePages={visiblePages}
-            onPageChange={onPageChange!}
-          />
-        ) : (
-          <DataTablePagination table={table} />
-        )}
-      </div>
     </div>
   );
 }

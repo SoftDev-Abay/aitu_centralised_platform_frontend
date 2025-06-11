@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import { DataTable } from "@/components/shared/data-table/data-table";
 import { Button } from "@/components/ui/button";
@@ -7,7 +6,6 @@ import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { useGetPostsQuery } from "@/features/posts/postsApiSlice";
 import { Link, useSearchParams } from "react-router-dom";
-import PaginationControls from "@/components/ui/pagination-controls";
 import { formatTime } from "@/lib/utils";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import {
@@ -17,7 +15,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontalIcon, MoreVerticalIcon } from "lucide-react";
+import { MoreHorizontalIcon } from "lucide-react";
 import { DataPagination } from "@/components/shared/data-pagination";
 
 const AdminPostsListPage = () => {
@@ -27,7 +25,7 @@ const AdminPostsListPage = () => {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError, refetch } = useGetPostsQuery({
+  const { data, isLoading, isError } = useGetPostsQuery({
     page: page - 1,
     pageSize,
   });

@@ -12,7 +12,6 @@ type RadioGroupInputProps = {
 };
 
 const RadioGroupInput: React.FC<RadioGroupInputProps> = ({
-  title,
   name,
   options,
   value,

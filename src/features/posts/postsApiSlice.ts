@@ -111,7 +111,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         url: `/posts/comments/by-post/${postId}`,
         method: "GET",
       }),
-      providesTags: (result, error, postId) =>
+      providesTags: (result, postId) =>
         result
           ? [
               ...result.map(({ id }) => ({ type: "Comment" as const, id })),
@@ -127,7 +127,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: (result, error, { postId }) => [
+      invalidatesTags: (_, __, { postId }) => [
         { type: "Comment", id: `POST_${postId}` },
       ],
     }),

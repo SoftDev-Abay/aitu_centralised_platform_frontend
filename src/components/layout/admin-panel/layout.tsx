@@ -3,7 +3,6 @@ import { Outlet } from "react-router-dom";
 import { AppSidebar } from "../shared/sidebar/sidebar";
 import {
   HomeIcon,
-  KeyIcon,
   LayersIcon,
   UserIcon,
   UsersIcon,

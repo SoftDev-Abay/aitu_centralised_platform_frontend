@@ -8,7 +8,6 @@ import {
   MessageCircle,
   StarIcon,
   User,
-  Users2Icon,
   UsersIcon,
 } from "lucide-react";
 import {
@@ -37,7 +36,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
 import QuickLinkCard from "@/components/shared/QuickLinkCard";
 
 const mockRows = [

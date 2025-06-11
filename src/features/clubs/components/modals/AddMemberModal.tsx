@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
@@ -20,7 +19,6 @@ import {
 import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
 import { useAssignClubMemberMutation } from "../../clubsApiSlice";
 import { clubMemberRolesOptions } from "../../constants";
-import { cl } from "node_modules/@fullcalendar/core/internal-common";
 import { ClubMemberRole } from "../../types";
 
 interface AddMemberModalProps {
@@ -39,7 +37,7 @@ const AddMemberModal = ({
   const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
   const [role, setRole] = useState<ClubMemberRole>(ClubMemberRole.MEMBER);
 
-  const [assignRole, { isLoading }] = useAssignClubMemberMutation();
+  const [assignRole, { isLoading: _ }] = useAssignClubMemberMutation();
 
   const handleAddMember = async () => {
     if (!clubId || !selectedUserId) return;

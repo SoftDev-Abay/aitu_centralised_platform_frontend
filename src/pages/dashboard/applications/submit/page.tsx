@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 
 import { useGetApplicationFormByIdQuery } from "@/features/applications/applicationFormsApiSlice";
@@ -6,7 +5,6 @@ import DynamicSurveyForm, {
   Survey,
 } from "@/features/applications/components/Survey/DynamicSurveyForm";
 import Section from "@/components/ui/section";
-import { Card } from "@/components/ui/card";
 
 const SubmitApplicationPage = () => {
   const { id: surveyId } = useParams<{ id: string }>();

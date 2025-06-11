@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,14 +11,6 @@ import { useUploadFilesMutation } from "@/features/files/filesApiSlice";
 import { useCreateEventMutation } from "@/features/events/eventsApiSlice";
 import { toast } from "react-hot-toast";
 import MultiImageUpload from "@/components/form/FormImageUpload";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Controller } from "react-hook-form";
 import { FormSelect } from "@/components/form/FormSelect";
 import { formatTime } from "@/lib/utils";
 import SelectAdvaced from "@/components/ui/select-advanced";
@@ -82,14 +73,13 @@ const CreateEventPage = () => {
   const [createEvent] = useCreateEventMutation();
   const {
     data: usersData,
-    isLoading: isLoadingUsers,
-    isError: isErrorUsers,
+    // isLoading: isLoadingUsers,
+    // isError: isErrorUsers,
   } = useGetAllUsersQuery();
 
   const {
     control,
     handleSubmit,
-    setValue,
     register,
     formState: { errors },
   } = useForm<EventFormValues>({

@@ -1,56 +1,24 @@
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import { DataPagination } from "@/components/shared/data-pagination";
 import { DataTable } from "@/components/shared/data-table/data-table";
-import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { useGetClubsQuery } from "@/features/clubs/clubsApiSlice";
-import PostCard from "@/features/posts/components/PostCard";
-import { useGetPostsQuery } from "@/features/posts/postsApiSlice";
 import { getFileDownloadUrl } from "@/lib/helpers";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const today = new Date();
 const oneMonthAgo = new Date();
 oneMonthAgo.setMonth(today.getMonth() - 1);
 
-const clubs = [
-  {
-    urlImg: "/images/robotics.webp",
-    title: "AITU Robotics Club",
-    position: "President",
-    status: "Active",
-    date: `${oneMonthAgo.toLocaleDateString()} - ${today.toLocaleDateString()}`,
-  },
-  {
-    urlImg: "/images/korean_club.jpeg",
-    title: "Korean Society",
-    position: "Member",
-    status: "Inactive",
-    date: `01/09/2023 - 01/06/2024`,
-  },
-  {
-    urlImg: "/images/music_stage.webp",
-    title: "Music Enthusiasts",
-    position: "Vice President",
-    status: "Active",
-    date: `01/02/2024 - ${today.toLocaleDateString()}`,
-  },
-  {
-    urlImg: "/images/voleyball_club.jpg",
-    title: "Voleyball Club",
-    position: "Treasurer",
-    status: "Active",
-    date: `01/01/2024 - ${today.toLocaleDateString()}`,
-  },
-];
 const MyClubsListPage = () => {
   useSetNavbarTitle("My Clubs");
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError } = useGetClubsQuery({});
+  const { data, isError } = useGetClubsQuery({});
+  // const { data, isLoading, isError } = useGetClubsQuery({});
 
   if (isError)
     return <div className="p-6 text-red-500">Ошибка загрузки сотрудников.</div>;

@@ -5,21 +5,10 @@ import { Separator } from "@/components/ui/separator";
 import {
   Ellipsis,
   Layers3Icon,
-  MessageCircle,
   StarIcon,
   User,
-  Users2Icon,
   UsersIcon,
 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -37,7 +26,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
 import QuickLinkCard from "@/components/shared/QuickLinkCard";
 import NotificationsCard from "@/features/notifications/components/NotificationsCard";
 

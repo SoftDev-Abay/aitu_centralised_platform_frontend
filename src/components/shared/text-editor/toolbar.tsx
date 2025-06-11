@@ -10,20 +10,12 @@ import {
   Heading1,
   Undo2,
   Redo2,
-  Image as ImageIcon,
 } from "lucide-react";
 
 const Toolbar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) return null;
 
   const isActive = (type: string) => editor.isActive(type);
-
-  const onAddImage = () => {
-    const url = window.prompt("Enter the URL of the image:");
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run();
-    }
-  };
 
   return (
     <div className="flex flex-wrap gap-2 mb-2">

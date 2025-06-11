@@ -53,7 +53,6 @@
 import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-navbar-title";
 import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
-import { Separator } from "@/components/ui/separator";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import PostCard from "@/features/posts/components/PostCard";
 import { useGetPostsQuery } from "@/features/posts/postsApiSlice";

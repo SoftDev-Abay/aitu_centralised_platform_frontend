@@ -1,20 +1,5 @@
-import {
-  useGetNotificationsQuery,
-  useMarkNotificationAsReadMutation,
-} from "@/features/notifications/notificationsApiSlice";
+import { useMarkNotificationAsReadMutation } from "@/features/notifications/notificationsApiSlice";
 import { MessageCircle } from "lucide-react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import { NotificationDto } from "../types";
 
 const NotificationItem = ({

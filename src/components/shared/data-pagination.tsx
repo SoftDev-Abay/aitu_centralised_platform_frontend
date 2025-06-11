@@ -1,5 +1,4 @@
 // src/components/ui/Pagination.tsx
-import React from "react";
 import { Button } from "@/components/ui/button";
 
 export interface PaginationProps {

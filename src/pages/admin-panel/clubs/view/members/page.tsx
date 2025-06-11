@@ -2,8 +2,7 @@ import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-nav
 import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { useGetApplicationsByVisitorQuery } from "@/features/applications/applicationRequestsApiSlice";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +16,6 @@ import { useGetClubMembersQuery } from "@/features/clubs/clubsApiSlice";
 import { useState } from "react";
 import AddMemberModal from "@/features/clubs/components/modals/AddMemberModal";
 import EditMemberRoleModal from "@/features/clubs/components/modals/EditMemberRoleModal";
-import { UserDto } from "@/features/users/types";
 import { DataPagination } from "@/components/shared/data-pagination";
 import { ClubMemberDto } from "@/features/clubs/types";
 
@@ -34,7 +32,11 @@ const ClubMembersListPage = () => {
     null
   );
 
-  const { data, isLoading, isError } = useGetClubMembersQuery({
+  const {
+    data,
+    isLoading: _,
+    isError,
+  } = useGetClubMembersQuery({
     page: page - 1,
     pageSize,
     clubId: clubId ?? "",

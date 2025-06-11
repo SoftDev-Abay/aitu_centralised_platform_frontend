@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import { useGetApplicationFormByIdQuery } from "@/features/applications/applicationFormsApiSlice";
@@ -19,7 +18,8 @@ const ViewSurveyResponcePage = () => {
     isError: isSurveyDataError,
   } = useGetApplicationFormByIdQuery({ id: surveyIdParam as string });
 
-  const { data: responceData, isLoading: isResponceDataLoading, isError:isResponceDataError } =
+  const { data: responceData, isLoading: isResponceDataLoading,  } =
+  // const { data: responceData, isLoading: isResponceDataLoading, isError:isResponceDataError } =
     useGetApplicationByIdQuery(
       { id: responceId as string },
       { skip: !surveyIdParam }

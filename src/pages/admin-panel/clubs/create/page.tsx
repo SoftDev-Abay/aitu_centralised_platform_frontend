@@ -84,8 +84,6 @@ const CreateClubPage = () => {
 
   const {
     data: usersData,
-    isLoading: isLoadingUsers,
-    isError: isErrorUsers,
   } = useGetAllUsersQuery();
 
   const onSubmit = async (data: ClubFormValues) => {

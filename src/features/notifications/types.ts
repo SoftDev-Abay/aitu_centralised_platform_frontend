@@ -7,17 +7,10 @@ export interface NotificationDto {
   read: boolean;
 }
 
-export interface PageNotificationDto {
-  totalPages: number;
-  totalElements: number;
-  last: boolean;
-  numberOfElements: number;
-  first: boolean;
-  size: number;
-  content: NotificationDto[];
-  number: number;
-  empty: boolean;
-}
+export type PaginatedNotifications = {
+  count: number;
+  data: NotificationDto[];
+};
 
 export interface NotificationIdParam {
   id: string;

@@ -10,7 +10,6 @@ import {
   Users,
   Layers,
   DockIcon,
-  UsersIcon,
   UserIcon,
 } from "lucide-react";
 

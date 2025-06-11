@@ -1,8 +1,7 @@
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
-import { useState } from "react";
 
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
@@ -10,14 +9,12 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
-import { Textarea } from "@/components/ui/textarea";
 import { useUploadFilesMutation } from "@/features/files/filesApiSlice";
 import { useCreatePostMutation } from "@/features/posts/postsApiSlice";
 import MultiImageUpload from "@/components/form/FormImageUpload";
 import { postCategoriesOptions } from "@/features/posts/constants";
 import SelectAdvaced from "@/components/ui/select-advanced";
 import { PostCategories } from "@/features/posts/types";
-import { FormTextarea } from "@/components/form/FormTextAreat";
 import TextEditor from "@/components/shared/text-editor/text-editor";
 // import { FormImageUpload } from "@/components/form/FormImageUpload";
 
@@ -44,8 +41,6 @@ const CreatePostPage = () => {
   const {
     control,
     handleSubmit,
-    setValue,
-    watch,
     register,
     formState: { errors },
   } = useForm<FormValues>({
@@ -78,7 +73,6 @@ const CreatePostPage = () => {
 
   const [uploadImages] = useUploadFilesMutation();
   const [createPost, { isLoading }] = useCreatePostMutation();
-  const [preview, setPreview] = useState<string | null>(null);
 
   const onSubmit = async (data: FormValues) => {
     try {

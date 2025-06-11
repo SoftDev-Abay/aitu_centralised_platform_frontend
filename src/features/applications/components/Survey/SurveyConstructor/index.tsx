@@ -29,7 +29,7 @@ type Props = {
 const SurveyConstructor: React.FC<Props> = ({ clubId }) => {
   const questions = useSurveyStore((state) => state.questions);
   const addQuestion = useSurveyStore((state) => state.addQuestion);
-  const [createApplicationForm, { isLoading: isSubmitting }] =
+  const [createApplicationForm, { isLoading: _ }] =
     useCreateApplicationFormMutation();
 
   // State for survey title, description and deadline.

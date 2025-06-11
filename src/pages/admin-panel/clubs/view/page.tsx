@@ -1,10 +1,4 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { useGetClubByIdQuery } from "@/features/clubs/clubsApiSlice";
-import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
-import { useGetFormsByClubQuery } from "@/features/applications/applicationFormsApiSlice";
-import { useGetApplicationsByFormQuery } from "@/features/applications/applicationRequestsApiSlice";
-import { skipToken } from "@reduxjs/toolkit/query";
 import Section from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -21,24 +15,12 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { ChartRadarDefault } from "@/components/shared/chart-radar-default";
 import { ChartBarLabel } from "@/components/shared/chart-bar-label";
 
-const usersTest = [
-  {
-    name: "Alice",
-    image:
-      "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg",
-  },
-];
-
 const ClubAdminDashboardPage = () => {
   const { id: clubId } = useParams<{ id: string }>();
-  const { data: club, refetch } = useGetClubByIdQuery({ id: clubId! });
-  const { data: users } = useGetAllUsersQuery();
-  const { data: formsData } = useGetFormsByClubQuery({ clubId: clubId! });
-  const [selectedFormId, setSelectedFormId] = useState<string | undefined>();
 
-  const { data: applications = [] } = useGetApplicationsByFormQuery(
-    selectedFormId ? { formId: selectedFormId } : skipToken
-  );
+  // const { data: applications = [] } = useGetApplicationsByFormQuery(
+  //   selectedFormId ? { formId: selectedFormId } : skipToken
+  // );
 
   return (
     <Section
@@ -177,84 +159,3 @@ const ClubAdminDashboardPage = () => {
 };
 
 export default ClubAdminDashboardPage;
-
-{
-  /* <div>
-        <h1 className="text-3xl font-bold mb-6">Latest Applications</h1>
-        <Card className="mb-6">
-          <CardHeader>
-            <h2 className="text-xl font-semibold">Forms</h2>
-          </CardHeader>
-          <CardContent>
-            <DataTable
-              columns={[
-                { accessorKey: "id", header: "ID" },
-                { accessorKey: "createdBy", header: "Created By" },
-                { accessorKey: "createdAt", header: "Created At" },
-                { accessorKey: "deadline", header: "Deadline" },
-                {
-                  id: "actions-test",
-                  header: "",
-                  cell: ({ row }: { row: any }) => (
-                    <Link
-                      className="text-blue-400"
-                      to={`/admin-panel/survey/preview/${row.original.id}`}
-                    >
-                      Preview
-                    </Link>
-                  ),
-                },
-                // {
-                //   id: "actions",
-                //   header: "",
-                //   cell: ({ row }: { row: any }) => (
-                //     <Button
-                //       variant="link"
-                //       onClick={() => setSelectedFormId(row.original.id)}
-                //     >
-                //       View Requests
-                //     </Button>
-                //   ),
-                // },
-              ]}
-              data={club?.forms ?? []}
-            />
-          </CardContent>
-        </Card>
-      </div> */
-}
-
-{
-  /* {selectedFormId && (
-        <Card className="mb-6">
-          <CardHeader>
-            <h2 className="text-xl font-semibold">
-              Requests for Form {selectedFormId}
-            </h2>
-          </CardHeader>
-          <CardContent>
-            <DataTable
-              columns={[
-                { accessorKey: "id", header: "ID" },
-                { accessorKey: "createdBy", header: "Created By" },
-                { accessorKey: "createdAt", header: "Created At" },
-                { accessorKey: "status", header: "Status" },
-                {
-                  header: "",
-                  id: "action/s",
-                  cell: ({ row }: { row: any }) => (
-                    <Link
-                      className="text-blue-400"
-                      to={`/admin-panel/survey/responce/${row.original.id}?surveyId=${selectedFormId}`}
-                    >
-                      View
-                    </Link>
-                  ),
-                },
-              ]}
-              data={applications}
-            />
-          </CardContent>
-        </Card>
-      )} */
-}

@@ -1,16 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import Section from "@/components/ui/section";
 import { Separator } from "@/components/ui/separator";
-import {
-  Ellipsis,
-  Layers3Icon,
-  MessageCircle,
-  StarIcon,
-  User,
-  Users2Icon,
-  UsersIcon,
-} from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -20,25 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { cn } from "@/lib/utils";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Link } from "react-router-dom";
-import QuickLinkCard from "@/components/shared/QuickLinkCard";
 import { useGetNotificationsQuery } from "../notificationsApiSlice";
 import { Skeleton } from "@/components/ui/skeleton";
 import NotificationItem from "./NotificationItem";
@@ -53,7 +23,7 @@ const NotificationsCard = () => {
   return (
     <Card className="border-0 shadow-none bg-white rounded-none col-span-2 py-0 gap-0">
       <CardHeader className="flex justify-between items-center px-5 py-4">
-        <p className="font-medium">Recent announcements</p>
+        <p className="font-medium">Notifications</p>
         <Select>
           <SelectTrigger size="sm" className="border-0 shadow-none text-sm text-brand-gray-muted">
             <SelectValue placeholder="Select time" />
@@ -75,7 +45,7 @@ const NotificationsCard = () => {
           ? Array.from({ length: 3 }).map((_, i) => (
               <Skeleton key={i} className="h-12 w-full" />
             ))
-          : data?.content.map((notification) => (
+          : data?.data.map((notification) => (
               <NotificationItem
                 key={notification.id}
                 notification={notification}
