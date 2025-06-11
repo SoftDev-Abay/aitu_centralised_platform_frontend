@@ -28,7 +28,7 @@ export function FormInput({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <div className={cn("flex flex-col space-y-2", className)}>
-          <Label htmlFor={name}>{label}</Label>
+          <Label htmlFor={name}>{label} </Label>
           <Input
             {...field}
             id={name}

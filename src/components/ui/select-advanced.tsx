@@ -67,8 +67,9 @@ const SelectAdvaced: React.FC<Props> = ({
       boxShadow: "none",
       //   minHeight: "2.75rem",
       //   paddingLeft: icon ? "2.5rem" : "0.75rem",
-      fontSize: "0.875rem",
-      borderRadius: "6px",
+      fontSize: "16px",
+      borderRadius: "0px",
+      padding: "12px 12px",
     }),
     placeholder: (provided: any) => ({
       ...provided,
