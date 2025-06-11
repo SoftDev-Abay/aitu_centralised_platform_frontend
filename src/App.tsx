@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import SignInPage from "./pages/auth/sign-in/page";
 import SignUpPage from "./pages/auth/sign-up/page";
 import DashboardLayout from "./components/layout/dashboard/layout";
@@ -33,10 +33,10 @@ import ProfilePage from "./pages/dashboard/profile/page";
 function App() {
   return (
     <Routes>
+      <Route path="*" element={<Navigate to="/auth/sign-in" replace />} />
       <Route element={<DashboardLayout />}>
         <Route path="my" element={<MyClubsListPage />} />
       </Route>
-
       <Route path="auth">
         <Route path="sign-in" element={<SignInPage />} />
         <Route path="sign-up" element={<SignUpPage />} />
@@ -96,7 +96,6 @@ function App() {
           <Route index element={<AdminClubListPage />} />
         </Route>
       </Route>
-
       {/* <Route path="dashboard" element={<DashboardLayout />}>
         <Route index element={<TablesPage />} />
         <Route path="objects">
