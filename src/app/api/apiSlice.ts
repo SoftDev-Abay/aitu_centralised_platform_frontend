@@ -7,7 +7,7 @@ import { RootState } from "../../app/store";
 import { logOut } from "@/features/auth/authSlice";
 
 const redirectToLogin = () => {
-  window.location.href = "/auth/sign-in";
+  window.location.href = "/auth/sign-in?mode=login";
 };
 
 const baseQuery = fetchBaseQuery({
