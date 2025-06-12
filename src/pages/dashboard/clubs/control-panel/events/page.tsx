@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 // import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatTime } from "@/lib/utils";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import {
@@ -17,24 +17,23 @@ import {
 import { MoreHorizontalIcon } from "lucide-react";
 import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 
-const AdminEventsListPage = () => {
-  useSetNavbarTitle("Events");
+const ClubEventsListPage = () => {
+  useSetNavbarTitle("Club Events");
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // const page = parseInt(searchParams.get("page") || "1", 10);
+  // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError } = useGetAllEventsQuery({
-    size: pageSize,
-    page: page - 1,
-  });
+  const { data, isLoading, isError } = useGetAllEventsQuery();
   // const { data, isLoading, isError, refetch } = useGetAllEventsQuery({
   //   page: page - 1,
   //   pageSize,
   // });
 
-  if (isError)
+  if (isError || !data)
     return <div className="p-6 text-red-500">Ошибка загрузки сотрудников.</div>;
+
+  // const totalPages = Math.ceil(data.count / pageSize);
 
   return (
     <Section
@@ -136,12 +135,46 @@ const AdminEventsListPage = () => {
                 ),
               },
             ]}
-            data={data?.data || []}
+            data={data}
+            // currentPage={page}
+            // totalPages={totalPages}
+            // visiblePages={4}
+            // onPageChange={(newPage) =>
+            //   setSearchParams({
+            //     page: newPage.toString(),
+            //     pageSize: pageSize.toString(),
+            //   })
+            // }
           />
+
+          {/* <PaginationControls
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={(newPage) =>
+              setSearchParams({
+                page: newPage.toString(),
+                pageSize: pageSize.toString(),
+              })
+            }
+            visiblePages={5}
+          /> */}
+
+          {/* <PaginationControls
+            page={page}
+            pageCount={pageCount}
+            onPageChange={(newPage) => setPage(newPage)}
+          /> */}
+          {/* <PaginationControls
+            totalItems={data.count}
+            itemsPerPage={ITEMS_PER_PAGE}
+          /> */}
+          {/* <DataPagination
+
+          /> */}
         </>
       )}
     </Section>
   );
 };
 
-export default AdminEventsListPage;
+export default ClubEventsListPage;

@@ -49,9 +49,18 @@
 
   --brand-gray-bluish: oklch(0.9755 0.0045 258.32); /* #F5F7FA */
   --brand-gray-dark: oklch(0.51 0.0031 286.29); /* #656567 */
-  --brand-success: oklch(0.7 0.2144 143.92); /* #23BD33 */
   --brand-danger: oklch(0.65 0.2348 26.76); /* #FF3636 */
   --brand-gray-steel: oklch(0.45 0.0293 267.57); /* #4E5566 */
+  
+  /* --brand-success: oklch(0.7 0.2144 143.92);  #23BD33 */
+
+  --brand-success-foreground: #c5edd2;
+  --brand-success: #3db265;
+
+  --brand-orange-accent: #e7940c;
+  --brand-orange-light: #faeac9;
+  --brand-red-error: #ef5c6f;
+  --brand-red-light: #fddae0;
 }
 
 .dark {
@@ -137,6 +146,14 @@
   --color-brand-gray-steel: var(--brand-gray-steel);
   --color-brand-success: var(--brand-success);
   --color-brand-danger: var(--brand-danger);
+
+  --color-brand-orange-accent: var(--brand-orange-accent);
+  --color-brand-orange-light: var(--brand-orange-light);
+  --color-brand-red-error: var(--brand-red-error);
+  --color-brand-red-light: var(--brand-red-light);
+  
+  --color-success-foreground: var(--brand-success-foreground);
+  --color-success: var(--brand-success);
 }
 
 @layer base {

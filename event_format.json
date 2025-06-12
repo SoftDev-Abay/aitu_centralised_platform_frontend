@@ -1,0 +1,16 @@
+{
+  "id": "string",
+  "name": "Information Security Fundamentals | Isakov Almas",
+  "description": "description",
+  "format": "ONLINE",
+  "address": "string",
+  "startDate": "string",
+  "endDate": "string",
+  "participants": [{}],
+  "admins": [{}],
+  "imageIds": [],
+  "isSchedule": true,
+  "subscribed": true,
+  "clubId": "string",
+  "type": "UNIVERSITY_EVENT"
+}

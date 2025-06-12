@@ -16,6 +16,7 @@ import {
 import { MoreHorizontalIcon } from "lucide-react";
 import { useGetClubsQuery } from "@/features/clubs/clubsApiSlice";
 import { DataPagination } from "@/components/shared/data-pagination";
+import StatusBadge from "@/components/ui/status-badge";
 
 const AdminClubListPage = () => {
   useSetNavbarTitle("Clubs");
@@ -118,6 +119,9 @@ const AdminClubListPage = () => {
           {
             accessorKey: "status",
             header: "Status",
+            cell: ({ getValue }) => {
+              return <StatusBadge status={String(getValue())} />;
+            },
           },
           {
             header: "",

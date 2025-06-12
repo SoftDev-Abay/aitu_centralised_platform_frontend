@@ -27,6 +27,22 @@ export const eventsApiSlice = apiSlice.injectEndpoints({
             ]
           : [{ type: "Event", id: "LIST" }],
     }),
+    getAllEventsByClubId: builder.query<EventDto[], { clubId: string }>({
+      query: ({ clubId }) => ({
+        url: `/events/club/${clubId}`,
+        method: "GET",
+        params: {
+          clubId,
+        },
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "Event", id: "LIST" },
+              ...result.map((e) => ({ type: "Event" as const, id: e.id })),
+            ]
+          : [{ type: "Event", id: "LIST" }],
+    }),
 
     getEventById: builder.query<EventDto, EventIdParam>({
       query: ({ id }) => ({
@@ -82,4 +98,5 @@ export const {
   useUpdateEventMutation,
   useSubscribeToEventMutation,
   useUnsubscribeFromEventMutation,
+  useGetAllEventsByClubIdQuery
 } = eventsApiSlice;

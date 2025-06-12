@@ -14,6 +14,7 @@ import {
 } from "@/features/events/eventsApiSlice";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import toast from "react-hot-toast";
+import HtmlRenderer from "@/components/shared/html-render";
 
 const EventsDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -128,7 +129,11 @@ const EventsDetailsPage = () => {
       >
         <h2 className="text-2xl mb-5 font-semibold">Description</h2>
         <div className="text-brand-gray-steel mb-10">
-          <p>{event.description}</p>
+          {event?.description ? (
+            <HtmlRenderer className="content" unsafeHtml={event.description} />
+          ) : (
+            "No description provided."
+          )}
         </div>
 
         <Tabs

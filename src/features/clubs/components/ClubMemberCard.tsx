@@ -2,7 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { UserDto } from "../types";
 
 interface ClubMemberCardProps {
-  user: UserDto;
+  user: Omit<UserDto, "securityKey">; // Exclude id since it's not used in the card
 }
 
 const ClubMemberCard = ({ user }: ClubMemberCardProps) => {

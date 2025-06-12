@@ -20,7 +20,7 @@ export type EventDto = {
   imageIds: string[];
   subscribed: boolean;
   clubId?: string;
-  type: EventType;
+  eventType: EventType;
 };
 
 export type EventCreateDto = {
@@ -33,7 +33,7 @@ export type EventCreateDto = {
   participantIds?: number[];
   adminIds?: number[];
   imageIds?: string[];
-  type: EventType;
+  eventType: EventType;
 };
 
 export type PaginatedEventsDto = {

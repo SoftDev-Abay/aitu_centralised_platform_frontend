@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Heart } from "lucide-react";
 import { PostDto } from "../types";
 import { getFileDownloadUrl } from "@/lib/helpers";
+import HtmlRenderer from "@/components/shared/html-render";
 
 const fallbackUsers = [
   {
@@ -41,7 +42,7 @@ const PostCard = ({ post }: { post: PostDto }) => {
         </div>
 
         <p className="text-sm text-gray-600 mb-5 line-clamp-4">
-          {post.description}
+          {post.description && <HtmlRenderer unsafeHtml={post.description} />}
         </p>
 
         {post.images && post.images.length > 0 ? (
@@ -51,7 +52,6 @@ const PostCard = ({ post }: { post: PostDto }) => {
             alt={post.title}
           />
         ) : null}
-        
 
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-4">

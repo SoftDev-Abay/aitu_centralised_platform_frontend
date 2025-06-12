@@ -2,8 +2,8 @@ import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-nav
 import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { useGetApplicationsByVisitorQuery } from "@/features/applications/applicationRequestsApiSlice";
-import { Link, useSearchParams } from "react-router-dom";
+import { useGetApplicationsByClubQuery } from "@/features/applications/applicationRequestsApiSlice";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,17 +15,25 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
 import { DataPagination } from "@/components/shared/data-pagination";
 import StatusBadge from "@/components/ui/status-badge";
+import RespondModal from "@/features/applications/components/modals/RespondModal";
+import { useState } from "react";
 
-const MyApplicationsListPage = () => {
-  useSetNavbarTitle("My applications");
+const ClubApplicationsListPage = () => {
+  useSetNavbarTitle("Club applications");
+
+  const { id: clubId } = useParams<{ id: string }>();
 
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isError } = useGetApplicationsByVisitorQuery({
+  const [isRespondModalOpen, setIsRespondModalOpen] = useState(false);
+  const [selectRequestId, setSelectedRequestId] = useState<string | null>(null);
+
+  const { data, isError } = useGetApplicationsByClubQuery({
     page: page - 1,
     pageSize,
+    clubId: clubId!,
   });
 
   if (isError)
@@ -40,9 +48,17 @@ const MyApplicationsListPage = () => {
         <div className="mb-[37px]">
           <SmartBreadcrumbs />
           <h1 className="text-[32px] max-w-[409px] font-bold mb-10 leading-12">
-            My Applications
+            Club Applications
           </h1>
         </div>
+
+        {selectRequestId && (
+          <RespondModal
+            open={isRespondModalOpen}
+            onOpenChange={setIsRespondModalOpen}
+            requestId={selectRequestId ?? ""}
+          />
+        )}
         <DataTable
           columns={[
             {
@@ -51,14 +67,15 @@ const MyApplicationsListPage = () => {
               cell: ({ row }) => {
                 return (
                   <Link
-                    to={`/dashboard/clubs/${row.original.clubId}`}
-                    className=" hover:underline"
+                    to={`/admin-panel/clubs/view/${row.original.id}`}
+                    // className="text-blue-500 hover:underline"
                   >
                     {row.original.clubId}
                   </Link>
                 );
               },
             },
+            { accessorKey: "createdBy", header: "Student" },
             {
               accessorKey: "status",
               header: "Status",
@@ -66,8 +83,14 @@ const MyApplicationsListPage = () => {
                 return <StatusBadge status={String(getValue())} />;
               },
             },
+            {
+              accessorKey: "response",
+              header: "Response",
+              cell: ({ getValue }) => {
+                return <StatusBadge status={String(getValue())} />;
+              },
+            },
             { accessorKey: "responseMessage", header: "Comment" },
-            { accessorKey: "createdAt", header: "Submit Date" },
             { accessorKey: "respondedDate", header: "Responded Date" },
             {
               header: "",
@@ -87,13 +110,20 @@ const MyApplicationsListPage = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-32">
                       <Link
-                        to={`/dashboard/applications/preview/${row.original.id}?surveyId=${row.original.formId}`}
+                        to={`/admin-panel/survey/responce/${row.original.id}?surveyId=${row.original.formId}`}
                       >
                         <DropdownMenuItem>Preview</DropdownMenuItem>
                       </Link>
-                      {/* <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setIsRespondModalOpen(true);
+                          setSelectedRequestId(row.original.id);
+                        }}
+                      >
+                        Respond
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>Delete</DropdownMenuItem> */}
+                      <DropdownMenuItem>Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </>
@@ -118,4 +148,4 @@ const MyApplicationsListPage = () => {
   );
 };
 
-export default MyApplicationsListPage;
+export default ClubApplicationsListPage;

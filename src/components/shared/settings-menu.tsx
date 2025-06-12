@@ -6,10 +6,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import useAuth from "@/hooks/useAuth";
 import { SettingsIcon } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const SettingsMenu = () => {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -34,12 +36,12 @@ const SettingsMenu = () => {
         <DropdownMenuItem onClick={() => navigate("/settings/account")}>
           Account
         </DropdownMenuItem>
-        {isDashboard && (
+        {user?.role === "ADMIN" && isDashboard && (
           <DropdownMenuItem onClick={() => navigate("/admin-panel")}>
             Switch to Admin Panel
           </DropdownMenuItem>
         )}
-        {isAdminPanel && (
+        {user?.role === "ADMIN" && isAdminPanel && (
           <DropdownMenuItem onClick={() => navigate("/dashboard")}>
             Switch to Dashboard
           </DropdownMenuItem>

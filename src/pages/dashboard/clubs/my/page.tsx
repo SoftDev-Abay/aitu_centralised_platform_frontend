@@ -3,9 +3,20 @@ import { DataPagination } from "@/components/shared/data-pagination";
 import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
+import StatusBadge from "@/components/ui/status-badge";
 import { useGetClubsQuery } from "@/features/clubs/clubsApiSlice";
 import { getFileDownloadUrl } from "@/lib/helpers";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MoreHorizontalIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import useAuth from "@/hooks/useAuth";
 
 const today = new Date();
 const oneMonthAgo = new Date();
@@ -16,6 +27,8 @@ const MyClubsListPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+
+  const { user } = useAuth();
 
   const { data, isError } = useGetClubsQuery({});
   // const { data, isLoading, isError } = useGetClubsQuery({});
@@ -51,7 +64,13 @@ const MyClubsListPage = () => {
                   )}
                   <div className="flex flex-col justify-between">
                     <p className="font-medium text-[17px]">
-                      {row.original.name}
+                      <Link
+                        to={`/dashboard/clubs/${row.original.id}`}
+                        key={row.original.id}
+                        className="w-full"
+                      >
+                        {row.original.name}
+                      </Link>
                     </p>
                     <p className="flex gap-1">
                       <span className="opacity-50">student position:</span>
@@ -88,20 +107,49 @@ const MyClubsListPage = () => {
               accessorKey: "status",
               header: "Status",
               cell: ({ getValue }) => {
-                return (
-                  <span
-                    className={`${
-                      getValue() === "ACTIVE"
-                        ? "text-brand-success"
-                        : "text-destructive"
-                    }`}
-                  >
-                    {String(getValue())}
-                  </span>
-                );
+                return <StatusBadge status={String(getValue())} />;
               },
             },
             { accessorKey: "date", header: "User Date" },
+            {
+              header: "",
+              id: "actions",
+              cell: ({ row }) => (
+                <>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className="flex size-8 text-muted-foreground data-[state=open]:bg-muted"
+                        size="icon"
+                      >
+                        <MoreHorizontalIcon />
+                        <span className="sr-only">Open menu</span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-32">
+                      <Link to={`/dashboard/clubs/${row.original.id}`}>
+                        <DropdownMenuItem>Preview</DropdownMenuItem>
+                      </Link>
+
+                      {user?.clubs.find(
+                        (club) => club.id === row.original.id
+                      ) && (
+                        <Link
+                          to={`/dashboard/clubs/control-panel/${row.original.id}`}
+                        >
+                          <DropdownMenuItem>Control Panel</DropdownMenuItem>
+                        </Link>
+                      )}
+
+                      {/* <DropdownMenuItem>Edit</DropdownMenuItem>
+                                  <DropdownMenuSeparator />
+                                  <DropdownMenuItem>Delete</DropdownMenuItem> */}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </>
+              ),
+            },
           ]}
           // data={clubs}
           data={data?.data ?? []}

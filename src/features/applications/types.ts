@@ -1,12 +1,21 @@
+export enum ClubApplicationStatus {
+  IN_REVIEW = "IN_REVIEW",
+  ANSWERED = "ANSWERED",
+}
+export enum ClubApplicationResponseStatus {
+  ACCEPTED = "ACCEPTED",
+  REJECTED = "REJECTED",
+}
+
 export type ClubApplicationRequestCreateDto = {
   formId: string;
   answerContent: string;
-  status: "IN_REVIEW" | "ANSWERED";
+  status: ClubApplicationStatus;
 };
 
 export type ClubApplicationRequestResponseDto = {
   requestId: string;
-  response: "ACCEPTED" | "REJECTED";
+  response: ClubApplicationResponseStatus;
   responseMessage?: string;
 };
 
@@ -16,8 +25,8 @@ export type ClubApplicationRequestDto = {
   createdAt: string;
   clubId: string;
   formId: string;
-  status: "IN_REVIEW" | "ANSWERED";
-  response?: "ACCEPTED" | "REJECTED";
+  status: ClubApplicationStatus;
+  response?: ClubApplicationResponseStatus;
   responseMessage?: string;
   respondedDate?: string;
   answerContent: string;
@@ -32,7 +41,7 @@ export type ClubApplicationFormCreateDto = {
   clubId: string;
   deadline: string;
   templateContent: string;
-  isActive: boolean
+  isActive: boolean;
 };
 
 export type ClubApplicationFormDto = {

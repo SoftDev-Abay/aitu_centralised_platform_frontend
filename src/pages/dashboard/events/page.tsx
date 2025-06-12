@@ -29,7 +29,7 @@ const EventsListPage = () => {
   } = useGetAllEventsQuery({
     size: pageSize,
     page: page - 1, // API uses 0-based index
-    type: EventType.CLUB_EVENT, // Uncomment if you want to filter by type
+    type: EventType.UNI_EVENT, // Uncomment if you want to filter by type
   });
 
   if (isError)

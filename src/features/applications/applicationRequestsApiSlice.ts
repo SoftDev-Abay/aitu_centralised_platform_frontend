@@ -19,6 +19,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["ApplicationRequest"],
     }),
 
     respondToApplication: builder.mutation<
@@ -30,6 +31,10 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: (result, error, arg) => [
+        "ApplicationRequest",
+        { type: "ApplicationRequest", id: arg.requestId },
+      ],
     }),
 
     getApplicationsByVisitor: builder.query<
@@ -41,7 +46,18 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
         params: { page, pageSize },
       }),
+      providesTags: (result) =>
+        result?.data
+          ? [
+              ...result.data.map(({ id }) => ({
+                type: "ApplicationRequest" as const,
+                id,
+              })),
+              { type: "ApplicationRequest", id: "VISITOR_LIST" },
+            ]
+          : [{ type: "ApplicationRequest", id: "VISITOR_LIST" }],
     }),
+
     getApplicationsByClub: builder.query<
       PaginatedClubApplicationRequestsDto,
       { page?: number; pageSize?: number; clubId: string }
@@ -51,6 +67,9 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
         params: { page, pageSize },
       }),
+      providesTags: (result, error, { clubId }) => [
+        { type: "ApplicationRequest", id: `CLUB_${clubId}` },
+      ],
     }),
 
     getApplicationsByForm: builder.query<
@@ -61,6 +80,9 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         url: `/clubs/applications/request/form/${formId}`,
         method: "GET",
       }),
+      providesTags: (result, error, { formId }) => [
+        { type: "ApplicationRequest", id: `FORM_${formId}` },
+      ],
     }),
 
     getApplicationById: builder.query<
@@ -71,8 +93,12 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         url: `/clubs/applications/request/${id}`,
         method: "GET",
       }),
+      providesTags: (result, error, { id }) => [
+        { type: "ApplicationRequest", id },
+      ],
     }),
   }),
+  overrideExisting: false,
 });
 
 export const {
@@ -81,5 +107,5 @@ export const {
   useGetApplicationsByVisitorQuery,
   useGetApplicationsByFormQuery,
   useGetApplicationByIdQuery,
-  useGetApplicationsByClubQuery
+  useGetApplicationsByClubQuery,
 } = applicationRequestsApiSlice;

@@ -3,7 +3,7 @@ import { DataTable } from "@/components/shared/data-table/data-table";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
 import { useGetApplicationsByClubQuery } from "@/features/applications/applicationRequestsApiSlice";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontalIcon } from "lucide-react";
 import { DataPagination } from "@/components/shared/data-pagination";
+import StatusBadge from "@/components/ui/status-badge";
+import RespondModal from "@/features/applications/components/modals/RespondModal";
+import { useState } from "react";
 
 const ClubApplicationsListPage = () => {
   useSetNavbarTitle("Club applications");
@@ -23,6 +26,9 @@ const ClubApplicationsListPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+
+  const [isRespondModalOpen, setIsRespondModalOpen] = useState(false);
+  const [selectRequestId, setSelectedRequestId] = useState<string | null>(null);
 
   const { data, isError } = useGetApplicationsByClubQuery({
     page: page - 1,
@@ -45,35 +51,52 @@ const ClubApplicationsListPage = () => {
             Club Applications
           </h1>
         </div>
+
+        {selectRequestId && (
+          <RespondModal
+            open={isRespondModalOpen}
+            onOpenChange={setIsRespondModalOpen}
+            requestId={selectRequestId ?? ""}
+          />
+        )}
         <DataTable
           columns={[
             {
               accessorKey: "clubId",
               header: "Сlub id",
-            },
-            {
-              accessorKey: "status",
-              header: "Status",
-              cell: ({ getValue }) => {
+              cell: ({ row }) => {
                 return (
-                  <span
-                    className={`${
-                      getValue() === "ANSWERED"
-                        ? "text-brand-success"
-                        : "text-yellow-200"
-                    }`}
+                  <Link
+                    to={`/admin-panel/clubs/view/${row.original.id}`}
+                    // className="text-blue-500 hover:underline"
                   >
-                    {String(getValue())}
-                  </span>
+                    {row.original.clubId}
+                  </Link>
                 );
               },
             },
-            { accessorKey: "responseMessage", header: "Responce Comment" },
+            { accessorKey: "createdBy", header: "Student" },
+            // {
+            //   accessorKey: "status",
+            //   header: "Status",
+            //   cell: ({ getValue }) => {
+            //     return <StatusBadge status={String(getValue())} />;
+            //   },
+            // },
+
+            {
+              accessorKey: "response",
+              header: "Response",
+              cell: ({ getValue }) => {
+                return <StatusBadge status={String(getValue())} />;
+              },
+            },
+            { accessorKey: "responseMessage", header: "Comment" },
             { accessorKey: "respondedDate", header: "Responded Date" },
             {
               header: "",
               id: "actions",
-              cell: () => (
+              cell: ({ row }) => (
                 <>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -87,8 +110,19 @@ const ClubApplicationsListPage = () => {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-32">
-                      <DropdownMenuItem>Preview</DropdownMenuItem>
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <Link
+                        to={`/admin-panel/survey/responce/${row.original.id}?surveyId=${row.original.formId}`}
+                      >
+                        <DropdownMenuItem>Preview</DropdownMenuItem>
+                      </Link>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          setIsRespondModalOpen(true);
+                          setSelectedRequestId(row.original.id);
+                        }}
+                      >
+                        Respond
+                      </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>Delete</DropdownMenuItem>
                     </DropdownMenuContent>

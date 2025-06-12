@@ -31,6 +31,7 @@ import ClubApplicationsListPage from "./pages/admin-panel/clubs/view/application
 import AdminDashboardPage from "./pages/admin-panel/page";
 import ProfilePage from "./pages/dashboard/profile/page";
 import RequireAuth from "./features/auth/RequireAuth";
+import ClubControlPanelDashboardPage from "./pages/dashboard/clubs/control-panel/page";
 function App() {
   return (
     <Routes>
@@ -47,6 +48,16 @@ function App() {
             <Route index element={<ClubsListPage />} />
             <Route path="my" element={<MyClubsListPage />} />
             <Route path=":id" element={<ClubDetailsPage />} />
+
+            <Route path="control-panel/:id">
+              <Route index element={<ClubControlPanelDashboardPage />} />
+              <Route path="events" element={<ClubEventsListPage />} />
+              <Route path="members" element={<ClubMembersListPage />} />
+              <Route
+                path="applications"
+                element={<ClubApplicationsListPage />}
+              />
+            </Route>
           </Route>
           <Route path="posts">
             <Route index element={<PostsListPage />} />
@@ -55,6 +66,7 @@ function App() {
           <Route path="events">
             <Route index element={<EvensListPage />} />
             <Route path=":id" element={<EventsDetailsPage />} />
+            <Route path=":id" element={<ClubEventsListPage />} />
           </Route>
           <Route path="calendar">
             <Route index element={<CalendarPage />} />
@@ -62,11 +74,12 @@ function App() {
           <Route path="applications">
             <Route index element={<MyApplicationsListPage />} />
             <Route path="submit/:id" element={<SubmitSurveyPage />} />
+            <Route path="preview/:id" element={<ViewSurveyResponcePage />} />
           </Route>
           <Route path="profile" element={<ProfilePage />} />
         </Route>
         <Route path="admin-panel" element={<AdminPanelLayout />}>
-          <Route index element={<AdminDashboardPage />} />
+          {/* <Route index element={<AdminDashboardPage />} /> */}
 
           <Route path="survey">
             <Route path="create" element={<SurveyCreatePage />} />

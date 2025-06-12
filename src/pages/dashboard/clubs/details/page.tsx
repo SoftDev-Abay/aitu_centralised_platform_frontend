@@ -41,25 +41,25 @@ const ClubDetailsPage = () => {
         </h1>
         <div className="flex justify-between gap-20">
           <div className="flex items-center gap-3">
-            {/* <AvatarGroup
+            <AvatarGroup
               users={
-                club?.admins.map((a) => ({
+                club?.members.map((a) => ({
                   name: `${a.firstName} ${a.lastName}`,
                   image: "/images/profile.jpg", // fallback since backend has no image
                 })) ?? []
               }
               max={3}
-            /> */}
-            {/* <div>
+            />
+            <div>
               <p className="text-brand-gray-muted text-sm">Head:</p>
               <p className="font-semibold">
-                {club?.admins &&
-                  club?.admins
+                {club?.members &&
+                  club?.members
                     .map((a) => `${a.firstName} ${a.lastName}`)
                     // .map((a) => `${a.firstName} ${a.lastName}`)
                     .join(" • ")}
               </p>
-            </div> */}
+            </div>
           </div>
 
           <Link
@@ -161,11 +161,11 @@ const ClubDetailsPage = () => {
           Club admins
           {/* <span className="font-normal">({club?.members.length ?? 0})</span> */}
         </h2>
-        {/* <div className="flex flex-col gap-5">
-          {club?.admins.map((admin) => (
+        <div className="flex flex-col gap-5">
+          {club?.members.map((admin) => (
             <ClubMemberCard key={admin.id} user={admin} />
           ))}
-        </div> */}
+        </div>
       </Section>
     </>
   );

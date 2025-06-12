@@ -9,11 +9,17 @@ export type ClubDto = {
   name: string;
   description: string;
   status: string;
-  admins: UserDto[];
-  memberIds: number[];
   forms: ClubApplicationFormDto[];
   images?: string[];
   activeFormId: number;
+  members: {
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    department: string;
+    role: ClubMemberRole;
+  }[];
 };
 export type CreateClubDto = {
   id: string;
@@ -38,6 +44,7 @@ export type ClubApplicationFormDto = {
   clubId: string;
   deadline: string;
   templateContent: string;
+  active: boolean;
 };
 
 export type UserDto = {

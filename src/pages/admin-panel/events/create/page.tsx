@@ -17,6 +17,7 @@ import SelectAdvaced from "@/components/ui/select-advanced";
 import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
 import { Label } from "@/components/ui/label";
 import TextEditor from "@/components/shared/text-editor/text-editor";
+import { EventType } from "@/features/events/types";
 
 const defaultEventDescription = `
   <h2>🎉 Event Overview</h2>
@@ -102,6 +103,7 @@ const CreateEventPage = () => {
         startDate: formatTime(data.startDate),
         endDate: formatTime(data.endDate),
         imageIds: imageData.data.map((ent) => ent.fileName),
+        eventType: EventType.UNI_EVENT, // Replace "EVENT" with the appropriate EventType value if needed
       }).unwrap();
 
       toast.success("Event created!");

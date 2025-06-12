@@ -21,6 +21,7 @@ import {
 import { getFileDownloadUrl } from "@/lib/helpers";
 import { AvatarGroup } from "@/components/ui/avatar-group";
 import { formatTime } from "@/lib/utils";
+import HtmlRenderer from "@/components/shared/html-render";
 
 const fallbackUsers = [
   {
@@ -139,8 +140,13 @@ const PostDetailsPage = () => {
         </div>
 
         <h2 className="text-2xl mb-5 font-semibold">Description</h2>
-        <div className="text-brand-gray-steel mb-10 whitespace-pre-line">
-          {post?.description ?? "No description provided."}
+        <div className="text-brand-gray-steel mb-10">
+        {/* <div className="text-brand-gray-steel mb-10 whitespace-pre-line"> */}
+          {post?.description ? (
+            <HtmlRenderer className="content" unsafeHtml={post.description} />
+          ) : (
+            "No description provided."
+          )}
         </div>
 
         <WriteComment postId={id!} />
