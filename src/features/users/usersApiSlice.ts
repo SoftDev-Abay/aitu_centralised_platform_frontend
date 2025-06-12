@@ -1,9 +1,9 @@
 import { apiSlice } from "@/app/api/apiSlice";
 import {
   UserDto,
-  UsersClubDto,
   GetUserByIdParams,
   GetUserByEmailParams,
+  UserVisitorDto,
 } from "./types";
 
 export const usersApiSlice = apiSlice.injectEndpoints({
@@ -29,19 +29,20 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    // In usersApiSlice.ts
+    getUserVisitor: builder.query<UserVisitorDto, void>({
+      query: () => ({
+        url: `/users/visitor`,
+        method: "GET",
+        providesTags: ["User"],
+      }),
+    }),
 
     getUserByEmail: builder.query<UserDto, GetUserByEmailParams>({
       query: ({ email }) => ({
         url: `/users/by-email`,
         method: "GET",
         params: { email },
-      }),
-    }),
-
-    getUserAndClubs: builder.query<UsersClubDto, void>({
-      query: () => ({
-        url: "/users/visitor",
-        method: "GET",
       }),
     }),
   }),
@@ -52,5 +53,6 @@ export const {
   useCreateUserMutation,
   useGetUserByIdQuery,
   useGetUserByEmailQuery,
-  useGetUserAndClubsQuery,
+  useGetUserVisitorQuery,
+  useLazyGetUserVisitorQuery,
 } = usersApiSlice;

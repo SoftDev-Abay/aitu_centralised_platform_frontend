@@ -1,5 +1,12 @@
 import { UserDto } from "@/features/users/types";
 
+export enum EventType {
+  // UNI_EVENT, CLUB_EVENT, USER_EVENT
+  UNI_EVENT = "UNI_EVENT",
+  CLUB_EVENT = "CLUB_EVENT",
+  USER_EVENT = "USER_EVENT",
+}
+
 export type EventDto = {
   id: string;
   name: string;
@@ -13,6 +20,7 @@ export type EventDto = {
   imageIds: string[];
   subscribed: boolean;
   clubId?: string;
+  type: EventType;
 };
 
 export type EventCreateDto = {
@@ -25,6 +33,18 @@ export type EventCreateDto = {
   participantIds?: number[];
   adminIds?: number[];
   imageIds?: string[];
+  type: EventType;
+};
+
+export type PaginatedEventsDto = {
+  data: EventDto[];
+  count: number;
+};
+
+export type ParamsPaginatedEventsDto = {
+  size: number;
+  page: number;
+  type?: EventType;
 };
 
 // type event = {

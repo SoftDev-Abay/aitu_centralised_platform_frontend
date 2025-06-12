@@ -1,4 +1,4 @@
-import { Link} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 // import { Link, useSearchParams } from "react-router-dom";
 import Section from "@/components/ui/section";
 import { Input } from "@/components/ui/input";
@@ -13,20 +13,27 @@ import { useSetNavbarTitle } from "@/components/layout/shared/navbar/use-set-nav
 import EventCard from "@/features/events/components/EventCard";
 import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 import { Suspense } from "react";
+import { EventType } from "@/features/events/types";
 
 const EventsListPage = () => {
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const page = parseInt(searchParams.get("page") || "1", 10);
-  // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
   useSetNavbarTitle("Events");
 
-  const { data: events = [], isLoading, isError } = useGetAllEventsQuery();
+  const {
+    data: events,
+    isLoading,
+    isError,
+  } = useGetAllEventsQuery({
+    size: pageSize,
+    page: page - 1, // API uses 0-based index
+    type: EventType.CLUB_EVENT, // Uncomment if you want to filter by type
+  });
 
-  if (isError || !events)
+  if (isError)
     return <div className="p-6 text-red-500">Ошибка загрузки сотрудников.</div>;
-
-  // const totalPages = Math.ceil(data.count / pageSize);
 
   return (
     <>
@@ -73,7 +80,8 @@ const EventsListPage = () => {
             {isLoading ? (
               <p>Loading...</p>
             ) : (
-              events.map((event) => (
+              events &&
+              events.data.map((event) => (
                 <Link
                   to={`/dashboard/events/${event.id}`}
                   key={event.id}

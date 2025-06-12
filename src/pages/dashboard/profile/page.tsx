@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import useAuth from "@/hooks/useAuth";
 
 const passowordSchema = z.object({
   current_passoword: z
@@ -17,6 +18,8 @@ const passowordSchema = z.object({
 type PasswordFormValues = z.infer<typeof passowordSchema>;
 
 const ProfilePage = () => {
+  const { user } = useAuth();
+
   const {
     control,
     // handleSubmit,
@@ -47,29 +50,49 @@ const ProfilePage = () => {
           <div className="flex flex-col gap-5 flex-1">
             <div className="flex gap-5 flex-wrap">
               <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-                <p className="text-brand-gray-steel text-sm">First name</p>
-                <Input className="bg-white border-0" />
+                <p className=" text-sm">First name</p>
+                <Input
+                  className="bg-white border-0"
+                  value={user?.firstName}
+                  disabled
+                />
               </div>
               <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-                <p className="text-brand-gray-steel text-sm">Last name</p>
-                <Input className="bg-white border-0" />
+                <p className=" text-sm">Last name</p>
+                <Input
+                  className="bg-white border-0"
+                  value={user?.lastName}
+                  disabled
+                />
               </div>
             </div>
             <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-              <p className="text-brand-gray-steel text-sm">ID</p>
-              <Input className="bg-white border-0" />
+              <p className=" text-sm">ID</p>
+              <Input className="bg-white border-0" value={user?.id} disabled />
             </div>
             <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-              <p className="text-brand-gray-steel text-sm">Email</p>
-              <Input className="bg-white border-0" />
+              <p className=" text-sm">Email</p>
+              <Input
+                className="bg-white border-0"
+                value={user?.email}
+                disabled
+              />
             </div>
             <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-              <p className="text-brand-gray-steel text-sm">Department</p>
-              <Input className="bg-white border-0" />
+              <p className=" text-sm">Department</p>
+              <Input
+                className="bg-white border-0"
+                value={user?.department}
+                disabled
+              />
             </div>
             <div className="flex w-full flex-1 flex-col gap-1.5 min-w-[240px]">
-              <p className="text-brand-gray-steel text-sm">Security-key</p>
-              <Input className="bg-white border-0" />
+              <p className=" text-sm">Security-key</p>
+              <Input
+                className="bg-white border-0"
+                value={user?.securityKey}
+                disabled
+              />
             </div>
           </div>
         </div>

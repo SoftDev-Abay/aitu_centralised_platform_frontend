@@ -1,3 +1,5 @@
+import { ClubMemberRole } from "../clubs/types";
+
 export type UserDto = {
   id: number;
   firstName: string;
@@ -8,29 +10,21 @@ export type UserDto = {
   role: "ADMIN" | "USER";
 };
 
-export type UsersClubDto = {
+export type UserVisitorDto = {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   department: string;
   securityKey: string;
-  role: string;
+  role: "ADMIN" | "USER";
   clubs: {
     id: string;
     name: string;
     description: string;
     status: string;
-    role: "ADMIN" | "USER";
+    role: ClubMemberRole;
   }[];
-};
-
-export type ClubMembershipDto = {
-  id: string;
-  name: string;
-  description: string;
-  status: string;
-  role: "ADMIN" | "USER";
 };
 
 export type GetUserByIdParams = { id: number };

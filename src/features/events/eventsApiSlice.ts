@@ -1,18 +1,29 @@
 import { apiSlice } from "@/app/api/apiSlice";
-import { EventDto, EventCreateDto, EventIdParam } from "./types";
+import {
+  EventDto,
+  EventCreateDto,
+  EventIdParam,
+  PaginatedEventsDto,
+  ParamsPaginatedEventsDto,
+} from "./types";
 
 export const eventsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllEvents: builder.query<EventDto[], void>({
-      query: () => ({
+    getAllEvents: builder.query<PaginatedEventsDto, ParamsPaginatedEventsDto>({
+      query: ({ size = 10, page = 0, type }) => ({
         url: "/events",
         method: "GET",
+        params: {
+          size,
+          page,
+          type,
+        },
       }),
       providesTags: (result) =>
         result
           ? [
               { type: "Event", id: "LIST" },
-              ...result.map((e) => ({ type: "Event" as const, id: e.id })),
+              ...result.data.map((e) => ({ type: "Event" as const, id: e.id })),
             ]
           : [{ type: "Event", id: "LIST" }],
     }),

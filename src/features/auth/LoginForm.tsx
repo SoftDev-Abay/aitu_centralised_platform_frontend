@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "@/features/auth/authSlice";
+import { setCredentials, setUser } from "@/features/auth/authSlice";
 import { useLoginMutation } from "@/features/auth/authApiSlice";
 import { toast } from "react-hot-toast";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,10 @@ import { CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FormInput } from "@/components/form/FormInput";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  useGetUserVisitorQuery,
+  useLazyGetUserVisitorQuery,
+} from "../users/usersApiSlice";
 const loginSchema = z.object({
   email: z.string().min(4, "email must be at least 4 characters"),
   password: z.string().min(4, "Password must be at least 6 characters"),
@@ -25,7 +29,7 @@ export function LoginForm({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = useLoginMutation();
-  // const [getUserInfo, { isLoading: userInfo }] = useGetUserAndClubsQuery();
+  const [triggerGetUserVisitor] = useLazyGetUserVisitorQuery();
 
   const {
     control,
@@ -44,6 +48,10 @@ export function LoginForm({
       }).unwrap();
 
       dispatch(setCredentials({ token: accessToken }));
+
+      // Fetch user info after successful login
+      const { data: userData } = await triggerGetUserVisitor();
+      dispatch(setUser({ user: userData }));
 
       console.log("token from login form", accessToken);
 
