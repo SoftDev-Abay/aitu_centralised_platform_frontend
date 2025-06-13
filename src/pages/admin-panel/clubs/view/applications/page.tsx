@@ -45,11 +45,18 @@ const ClubApplicationsListPage = () => {
         variant="wide"
         className="pt-[80px] pb-[37px] bg-brand-gray-bluish h-full flex-grow"
       >
-        <div className="mb-[37px]">
-          <SmartBreadcrumbs />
-          <h1 className="text-[32px] max-w-[409px] font-bold mb-10 leading-12">
-            Club Applications
-          </h1>
+        <div className="flex justify-between">
+          <div className="mb-[37px]">
+            <SmartBreadcrumbs />
+            <h1 className="text-[32px] max-w-[409px] font-bold mb-10 leading-12">
+              Club Applications
+            </h1>
+          </div>
+          <div>
+            <Link to={`/admin-panel/survey/create?clubId=${clubId}`}>
+              <Button>Create Form</Button>
+            </Link>
+          </div>
         </div>
 
         {selectRequestId && (
