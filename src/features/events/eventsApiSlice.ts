@@ -5,18 +5,31 @@ import {
   EventIdParam,
   PaginatedEventsDto,
   ParamsPaginatedEventsDto,
+  CalendarDayDto,
 } from "./types";
 
 export const eventsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllEvents: builder.query<PaginatedEventsDto, ParamsPaginatedEventsDto>({
-      query: ({ size = 10, page = 0, type }) => ({
-        url: "/events",
+      query: ({
+        size = 10,
+        page = 0,
+        type,
+        category, // Added
+        search, // Added
+        sortBy, // Added
+        sortDir, // Added
+      }) => ({
+        url: "/events", // Updated endpoint
         method: "GET",
         params: {
           size,
           page,
           type,
+          category, // Added
+          search, // Added
+          sortBy, // Added
+          sortDir, // Added
         },
       }),
       providesTags: (result) =>
@@ -26,6 +39,16 @@ export const eventsApiSlice = apiSlice.injectEndpoints({
               ...result.data.map((e) => ({ type: "Event" as const, id: e.id })),
             ]
           : [{ type: "Event", id: "LIST" }],
+    }),
+    getCalendar: builder.query<
+      CalendarDayDto[],
+      { year: number; month?: number }
+    >({
+      query: ({ year, month }) => ({
+        url: "/calendar",
+        method: "GET",
+        params: month != null ? { year, month } : { year },
+      }),
     }),
     getAllEventsByClubId: builder.query<EventDto[], { clubId: string }>({
       query: ({ clubId }) => ({
@@ -98,5 +121,6 @@ export const {
   useUpdateEventMutation,
   useSubscribeToEventMutation,
   useUnsubscribeFromEventMutation,
-  useGetAllEventsByClubIdQuery
+  useGetAllEventsByClubIdQuery,
+  useGetCalendarQuery,
 } = eventsApiSlice;

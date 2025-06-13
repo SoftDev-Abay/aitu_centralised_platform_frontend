@@ -6,6 +6,25 @@ export enum EventType {
   CLUB_EVENT = "CLUB_EVENT",
   USER_EVENT = "USER_EVENT",
 }
+export enum MoodleModule {
+  ATTENDANCE = "ATTENDANCE",
+  ASSIGN = "ASSIGN",
+  QUIZ = "QUIZ",
+  OTHER = "OTHER",
+}
+
+// Add new enum for sort direction
+export enum SortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+// Add new enum for sortable fields
+export enum SortableField {
+  CREATED_AT = "createdAt",
+  START_DATE = "startDate",
+  SUBSCRIBER_COUNT = "subscriberCount",
+}
 
 export type EventDto = {
   id: string;
@@ -41,32 +60,37 @@ export type PaginatedEventsDto = {
   count: number;
 };
 
+// Add new parameters to ParamsPaginatedEventsDto
 export type ParamsPaginatedEventsDto = {
   size: number;
   page: number;
   type?: EventType;
+  category?: string; // Added
+  search?: string; // Added
+  sortBy?: string; // Added
+  sortDir?: string; // Added
 };
 
-// type event = {
-//   name: "Consert from Musci Club";
-//   address: "Expo C1 ";
-//   format: "ONLINE";
-//   startDate: "2025-06-02T15:49";
-//   endDate: "2025-06-26T15:49";
-//   description: "Music club provided us with a spectacle, showcasing music styles of variaety. ";
-//   imageIds: ["2c490a95-e33e-4bde-bd44-dbd2d387fb84.png"];
+export type CalendarEventDto = {
+  id: string;
+  name: string;
+  description: string;
+  startDate: string; // ISO datetime
+  endDate: string; // ISO datetime
+  fromMoodle: boolean;
+  moodleModule: MoodleModule;
+  eventType: EventType;
+  courseName: string;
+};
 
-//   name: "Мастер-класс по Python";
-//   description: "string";
-//   format: "OFFLINE";
-//   address: "ул. Университетская, 15";
-//   startDate: "2025-06-02T10:47:04.276Z";
-//   endDate: "2025-06-02T10:47:04.276Z";
-//   clubId: "3fa85f64-5717-4562-b3fc-2c963f66afa6";
-//   adminIds: [0];
-//   participantIds: [0];
-//   imageIds: ["string"];
-// };
+export type CalendarDayDto = {
+  date: string; // “2025-06-01”
+  day: number;
+  month: number;
+  year: number;
+  dayOfWeek: string;
+  events: CalendarEventDto[];
+};
 
 export type EventIdParam = {
   id: string;

@@ -1,7 +1,6 @@
 // src/pages/CalendarPage.tsx
-import { useState } from "react";
+import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
-import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import Section from "@/components/ui/section";
@@ -10,8 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Calendar1Icon, FlagIcon, PlusIcon } from "lucide-react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-// import { CreateEventModal } from "@/components/calendar/CreateEventModal";
-// import { ViewEventModal } from "@/components/calendar/ViewEventModal";
 import {
   Dialog,
   DialogContent,
@@ -19,9 +16,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-
-// import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-// import { Button } from "@/components/ui/button";
+import { DatesSetArg } from "@fullcalendar/core";
+import { useGetCalendarQuery } from "@/features/events/eventsApiSlice";
 
 export function CreateEventModal({
   open,
@@ -42,9 +38,6 @@ export function CreateEventModal({
     </Dialog>
   );
 }
-
-// import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-// import { Button } from "@/components/ui/button";
 
 export function ViewEventModal({
   event,
@@ -69,7 +62,7 @@ export function ViewEventModal({
 
 const EventItem = () => (
   <div className="flex gap-4.5">
-    <div className="w-2.5 h-2.5 rounded-full bg-blue-400"></div>
+    <div className="w-2.5 h-2.5 rounded-full bg-blue-400" />
     <div>
       <p className="leading-3 mb-3">Today, 00:15 - 00:30</p>
       <p className="font-medium">Advanced Programming lecture</p>
@@ -80,13 +73,50 @@ const EventItem = () => (
 const CalendarPage = () => {
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const [params, setParams] = useState<{ year: number; month?: number }>({
+    year: new Date().getFullYear(),
+    month: new Date().getMonth() + 1,
+  });
+
+  const { data: days = [], isLoading } = useGetCalendarQuery(params, {
+    skip: !params.year,
+  });
+
+  const events = days.flatMap((d) =>
+    d.events.map((e) => ({
+      id: e.id,
+      title: e.name,
+      start: e.startDate,
+      end: e.endDate,
+      className: e.fromMoodle ? "event-moodle" : "event-local",
+    }))
+  );
+
+  function onDatesSet(arg: DatesSetArg) {
+    const viewType = arg.view.type;
+    const year = arg.start.getFullYear();
+    let month: number | undefined;
+
+    if (viewType === "dayGridMonth") {
+      month = arg.start.getMonth() + 1;
+    }
+
+    setParams({ year, month });
+  }
+
+  const headerToolbar = isLoading
+    ? { center: "title" }
+    : {
+        left: "prev,next today",
+        center: "title",
+        right: "dayGridMonth,listYear",
+      };
 
   return (
     <Section
       variant="large"
       className="bg-brand-gray-bluish pt-[75px] pb-[60px] h-full flex-grow"
     >
-      {/* <h1 className="font-semibold text-[40px] mb-6">Calendar</h1> */}
       <div className="flex gap-10">
         <div className="w-90 flex flex-col gap-6">
           <Button
@@ -101,7 +131,6 @@ const CalendarPage = () => {
               <Calendar1Icon />
               <span className="font-semibold">Upcoming events</span>
             </CardHeader>
-
             <CardContent className="pt-9 flex flex-col gap-7">
               <EventItem />
               <EventItem />
@@ -114,7 +143,6 @@ const CalendarPage = () => {
               <FlagIcon />
               <span className="font-semibold">Categories</span>
             </CardHeader>
-
             <CardContent className="flex flex-col">
               {["University", "Clubs", "Meetings", "Holidays"].map(
                 (cat, index) => (
@@ -134,34 +162,21 @@ const CalendarPage = () => {
           </Card>
         </div>
 
-        <div className="flex-1 bg-white p-6 rounded-md">
+        <div className="flex-1 bg-white p-6 rounded-md relative">
           <FullCalendar
-            plugins={[timeGridPlugin, dayGridPlugin, interactionPlugin]}
-            initialView="timeGridWeek"
-            editable={true}
-            selectable={true}
-            height="auto"
-            headerToolbar={{
-              left: "prev,next today",
-              center: "title",
-              right: "dayGridMonth,timeGridWeek,timeGridDay",
-            }}
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView={params.month ? "dayGridMonth" : "listYear"}
+            headerToolbar={headerToolbar}
+            events={events}
+            datesSet={onDatesSet}
             eventClick={(info) => setSelectedEvent(info.event)}
-            events={[
-              {
-                title: "Team Sync",
-                start: "2025-06-03T10:00:00",
-                end: "2025-06-03T11:00:00",
-                className: "event-primary",
-              },
-              {
-                title: "Design Review",
-                start: "2025-06-05T14:00:00",
-                end: "2025-06-05T15:00:00",
-                className: "event-primary",
-              },
-            ]}
           />
+
+          {isLoading && (
+            <div className="absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
+              <div className="w-10 h-10 border-4 border-t-transparent border-blue-500 rounded-full animate-spin" />
+            </div>
+          )}
         </div>
       </div>
 
@@ -169,7 +184,6 @@ const CalendarPage = () => {
         open={createModalOpen}
         onOpenChange={setCreateModalOpen}
       />
-
       <ViewEventModal
         event={selectedEvent}
         onClose={() => setSelectedEvent(null)}
