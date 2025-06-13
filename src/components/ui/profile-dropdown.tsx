@@ -11,7 +11,7 @@ function ProfileDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Avatar className="h-12 w-12">
-          <AvatarImage src="/images/profile.jpg" />
+          <AvatarImage src="/images/default_avatar.jpg" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

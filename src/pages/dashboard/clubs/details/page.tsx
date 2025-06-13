@@ -45,7 +45,7 @@ const ClubDetailsPage = () => {
               users={
                 club?.members.map((a) => ({
                   name: `${a.firstName} ${a.lastName}`,
-                  image: "/images/profile.jpg", // fallback since backend has no image
+                  image: "/images/default_avatar.jpg", // fallback since backend has no image
                 })) ?? []
               }
               max={3}

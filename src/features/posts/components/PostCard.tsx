@@ -17,11 +17,11 @@ const fallbackUsers = [
   },
   {
     name: "Eve",
-    image: "/images/profile.jpg",
+    image: "/images/default_avatar.jpg",
   },
   {
     name: "Frank",
-    image: "/images/profile.jpg",
+    image: "/images/default_avatar.jpg",
   },
 ];
 
@@ -31,7 +31,7 @@ const PostCard = ({ post }: { post: PostDto }) => {
       <CardContent className="p-6">
         <div className="flex items-center gap-4 mb-5">
           <img
-            src="/images/profile.jpg"
+            src="/images/default_avatar.jpg"
             className="rounded-full w-12 h-12"
             alt="Author Avatar"
           />

@@ -39,7 +39,11 @@ const ProfilePage = () => {
       >
         <div className="flex gap-20">
           <div className="bg-white pt-[56px] pb-[56px] px-[44px] flex items-center flex-col ">
-            <img src="/images/profile.jpg" alt="" className="w-75 mb-5.5" />
+            <img
+              src="/images/default_avatar.jpg"
+              alt=""
+              className="w-75 mb-5.5"
+            />
             <p className="text-brand-gray-steel text-center max-w-66">
               Image size should be under 1MB and image ration needs to be 1:1
             </p>

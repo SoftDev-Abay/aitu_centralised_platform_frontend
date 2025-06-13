@@ -10,7 +10,7 @@ const ClubMemberCard = ({ user }: ClubMemberCardProps) => {
     <Card className="w-full rounded-none">
       <CardContent className="flex gap-6">
         <img
-          src="/images/profile.jpg"
+          src="/images/default_avatar.jpg"
           alt={`${user.firstName} ${user.lastName}`}
           className="w-[136px] h-[136px] rounded-full"
         />

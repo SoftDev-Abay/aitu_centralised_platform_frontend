@@ -34,19 +34,19 @@ const EventsDetailsPage = () => {
 
   const users = [...event.admins, ...event.participants].map((user) => ({
     name: `${user.firstName} ${user.lastName}`,
-    image: "/images/profile.jpg", // Replace with actual avatar if available
+    image: "/images/default_avatar.jpg", // Replace with actual avatar if available
   }));
 
   const peopleTabs = {
     Admins: event.admins.map((user) => ({
       name: `${user.firstName} ${user.lastName}`,
       role: user.role.toLowerCase(),
-      image: "/images/profile.jpg",
+      image: "/images/default_avatar.jpg",
     })),
     Participants: event.participants.map((user) => ({
       name: `${user.firstName} ${user.lastName}`,
       role: user.role.toLowerCase(),
-      image: "/images/profile.jpg",
+      image: "/images/default_avatar.jpg",
     })),
   };
 

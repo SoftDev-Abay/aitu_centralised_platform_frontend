@@ -35,11 +35,11 @@ const fallbackUsers = [
   },
   {
     name: "Eve",
-    image: "/images/profile.jpg",
+    image: "/images/default_avatar.jpg",
   },
   {
     name: "Frank",
-    image: "/images/profile.jpg",
+    image: "/images/default_avatar.jpg",
   },
 ];
 
@@ -71,7 +71,7 @@ const PostDetailsPage = () => {
         <div className="flex justify-between gap-20">
           <div className="flex items-center gap-3">
             <img
-              src="/images/profile.jpg"
+              src="/images/default_avatar.jpg"
               className="rounded-full w-12.5 h-12.5"
               alt="Author avatar"
             />
@@ -141,7 +141,7 @@ const PostDetailsPage = () => {
 
         <h2 className="text-2xl mb-5 font-semibold">Description</h2>
         <div className="text-brand-gray-steel mb-10">
-        {/* <div className="text-brand-gray-steel mb-10 whitespace-pre-line"> */}
+          {/* <div className="text-brand-gray-steel mb-10 whitespace-pre-line"> */}
           {post?.description ? (
             <HtmlRenderer className="content" unsafeHtml={post.description} />
           ) : (

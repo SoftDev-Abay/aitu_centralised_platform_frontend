@@ -11,7 +11,7 @@ const CommentItem = ({
   return (
     <div className={cn("flex gap-4 mb-6", className)}>
       <img
-        src="/images/profile.jpg"
+        src="/images/default_avatar.jpg"
         className="rounded-full w-10 h-10"
         alt="User Avatar"
       />
