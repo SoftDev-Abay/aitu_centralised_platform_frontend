@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 // import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams} from "react-router-dom";
 import { formatTime } from "@/lib/utils";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import {
@@ -17,16 +17,15 @@ import {
 import { MoreHorizontalIcon } from "lucide-react";
 import {
   useGetAllEventsByClubIdQuery,
-  useGetAllEventsQuery,
 } from "@/features/events/eventsApiSlice";
 
 const ClubEventsListPage = () => {
   useSetNavbarTitle("Club Events");
 
   const { id: clubId } = useParams<{ id: string }>();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") || "1", 10);
-  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  // const [searchParams, _] = useSearchParams();
+  // const page = parseInt(searchParams.get("page") || "1", 10);
+  // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
   const { data, isLoading, isError } = useGetAllEventsByClubIdQuery({
     clubId: clubId!,

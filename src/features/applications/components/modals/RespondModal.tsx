@@ -16,11 +16,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useGetAllUsersQuery } from "@/features/users/usersApiSlice";
 import {
-  ClubApplicationRequestResponseDto,
   ClubApplicationResponseStatus,
-  ClubApplicationStatus,
 } from "../../types";
 import { useRespondToApplicationMutation } from "../../applicationRequestsApiSlice";
 import { clubApplicationResponseStatusesOptions } from "../../constants";

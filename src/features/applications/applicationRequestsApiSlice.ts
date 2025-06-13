@@ -31,7 +31,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: (result, error, arg) => [
+      invalidatesTags: (_, __, arg) => [
         "ApplicationRequest",
         { type: "ApplicationRequest", id: arg.requestId },
       ],
@@ -67,7 +67,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         method: "GET",
         params: { page, pageSize },
       }),
-      providesTags: (result, error, { clubId }) => [
+      providesTags: (__, _, { clubId }) => [
         { type: "ApplicationRequest", id: `CLUB_${clubId}` },
       ],
     }),
@@ -80,7 +80,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         url: `/clubs/applications/request/form/${formId}`,
         method: "GET",
       }),
-      providesTags: (result, error, { formId }) => [
+      providesTags: (_, __, { formId }) => [
         { type: "ApplicationRequest", id: `FORM_${formId}` },
       ],
     }),
@@ -93,7 +93,7 @@ export const applicationRequestsApiSlice = apiSlice.injectEndpoints({
         url: `/clubs/applications/request/${id}`,
         method: "GET",
       }),
-      providesTags: (result, error, { id }) => [
+      providesTags: (_, __, { id }) => [
         { type: "ApplicationRequest", id },
       ],
     }),

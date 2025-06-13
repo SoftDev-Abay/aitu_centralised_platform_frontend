@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 // import PaginationControls from "@/components/ui/pagination-controls";
 import Section from "@/components/ui/section";
 import SmartBreadcrumbs from "@/components/ui/smart-bread-crumbs";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { formatTime } from "@/lib/utils";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import {
@@ -20,11 +20,14 @@ import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 const ClubEventsListPage = () => {
   useSetNavbarTitle("Club Events");
 
-  // const [searchParams, setSearchParams] = useSearchParams();
-  // const page = parseInt(searchParams.get("page") || "1", 10);
-  // const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+  const [searchParams, _] = useSearchParams();
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  const { data, isLoading, isError } = useGetAllEventsQuery();
+  const { data, isLoading, isError } = useGetAllEventsQuery({
+    page: page - 1,
+    size: pageSize,
+  });
   // const { data, isLoading, isError, refetch } = useGetAllEventsQuery({
   //   page: page - 1,
   //   pageSize,
@@ -135,7 +138,7 @@ const ClubEventsListPage = () => {
                 ),
               },
             ]}
-            data={data}
+            data={data.data}
             // currentPage={page}
             // totalPages={totalPages}
             // visiblePages={4}

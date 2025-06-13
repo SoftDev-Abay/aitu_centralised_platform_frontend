@@ -28,7 +28,7 @@ import SubmitSurveyPage from "./pages/dashboard/applications/submit/page";
 import ClubEventsListPage from "./pages/admin-panel/clubs/view/events/page";
 import ClubMembersListPage from "./pages/admin-panel/clubs/view/members/page";
 import ClubApplicationsListPage from "./pages/admin-panel/clubs/view/applications/page";
-import AdminDashboardPage from "./pages/admin-panel/page";
+// import AdminDashboardPage from "./pages/admin-panel/page";
 import ProfilePage from "./pages/dashboard/profile/page";
 import RequireAuth from "./features/auth/RequireAuth";
 import ClubControlPanelDashboardPage from "./pages/dashboard/clubs/control-panel/page";

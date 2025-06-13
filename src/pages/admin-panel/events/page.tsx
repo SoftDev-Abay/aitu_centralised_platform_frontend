@@ -20,7 +20,7 @@ import { useGetAllEventsQuery } from "@/features/events/eventsApiSlice";
 const AdminEventsListPage = () => {
   useSetNavbarTitle("Events");
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, _] = useSearchParams();
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 

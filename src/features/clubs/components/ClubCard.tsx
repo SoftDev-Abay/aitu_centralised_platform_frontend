@@ -49,7 +49,7 @@ const ClubCard = ({ club }: ClubCardProps) => {
           <span>{club.status}</span>
           <div className="flex gap-1 items-center">
             <User size={20} className="text-brand-secondary" />
-            <span className="text-gray-500">{club.memberIds?.length ?? 0}</span>
+            <span className="text-gray-500">{club.members?.length ?? 0}</span>
           </div>
         </div>
 

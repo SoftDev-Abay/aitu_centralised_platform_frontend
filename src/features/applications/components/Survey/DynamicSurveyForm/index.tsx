@@ -9,6 +9,7 @@ import { Question } from "@/features/applications/store";
 import { Card } from "@/components/ui/card";
 import { useCreateApplicationRequestMutation } from "@/features/applications/applicationRequestsApiSlice";
 import toast from "react-hot-toast";
+import { ClubApplicationStatus } from "@/features/applications/types";
 
 export type Survey = {
   title: string;
@@ -137,7 +138,7 @@ const DynamicSurveyForm: React.FC<DynamicSurveyFormProps> = ({
         surveyDescription: survey.description,
         responses,
       }),
-      status: "IN_REVIEW" as const,
+      status: ClubApplicationStatus.IN_REVIEW,
     };
 
     try {
