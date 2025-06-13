@@ -65,6 +65,14 @@ export type ClubMemberDto = {
   role: ClubMemberRole;
 };
 
+export type MyClubDto = {
+  id: string;
+  name: string;
+  description: string;
+  status: string;
+  role: ClubMemberRole;
+};
+
 export type CreateOrUpdateClubInput = Omit<
   CreateClubDto,
   "id" | "admins" | "members" | "forms"

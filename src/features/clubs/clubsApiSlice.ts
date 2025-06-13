@@ -6,6 +6,7 @@ import {
   PaginatedClubs,
   ClubAdminOrMemberInput,
   ClubMemberDto,
+  MyClubDto,
 } from "./types";
 
 export const clubsApiSlice = apiSlice.injectEndpoints({
@@ -24,6 +25,22 @@ export const clubsApiSlice = apiSlice.injectEndpoints({
           ? [
               { type: "Club", id: "LIST" },
               ...result.data.map((club) => ({
+                type: "Club" as const,
+                id: club.id,
+              })),
+            ]
+          : [{ type: "Club", id: "LIST" }],
+    }),
+    getMyClubs: builder.query<MyClubDto[], { userId: number }>({
+      query: ({ userId }) => ({
+        url: `/clubs/by-user/${userId}`,
+        method: "GET",
+      }),
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "Club", id: "LIST" },
+              ...result.map((club) => ({
                 type: "Club" as const,
                 id: club.id,
               })),
@@ -108,4 +125,5 @@ export const {
   useDeleteClubMutation,
   useGetClubMembersQuery,
   useAssignClubMemberMutation,
+  useGetMyClubsQuery
 } = clubsApiSlice;
