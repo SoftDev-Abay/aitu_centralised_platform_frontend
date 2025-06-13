@@ -126,7 +126,7 @@ const AdminClubListPage = () => {
           {
             header: "",
             id: "actions",
-            cell: () => (
+            cell: ({ row }) => (
               <>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -141,7 +141,9 @@ const AdminClubListPage = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-32">
                     <DropdownMenuItem>Preview</DropdownMenuItem>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <Link to={`/admin-panel/clubs/view/${row.original.id}`}>
+                      <DropdownMenuItem>Control Panel</DropdownMenuItem>
+                    </Link>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Delete</DropdownMenuItem>
                   </DropdownMenuContent>

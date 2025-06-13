@@ -32,6 +32,7 @@ import ClubApplicationsListPage from "./pages/admin-panel/clubs/view/application
 import ProfilePage from "./pages/dashboard/profile/page";
 import RequireAuth from "./features/auth/RequireAuth";
 import ClubControlPanelDashboardPage from "./pages/dashboard/clubs/control-panel/page";
+import MyEventsListPage from "./pages/dashboard/events/my/page";
 function App() {
   return (
     <Routes>
@@ -65,8 +66,8 @@ function App() {
           </Route>
           <Route path="events">
             <Route index element={<EvensListPage />} />
+            <Route path="my" element={<MyEventsListPage />} />
             <Route path=":id" element={<EventsDetailsPage />} />
-            <Route path=":id" element={<ClubEventsListPage />} />
           </Route>
           <Route path="calendar">
             <Route index element={<CalendarPage />} />
