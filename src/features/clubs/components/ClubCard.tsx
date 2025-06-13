@@ -34,6 +34,9 @@ interface ClubCardProps {
 }
 
 const ClubCard = ({ club }: ClubCardProps) => {
+  const stripTags = (htmlString: string) =>
+    htmlString.replace(/<\/?[^>]+(>|$)/g, "");
+
   return (
     <div className="w-full rounded-3xl">
       {club.images ? (
@@ -54,7 +57,7 @@ const ClubCard = ({ club }: ClubCardProps) => {
         </div>
 
         <h2 className="text-xl font-semibold truncate">{club.name}</h2>
-        <p className="text-sm line-clamp-2">{club.description}</p>
+        <p className="text-sm line-clamp-2">{stripTags(club.description)}</p>
         <Link to={`/survey/submit/${club.forms?.[0]?.id}`}>
           <Button variant="dark" className="w-full max-w-[200px]">
             Registration

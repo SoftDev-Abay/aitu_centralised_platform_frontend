@@ -22,6 +22,7 @@ import {
 import { PlayIcon, TimerIcon } from "lucide-react";
 import { getFileDownloadUrl } from "@/lib/helpers";
 import ClubMemberCard from "@/features/clubs/components/ClubMemberCard";
+import HtmlRenderer from "@/components/shared/html-render";
 
 const ClubDetailsPage = () => {
   const { id } = useParams();
@@ -100,8 +101,10 @@ const ClubDetailsPage = () => {
         </Carousel>
 
         <h2 className="text-2xl mb-5 font-semibold">Description</h2>
-        <div className="text-brand-gray-steel mb-10 whitespace-pre-line">
-          {club?.description || "No description available."}
+        <div className="text-brand-gray-steel mb-10 ">
+          {club?.description && (
+            <HtmlRenderer className="content" unsafeHtml={club?.description} />
+          )}
         </div>
 
         <h2 className="text-2xl mb-5 font-semibold">Information</h2>
