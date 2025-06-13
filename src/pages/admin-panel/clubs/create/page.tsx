@@ -55,9 +55,8 @@ const clubSchema = z.object({
       })
     )
     .min(1, "At least one image is required"),
-  adminIds: z.array(z.number()).optional(),
+  presidentId: z.number(),
   // adminIds: z.array(z.number(), { required_error: "Choose admins" }),
-  memberIds: z.array(z.number()).optional(),
 });
 
 type ClubFormValues = z.infer<typeof clubSchema>;
@@ -82,9 +81,7 @@ const CreateClubPage = () => {
     },
   });
 
-  const {
-    data: usersData,
-  } = useGetAllUsersQuery();
+  const { data: usersData } = useGetAllUsersQuery();
 
   const onSubmit = async (data: ClubFormValues) => {
     try {
@@ -98,6 +95,7 @@ const CreateClubPage = () => {
         ...rest,
         status: "ACTIVE",
         images: imageData.data.map((ent) => ent.fileName),
+        presidentId: Number(data.presidentId),
       }).unwrap();
       toast.success("Club created successfully!");
       navigate("/dashboard/clubs");
@@ -123,10 +121,7 @@ const CreateClubPage = () => {
         </CardHeader>
         <Separator />
         <CardContent className="px-10 py-8">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="space-y-6 mt-6 "
-          >
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 mt-6 ">
             <FormInput
               name="name"
               control={control}
@@ -140,14 +135,13 @@ const CreateClubPage = () => {
               defaultValue=""
             />
             <div className="flex flex-col space-y-2">
-              <Label>Admins</Label>
+              <Label>President</Label>
               <SelectAdvaced
                 options={usersOptions}
-                register={register("adminIds")}
-                name="adminIds"
+                register={register("presidentId")}
+                name="presidentId"
                 control={control}
-                error={errors.adminIds && errors.adminIds.message}
-                multiple
+                error={errors.presidentId && errors.presidentId.message}
               />
             </div>
 

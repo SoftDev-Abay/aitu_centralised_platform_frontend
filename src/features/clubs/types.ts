@@ -26,10 +26,9 @@ export type CreateClubDto = {
   name: string;
   description: string;
   status: string;
-  admins: UserDto[];
-  members: UserDto[];
   forms: ClubApplicationFormDto[];
   images?: string[];
+  presidentId: number;
 };
 
 export type PaginatedClubs = {
